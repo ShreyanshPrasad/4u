@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4U – Use Unity to Uplift Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       CSS CUSTOM PROPERTIES – DESIGN TOKENS
+    ============================================= */
+    :root {
+      --blue-900: #0f2460;
+      --blue-800: #1E3A8A;
+      --blue-700: #2547a8;
+      --blue-600: #3b5fc4;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+
+      --green-700: #15803d;
+      --green-600: #16A34A;
+      --green-500: #22c55e;
+      --green-100: #dcfce7;
+
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white:    #ffffff;
+
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Poppins', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --shadow-sm: 0 2px 8px rgba(30,58,138,0.08);
+      --shadow-md: 0 8px 28px rgba(30,58,138,0.13);
+      --shadow-lg: 0 20px 60px rgba(30,58,138,0.18);
+
+      --section-pad: 100px 0;
+      --container:  1200px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =============================================
+       TYPOGRAPHY UTILITIES
+    ============================================= */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 14px;
+    }
+    .section-label::before {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--green-600);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+    .section-title span { color: var(--blue-800); }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--gray-500);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-subtitle { margin: 0 auto; }
+
+    /* =============================================
+       BUTTON SYSTEM
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .btn-primary { background: var(--blue-800); color: var(--white); border-color: var(--blue-800); }
+    .btn-primary:hover { background: var(--blue-900); border-color: var(--blue-900); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,58,138,0.35); }
+    .btn-secondary { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.7); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.15); border-color: var(--white); transform: translateY(-2px); }
+    .btn-green { background: var(--green-600); color: var(--white); border-color: var(--green-600); }
+    .btn-green:hover { background: var(--green-700); border-color: var(--green-700); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,163,74,0.35); }
+    .btn-outline-blue { background: transparent; color: var(--blue-800); border-color: var(--blue-800); }
+    .btn-outline-blue:hover { background: var(--blue-800); color: var(--white); transform: translateY(-2px); }
+    .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .btn-sm  { padding: 8px 18px; font-size: 0.82rem; }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(30,58,138,0.08);
+      transition: box-shadow var(--transition);
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 24px;
+    }
+    .navbar__logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--blue-800), var(--green-600));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem; font-weight: 900;
+      font-family: var(--font-body);
+      flex-shrink: 0;
+    }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-text strong { font-size: 1.2rem; font-weight: 800; color: var(--blue-800); }
+    .logo-text span   { font-size: 0.6rem; font-weight: 500; color: var(--gray-500); letter-spacing: 0.04em; }
+    .navbar__links { display: flex; align-items: center; gap: 6px; }
+    .navbar__links a {
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--gray-700);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+    .navbar__links a:hover, .navbar__links a.active { color: var(--blue-800); background: var(--blue-50); }
+    .navbar__cta { flex-shrink: 0; }
+    .navbar__hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 40px; height: 40px;
+      cursor: pointer; background: none; border: none;
+      padding: 6px; border-radius: var(--radius-sm);
+      transition: background var(--transition);
+    }
+    .navbar__hamburger:hover { background: var(--gray-100); }
+    .navbar__hamburger span {
+      display: block; height: 2px;
+      background: var(--gray-700); border-radius: 2px;
+      transition: var(--transition); transform-origin: center;
+    }
+    .navbar__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .navbar__hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .navbar__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .navbar__mobile {
+      display: none;
+      flex-direction: column; gap: 4px;
+      padding: 16px 24px 20px;
+      border-top: 1px solid var(--gray-100);
+      background: var(--white);
+    }
+    .navbar__mobile.open { display: flex; }
+    .navbar__mobile a {
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--gray-700);
+      padding: 12px 16px; border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+    .navbar__mobile a:hover { background: var(--blue-50); color: var(--blue-800); }
+    .navbar__mobile .btn { margin-top: 8px; width: 100%; justify-content: center; }
+
+    /* =============================================
+       HERO SECTION
+       FIX A: padding-bottom clears stats ribbon (~84px).
+    ============================================= */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding-top: 60px;
+      padding-bottom: 108px; /* FIX A – was 0, buttons overlapped ribbon */
+      overflow: hidden;
+      background: var(--blue-900);
+    }
+    .hero__bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(22,163,74,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(59,95,196,0.4) 0%, transparent 55%),
+        linear-gradient(135deg, #0f2460 0%, #1e3a8a 45%, #1a3575 100%);
+    }
+    .hero__dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.7;
+    }
+    /* FIX B: explicit z-index keeps shapes behind content & ribbon */
+    .hero__shape {
+      position: absolute; border-radius: 50%;
+      z-index: 1; /* FIX B */
+      animation: floatShape 8s ease-in-out infinite;
+    }
+    .hero__shape--1 { width:300px;height:300px; background:radial-gradient(circle,rgba(22,163,74,0.2),transparent 70%); top:-60px;right:10%; animation-delay:0s; }
+    .hero__shape--2 { width:200px;height:200px; background:radial-gradient(circle,rgba(59,95,196,0.3),transparent 70%); bottom:10%;left:5%; animation-delay:3s; }
+    .hero__shape--3 { width:150px;height:150px; background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 70%); top:40%;right:5%; animation-delay:5s; }
+    @keyframes floatShape {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-24px) scale(1.05); }
+    }
+    .hero__content { position: relative; z-index: 2; max-width: 720px; }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 8px 18px; border-radius: 100px;
+      margin-bottom: 28px;
+      animation: fadeSlideUp 0.7s ease both;
+    }
+    .hero__badge-dot { width:8px;height:8px; background:var(--green-500); border-radius:50%; animation:pulse 2s infinite; }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+    }
+    .hero__title {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem,6vw,4.2rem);
+      font-weight: 700; color: var(--white);
+      line-height: 1.18; margin-bottom: 24px;
+      animation: fadeSlideUp 0.8s ease 0.15s both;
+    }
+    .hero__title em { font-style: italic; color: #6ee7a0; }
+    .hero__subtitle {
+      font-size: 1.1rem; color: rgba(255,255,255,0.78);
+      max-width: 540px; line-height: 1.75; margin-bottom: 44px;
+      animation: fadeSlideUp 0.8s ease 0.3s both;
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; animation: fadeSlideUp 0.8s ease 0.45s both; }
+    /* FIX C: scroll indicator above the ribbon */
+    .hero__scroll {
+      position: absolute;
+      bottom: 110px; /* FIX C – was 36px, now clears 84px ribbon */
+      left: 50%; transform: translateX(-50%);
+      z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5));
+      animation: scrollAnim 2s ease infinite;
+    }
+    @keyframes scrollAnim {
+      0%   { transform:scaleY(0); transform-origin:top; }
+      50%  { transform:scaleY(1); transform-origin:top; }
+      51%  { transform-origin:bottom; }
+      100% { transform:scaleY(0); transform-origin:bottom; }
+    }
+    /* Stats ribbon */
+    .hero__stats {
+      position: absolute; bottom:0; left:0; right:0;
+      z-index: 3;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    /* FIX D: removed invalid `divide: 1` property */
+    .hero__stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .hero-stat { padding:22px 24px; text-align:center; border-right:1px solid rgba(255,255,255,0.1); }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat__num { font-size:1.7rem; font-weight:800; color:var(--white); line-height:1; margin-bottom:4px; }
+    .hero-stat__label { font-size:0.75rem; color:rgba(255,255,255,0.6); font-weight:500; }
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* =============================================
+       ABOUT PREVIEW
+    ============================================= */
+    .about-preview { padding: var(--section-pad); background: var(--white); }
+    .about-preview__grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .about-preview__visual { position: relative; }
+    .about-card-img {
+      width:100%; aspect-ratio:4/3;
+      background: linear-gradient(135deg, var(--blue-800), var(--blue-600));
+      border-radius: var(--radius-lg); overflow:hidden;
+      position:relative; display:flex; align-items:center; justify-content:center;
+    }
+    .about-card-img svg { opacity: 0.18; }
+    .about-card-overlay { position:absolute; inset:0; background:linear-gradient(160deg,rgba(22,163,74,0.35) 0%,transparent 60%); }
+    .about-card-badge {
+      position:absolute; bottom:-20px; right:-20px;
+      width:130px; height:130px;
+      background:var(--white); border-radius:50%;
+      box-shadow:var(--shadow-lg);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+      border:4px solid var(--green-100);
+    }
+    .about-card-badge strong { font-size:1.8rem; font-weight:800; color:var(--green-600); line-height:1; }
+    .about-card-badge span  { font-size:0.7rem; font-weight:600; color:var(--gray-500); text-align:center; line-height:1.2; }
+    .about-preview__visual::after {
+      content:''; position:absolute; bottom:-34px; right:-34px;
+      width:158px; height:158px;
+      border:2px dashed var(--green-100); border-radius:50%;
+    }
+    .about-preview__content .section-subtitle { margin-bottom:28px; }
+    .about-values { display:flex; flex-direction:column; gap:14px; margin:28px 0 36px; }
+    .about-value { display:flex; align-items:center; gap:14px; font-size:0.95rem; font-weight:500; color:var(--gray-700); }
+    .about-value__icon { width:36px;height:36px; background:var(--blue-50); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem; }
+
+    /* =============================================
+       INITIATIVES PREVIEW
+    ============================================= */
+    .initiatives { padding:var(--section-pad); background:var(--gray-50); }
+    .initiatives__head { text-align:center; max-width:620px; margin:0 auto 60px; }
+    .initiatives__head .section-label { justify-content:center; }
+    .initiatives__head .section-label::before { display:none; }
+    .initiatives__head .section-label::after { content:''; width:28px; height:2px; background:var(--green-600); border-radius:2px; }
+    .initiatives__grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+    .initiative-card {
+      background:var(--white); border-radius:var(--radius-md);
+      padding:36px 28px 32px;
+      box-shadow:var(--shadow-sm); border:1px solid rgba(30,58,138,0.06);
+      transition:var(--transition); position:relative; overflow:hidden;
+    }
+    .initiative-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:4px;
+      background:linear-gradient(90deg,var(--blue-800),var(--green-600));
+      transform:scaleX(0); transform-origin:left; transition:transform var(--transition);
+    }
+    .initiative-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-6px); border-color:transparent; }
+    .initiative-card:hover::before { transform:scaleX(1); }
+    .initiative-card__icon { width:64px;height:64px; border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin-bottom:22px; }
+    .icon-blue  { background:var(--blue-50); }
+    .icon-green { background:var(--green-100); }
+    .icon-teal  { background:#e0f2fe; }
+    .icon-amber { background:#fef3c7; }
+    .initiative-card__title { font-size:1.05rem; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .initiative-card__desc  { font-size:0.88rem; color:var(--gray-500); line-height:1.65; }
+    .initiative-card__link { display:inline-flex; align-items:center; gap:6px; font-size:0.85rem; font-weight:600; color:var(--blue-800); margin-top:20px; transition:gap var(--transition),color var(--transition); }
+    .initiative-card:hover .initiative-card__link { gap:10px; color:var(--green-600); }
+
+    /* =============================================
+       IMPACT STATS
+    ============================================= */
+    .impact { padding:var(--section-pad); background:linear-gradient(135deg,var(--blue-900) 0%,var(--blue-800) 60%,#1a5c3a 100%); position:relative; overflow:hidden; }
+    .impact::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px); background-size:40px 40px; }
+    .impact__inner { position:relative; z-index:1; }
+    .impact__head { text-align:center; margin-bottom:60px; }
+    .impact__head .section-label { color:#6ee7a0; justify-content:center; }
+    .impact__head .section-label::before { display:none; }
+    .impact__head .section-label::after { content:''; width:28px;height:2px; background:#6ee7a0; border-radius:2px; }
+    .impact__head .section-title    { color:var(--white); }
+    .impact__head .section-subtitle { color:rgba(255,255,255,0.7); margin:0 auto; }
+    .impact__grid { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+    .impact-card {
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(8px); border-radius:var(--radius-md);
+      padding:40px 28px; text-align:center; transition:var(--transition);
+    }
+    .impact-card:hover { background:rgba(255,255,255,0.13); transform:translateY(-4px); border-color:rgba(255,255,255,0.25); }
+    .impact-card__icon  { font-size:2.4rem; margin-bottom:16px; display:block; }
+    .impact-card__num   { font-family:var(--font-body); font-size:clamp(2.4rem,5vw,3.4rem); font-weight:800; color:var(--white); line-height:1; margin-bottom:6px; }
+    .impact-card__num .plus { color:var(--green-500); }
+    .impact-card__label { font-size:0.9rem; color:rgba(255,255,255,0.65); font-weight:500; }
+
+    /* =============================================
+       EVENTS PREVIEW
+    ============================================= */
+    .events { padding:var(--section-pad); background:var(--white); }
+    .events__head { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:50px; flex-wrap:wrap; gap:20px; }
+    .events__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    .event-card { border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--gray-100); background:var(--white); box-shadow:var(--shadow-sm); transition:var(--transition); display:flex; flex-direction:column; }
+    .event-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
+    .event-card__header { padding:24px 24px 0; display:flex; align-items:flex-start; gap:16px; }
+    .event-date { background:var(--blue-800); color:var(--white); border-radius:var(--radius-sm); padding:10px 14px; text-align:center; min-width:54px; flex-shrink:0; }
+    .event-date__day   { font-size:1.5rem; font-weight:800; line-height:1; display:block; }
+    .event-date__month { font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; opacity:0.85; }
+    .event-card__meta  { flex:1; }
+    .event-tag { display:inline-block; font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:4px 10px; border-radius:100px; margin-bottom:8px; }
+    .tag-green  { background:var(--green-100); color:var(--green-700); }
+    .tag-blue   { background:var(--blue-100);  color:var(--blue-700); }
+    .tag-orange { background:#fef3c7; color:#b45309; }
+    .event-card__title { font-size:1rem; font-weight:700; color:var(--gray-900); line-height:1.3; }
+    .event-card__body  { padding:16px 24px 24px; flex:1; display:flex; flex-direction:column; }
+    .event-card__desc  { font-size:0.875rem; color:var(--gray-500); line-height:1.65; flex:1; margin-bottom:18px; }
+    .event-card__footer { display:flex; align-items:center; justify-content:space-between; padding-top:16px; border-top:1px solid var(--gray-100); }
+    .event-location { display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--gray-500); font-weight:500; }
+
+    /* =============================================
+       CTA SECTION
+    ============================================= */
+    .cta-section { padding:100px 0; background:var(--gray-50); }
+    .cta-section__card {
+      background:linear-gradient(135deg,var(--blue-800) 0%,var(--blue-900) 50%,#1a4f2e 100%);
+      border-radius:var(--radius-xl); padding:80px 60px;
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .cta-section__card::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px); background-size:32px 32px; }
+    .cta-section__card::after  { content:''; position:absolute; top:-80px;right:-80px; width:320px;height:320px; background:radial-gradient(circle,rgba(22,163,74,0.3) 0%,transparent 65%); }
+    .cta-section__content { position:relative; z-index:1; }
+    .cta-section__title { font-family:var(--font-head); font-size:clamp(2rem,5vw,3rem); font-weight:700; color:var(--white); line-height:1.25; margin-bottom:18px; }
+    .cta-section__sub   { font-size:1.05rem; color:rgba(255,255,255,0.72); max-width:520px; margin:0 auto 40px; line-height:1.7; }
+    .cta-actions { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    .testimonials { padding:var(--section-pad); background:var(--white); }
+    .testimonials__head { text-align:center; margin-bottom:56px; }
+    .testimonials__head .section-label { justify-content:center; }
+    .testimonials__head .section-label::before { display:none; }
+    .testimonials__head .section-label::after { content:''; width:28px;height:2px; background:var(--green-600); border-radius:2px; }
+    .testimonials__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    .testimonial-card { background:var(--gray-50); border-radius:var(--radius-md); padding:36px 32px; border:1px solid var(--gray-100); transition:var(--transition); position:relative; }
+    .testimonial-card:hover { box-shadow:var(--shadow-md); background:var(--white); }
+    .testimonial-card__quote { font-size:3rem; line-height:1; color:var(--blue-100); font-family:Georgia,serif; margin-bottom:12px; }
+    .testimonial-card__text  { font-size:0.95rem; color:var(--gray-700); line-height:1.75; font-style:italic; margin-bottom:28px; }
+    .testimonial-card__author { display:flex; align-items:center; gap:14px; }
+    .author-avatar { width:46px;height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; color:var(--white); flex-shrink:0; }
+    .av-blue  { background:linear-gradient(135deg,var(--blue-700),var(--blue-600)); }
+    .av-green { background:linear-gradient(135deg,var(--green-600),var(--green-500)); }
+    .av-teal  { background:linear-gradient(135deg,#0891b2,#06b6d4); }
+    .author-info strong { display:block; font-size:0.9rem; font-weight:700; color:var(--gray-900); }
+    .author-info span   { font-size:0.78rem; color:var(--gray-500); }
+    .testimonial-stars  { position:absolute; top:28px; right:28px; color:#f59e0b; font-size:0.85rem; letter-spacing:2px; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer { background:var(--gray-900); color:rgba(255,255,255,0.75); padding:80px 0 0; }
+    .footer__grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:60px; padding-bottom:60px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .footer__brand .navbar__logo { margin-bottom:20px; }
+    .footer__brand .navbar__logo .logo-text strong { color:var(--white); }
+    .footer__brand .navbar__logo .logo-text span   { color:rgba(255,255,255,0.4); }
+    .footer__tagline { font-size:0.88rem; line-height:1.7; color:rgba(255,255,255,0.55); margin-bottom:28px; }
+    .footer__social  { display:flex; gap:10px; }
+    .social-btn { width:38px;height:38px; border-radius:var(--radius-sm); background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.65); transition:var(--transition); }
+    .social-btn:hover { background:var(--blue-800); color:var(--white); transform:translateY(-2px); }
+    .footer__col-title { font-size:0.85rem; font-weight:700; color:var(--white); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:22px; }
+    .footer__links { display:flex; flex-direction:column; gap:10px; }
+    .footer__links a { font-size:0.875rem; color:rgba(255,255,255,0.55); transition:color var(--transition); }
+    .footer__links a:hover { color:var(--white); }
+    .footer__contact { display:flex; flex-direction:column; gap:14px; }
+    .footer-contact-item { display:flex; align-items:flex-start; gap:12px; font-size:0.875rem; color:rgba(255,255,255,0.55); }
+    .footer-contact-item svg { width:16px;height:16px; color:var(--green-500); flex-shrink:0; margin-top:2px; }
+    .footer__bottom { padding:24px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .footer__copy { font-size:0.82rem; color:rgba(255,255,255,0.35); }
+    .footer__bottom-links { display:flex; gap:20px; }
+    .footer__bottom-links a { font-size:0.82rem; color:rgba(255,255,255,0.35); transition:color var(--transition); }
+    .footer__bottom-links a:hover { color:rgba(255,255,255,0.7); }
+
+    /* =============================================
+       SCROLL REVEAL  ← ROOT FIX FOR BLANK SECTIONS
+       Elements are VISIBLE by default.
+       JS adds .js-animations to <body> immediately,
+       then the hidden+transition rules kick in and
+       IntersectionObserver reveals them on scroll.
+       If JS never runs OR observer never fires,
+       content stays fully visible — no blank sections.
+    ============================================= */
+    .js-animations .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .js-animations .reveal.visible        { opacity:1; transform:translateY(0); }
+    .js-animations .reveal-delay-1 { transition-delay:0.1s; }
+    .js-animations .reveal-delay-2 { transition-delay:0.2s; }
+    .js-animations .reveal-delay-3 { transition-delay:0.3s; }
+    .js-animations .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* =============================================
+       RESPONSIVE – TABLET (≤ 1024px)
+    ============================================= */
+    @media (max-width: 1024px) {
+      .initiatives__grid  { grid-template-columns:repeat(2,1fr); }
+      .impact__grid       { grid-template-columns:repeat(2,1fr); }
+      .events__grid       { grid-template-columns:repeat(2,1fr); }
+      .testimonials__grid { grid-template-columns:repeat(2,1fr); }
+      .footer__grid       { grid-template-columns:1fr 1fr; gap:40px; }
+      .about-preview__grid { gap:48px; }
+      .hero__stats-inner  { grid-template-columns:repeat(2,1fr); }
+      /* FIX E: remove border-right from both right-column stats */
+      .hero-stat:nth-child(2),
+      .hero-stat:nth-child(4) { border-right:none; }
+    }
+
+    /* =============================================
+       RESPONSIVE – MOBILE (≤ 768px)
+    ============================================= */
+    @media (max-width: 768px) {
+      :root { --section-pad:72px 0; }
+      .navbar__links, .navbar__cta { display:none; }
+      .navbar__hamburger { display:flex; }
+      .hero { min-height:100svh; padding-bottom:140px; }
+      .hero__stats-inner { grid-template-columns:repeat(2,1fr); }
+      .about-preview__grid { grid-template-columns:1fr; gap:40px; }
+      .about-preview__visual { display:none; }
+      .initiatives__grid  { grid-template-columns:1fr; gap:16px; }
+      .impact__grid       { grid-template-columns:repeat(2,1fr); gap:16px; }
+      .events__grid       { grid-template-columns:1fr; }
+      .events__head       { flex-direction:column; align-items:flex-start; }
+      .testimonials__grid { grid-template-columns:1fr; }
+      .testimonials__grid .testimonial-card:last-child { display:none; }
+      .cta-section__card  { padding:52px 28px; border-radius:var(--radius-lg); }
+      .footer__grid       { grid-template-columns:1fr; gap:36px; }
+      .footer__bottom     { flex-direction:column; text-align:center; }
+    }
+    @media (max-width: 480px) {
+      .hero-stat { padding:16px; }
+      .hero-stat__num { font-size:1.35rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVBAR
+  ========================================== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container">
+      <nav class="navbar__inner" aria-label="Primary navigation">
+        <a href="#home" class="navbar__logo" aria-label="4U Home">
+          <div class="logo-mark" aria-hidden="true">4U</div>
+          <div class="logo-text">
+            <strong>4U</strong>
+            <span>Use Unity to Uplift Universe</span>
+          </div>
+        </a>
+        <ul class="navbar__links" role="list">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#initiatives">Initiatives</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="navbar__cta">
+          <a href="#volunteer" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <div class="navbar__mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#initiatives">Initiatives</a>
+      <a href="#events">Events</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <a href="#volunteer" class="btn btn-primary">Join Us</a>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO
+  ========================================== -->
+  <section class="hero" id="home" aria-label="Hero">
+    <div class="hero__bg"   aria-hidden="true"></div>
+    <div class="hero__dots" aria-hidden="true"></div>
+    <div class="hero__shape hero__shape--1" aria-hidden="true"></div>
+    <div class="hero__shape hero__shape--2" aria-hidden="true"></div>
+    <div class="hero__shape hero__shape--3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          Social Impact Initiative · India
+        </div>
+        <h1 class="hero__title">
+          Use <em>Unity</em> to<br>Uplift the Universe
+        </h1>
+        <p class="hero__subtitle">
+          We are a community-driven movement bringing compassion, action, and hope
+          to underprivileged communities — one initiative at a time. Be the change. Be 4U.
+        </p>
+        <div class="hero__actions">
+          <a href="#volunteer" class="btn btn-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Join Us
+          </a>
+          <a href="#donate" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Donate Now
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__stats" aria-label="Key statistics">
+      <div class="container">
+        <div class="hero__stats-inner">
+          <div class="hero-stat">
+            <div class="hero-stat__num" data-target="500">0<span>+</span></div>
+            <div class="hero-stat__label">Volunteers</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__num" data-target="120">0<span>+</span></div>
+            <div class="hero-stat__label">Events Conducted</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__num" data-target="8000">0<span>+</span></div>
+            <div class="hero-stat__label">People Helped</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__num" data-target="25">0<span>+</span></div>
+            <div class="hero-stat__label">Areas Impacted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       ABOUT PREVIEW
+  ========================================== -->
+  <section class="about-preview" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about-preview__grid">
+        <div class="about-preview__visual reveal">
+          <div class="about-card-img">
+            <svg width="320" height="240" viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="160" cy="120" r="90" stroke="white" stroke-width="2"/>
+              <circle cx="160" cy="120" r="60" stroke="white" stroke-width="1.5"/>
+              <circle cx="160" cy="120" r="30" fill="white" fill-opacity="0.15"/>
+              <path d="M160 30 L200 120 L120 120 Z" fill="white" fill-opacity="0.1"/>
+              <path d="M90 75 L200 75" stroke="white" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <path d="M70 120 L250 120" stroke="white" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <path d="M90 165 L230 165" stroke="white" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <circle cx="160" cy="40"  r="6" fill="white" fill-opacity="0.6"/>
+              <circle cx="230" cy="95"  r="6" fill="white" fill-opacity="0.6"/>
+              <circle cx="220" cy="165" r="6" fill="white" fill-opacity="0.6"/>
+              <circle cx="100" cy="175" r="6" fill="white" fill-opacity="0.6"/>
+              <circle cx="85"  cy="95"  r="6" fill="white" fill-opacity="0.6"/>
+            </svg>
+            <div class="about-card-overlay"></div>
+          </div>
+          <div class="about-card-badge">
+            <strong>3+</strong>
+            <span>Years of<br>Service</span>
+          </div>
+        </div>
+
+        <div class="about-preview__content reveal reveal-delay-2">
+          <span class="section-label">Who We Are</span>
+          <h2 class="section-title" id="about-title">
+            A Movement Built on<br><span>Compassion & Action</span>
+          </h2>
+          <p class="section-subtitle">
+            4U – Use Unity to Uplift Universe is a grassroots social initiative committed
+            to serving underprivileged communities. From cleanliness drives and food
+            distribution to visiting orphanages and supporting the elderly, we believe
+            small acts of kindness can create massive waves of change.
+          </p>
+          <div class="about-values">
+            <div class="about-value"><div class="about-value__icon" aria-hidden="true">🤝</div>Community-first approach to social upliftment</div>
+            <div class="about-value"><div class="about-value__icon" aria-hidden="true">💚</div>100% volunteer-driven with transparent operations</div>
+            <div class="about-value"><div class="about-value__icon" aria-hidden="true">🌍</div>Expanding our reach across cities and towns</div>
+          </div>
+          <a href="#about" class="btn btn-primary">
+            Learn More About Us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       INITIATIVES PREVIEW
+  ========================================== -->
+  <section class="initiatives" id="initiatives" aria-labelledby="initiatives-title">
+    <div class="container">
+      <div class="initiatives__head reveal">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title" id="initiatives-title">Our Core <span>Initiatives</span></h2>
+        <p class="section-subtitle">Every initiative is a step toward a more equal, clean, and compassionate world. Here's how we're making a difference every single day.</p>
+      </div>
+      <div class="initiatives__grid">
+        <article class="initiative-card reveal reveal-delay-1">
+          <div class="initiative-card__icon icon-blue" aria-hidden="true">🧹</div>
+          <h3 class="initiative-card__title">Cleanliness Drives</h3>
+          <p class="initiative-card__desc">Organizing neighborhood clean-up drives to create hygienic, beautiful public spaces. We've cleaned parks, roads, and water bodies across multiple districts.</p>
+          <a href="#initiatives" class="initiative-card__link">Learn more →</a>
+        </article>
+        <article class="initiative-card reveal reveal-delay-2">
+          <div class="initiative-card__icon icon-green" aria-hidden="true">🏠</div>
+          <h3 class="initiative-card__title">Orphanage Visits</h3>
+          <p class="initiative-card__desc">Regular visits to orphanages with food, supplies, and emotional support. We aim to bring smiles to children who need love and attention the most.</p>
+          <a href="#initiatives" class="initiative-card__link">Learn more →</a>
+        </article>
+        <article class="initiative-card reveal reveal-delay-3">
+          <div class="initiative-card__icon icon-teal" aria-hidden="true">🧓</div>
+          <h3 class="initiative-card__title">Old Age Home Support</h3>
+          <p class="initiative-card__desc">Spending quality time with the elderly, providing essentials, and ensuring they feel valued and connected to the community they helped build.</p>
+          <a href="#initiatives" class="initiative-card__link">Learn more →</a>
+        </article>
+        <article class="initiative-card reveal reveal-delay-4">
+          <div class="initiative-card__icon icon-amber" aria-hidden="true">🍱</div>
+          <h3 class="initiative-card__title">Food Distribution</h3>
+          <p class="initiative-card__desc">Distributing nutritious meals to the homeless, daily-wage workers, and families in need. No one should go to bed hungry — and we mean it.</p>
+          <a href="#initiatives" class="initiative-card__link">Learn more →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       IMPACT STATS
+  ========================================== -->
+  <section class="impact" id="impact" aria-labelledby="impact-title">
+    <div class="impact__inner">
+      <div class="container">
+        <div class="impact__head reveal">
+          <span class="section-label">Our Impact</span>
+          <h2 class="section-title" id="impact-title">Numbers That<br>Tell Our Story</h2>
+          <p class="section-subtitle">Real people. Real change. Every number below represents a life touched, a community uplifted, and a future made brighter together.</p>
+        </div>
+        <div class="impact__grid">
+          <div class="impact-card reveal reveal-delay-1">
+            <span class="impact-card__icon" aria-hidden="true">🙋</span>
+            <div class="impact-card__num"><span class="counter" data-target="500">500</span><span class="plus">+</span></div>
+            <div class="impact-card__label">Active Volunteers</div>
+          </div>
+          <div class="impact-card reveal reveal-delay-2">
+            <span class="impact-card__icon" aria-hidden="true">📅</span>
+            <div class="impact-card__num"><span class="counter" data-target="120">120</span><span class="plus">+</span></div>
+            <div class="impact-card__label">Events Conducted</div>
+          </div>
+          <div class="impact-card reveal reveal-delay-3">
+            <span class="impact-card__icon" aria-hidden="true">❤️</span>
+            <div class="impact-card__num"><span class="counter" data-target="8000">8K</span><span class="plus">+</span></div>
+            <div class="impact-card__label">People Helped</div>
+          </div>
+          <div class="impact-card reveal reveal-delay-4">
+            <span class="impact-card__icon" aria-hidden="true">📍</span>
+            <div class="impact-card__num"><span class="counter" data-target="25">25</span><span class="plus">+</span></div>
+            <div class="impact-card__label">Areas Impacted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       UPCOMING EVENTS
+  ========================================== -->
+  <section class="events" id="events" aria-labelledby="events-title">
+    <div class="container">
+      <div class="events__head">
+        <div>
+          <span class="section-label">What's Coming</span>
+          <h2 class="section-title" id="events-title">Upcoming <span>Events</span></h2>
+        </div>
+        <a href="#events" class="btn btn-outline-blue">
+          View All Events
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="events__grid">
+        <article class="event-card reveal reveal-delay-1">
+          <div class="event-card__header">
+            <div class="event-date" aria-label="April 12"><span class="event-date__day">12</span><span class="event-date__month">Apr</span></div>
+            <div class="event-card__meta">
+              <span class="event-tag tag-green">Cleanliness Drive</span>
+              <h3 class="event-card__title">City Park Clean-Up Campaign</h3>
+            </div>
+          </div>
+          <div class="event-card__body">
+            <p class="event-card__desc">Join us as we transform the neglected sections of Central City Park. Bring gloves and your enthusiasm — everything else is provided.</p>
+            <div class="event-card__footer">
+              <span class="event-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Central Park, Jamshedpur
+              </span>
+              <a href="#events" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card reveal reveal-delay-2">
+          <div class="event-card__header">
+            <div class="event-date" style="background:var(--green-600);" aria-label="April 20"><span class="event-date__day">20</span><span class="event-date__month">Apr</span></div>
+            <div class="event-card__meta">
+              <span class="event-tag tag-blue">Orphanage Visit</span>
+              <h3 class="event-card__title">Festival of Joy – Orphanage Day</h3>
+            </div>
+          </div>
+          <div class="event-card__body">
+            <p class="event-card__desc">A day of games, music, gifts, and laughter at Sunshine Children's Home. Volunteer to spend quality time with kids who deserve the world.</p>
+            <div class="event-card__footer">
+              <span class="event-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Sunshine Home, Ranchi
+              </span>
+              <a href="#events" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card reveal reveal-delay-3">
+          <div class="event-card__header">
+            <div class="event-date" style="background:#b45309;" aria-label="May 1"><span class="event-date__day">01</span><span class="event-date__month">May</span></div>
+            <div class="event-card__meta">
+              <span class="event-tag tag-orange">Food Drive</span>
+              <h3 class="event-card__title">Labour Day Meal Distribution</h3>
+            </div>
+          </div>
+          <div class="event-card__body">
+            <p class="event-card__desc">On Labour Day, we honour workers by distributing nutritious meals and care kits to daily-wage workers and their families in the industrial zone.</p>
+            <div class="event-card__footer">
+              <span class="event-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Industrial Area, Jamshedpur
+              </span>
+              <a href="#events" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CTA SECTION
+  ========================================== -->
+  <section class="cta-section" id="donate" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta-section__card reveal">
+        <div class="cta-section__content">
+          <h2 class="cta-section__title" id="cta-title">Ready to Make<br>a Real Difference?</h2>
+          <p class="cta-section__sub">Whether you volunteer your time or support us financially, every contribution is a step toward a more just and compassionate world. The universe is waiting — and it starts with you.</p>
+          <div class="cta-actions">
+            <a href="#volunteer" class="btn btn-green" id="volunteer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Become a Volunteer
+            </a>
+            <a href="#donate" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Support the Cause
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TESTIMONIALS
+  ========================================== -->
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="testimonials__head reveal">
+        <span class="section-label">Voices of Change</span>
+        <h2 class="section-title" id="testimonials-title">What Our Community <span>Says</span></h2>
+        <p class="section-subtitle">Behind every number is a story. Here are a few words from the people whose lives have been touched by 4U.</p>
+      </div>
+      <div class="testimonials__grid">
+        <blockquote class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+          <div class="testimonial-card__quote" aria-hidden="true">"</div>
+          <p class="testimonial-card__text">Joining 4U was the best decision of my life. The energy, the purpose, the genuine will to help — I've never felt more alive or useful than during our food distribution drives.</p>
+          <footer class="testimonial-card__author">
+            <div class="author-avatar av-blue" aria-hidden="true">RK</div>
+            <div class="author-info"><strong>Rahul Kumar</strong><span>Volunteer since 2022</span></div>
+          </footer>
+        </blockquote>
+        <blockquote class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+          <div class="testimonial-card__quote" aria-hidden="true">"</div>
+          <p class="testimonial-card__text">The team from 4U visited our old age home with such warmth and kindness. Our residents felt truly seen and loved. We hope they keep coming — it means the world to our elders.</p>
+          <footer class="testimonial-card__author">
+            <div class="author-avatar av-green" aria-hidden="true">PM</div>
+            <div class="author-info"><strong>Priya Mahato</strong><span>Caretaker, Sewa Old Age Home</span></div>
+          </footer>
+        </blockquote>
+        <blockquote class="testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+          <div class="testimonial-card__quote" aria-hidden="true">"</div>
+          <p class="testimonial-card__text">I've seen many NGOs come and go, but 4U is different — they show up consistently, they listen, and they truly care. It's not charity; it's community, and that's exactly what we need.</p>
+          <footer class="testimonial-card__author">
+            <div class="author-avatar av-teal" aria-hidden="true">AS</div>
+            <div class="author-info"><strong>Amit Singh</strong><span>Community Leader, Dhalbhum</span></div>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery anchor (placeholder – keeps #gallery links from 404ing) -->
+  <div id="gallery" aria-hidden="true" style="height:0;overflow:hidden;"></div>
+
+  <!-- ==========================================
+       FOOTER
+  ========================================== -->
+  <footer class="footer" id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="#home" class="navbar__logo" aria-label="4U Home">
+            <div class="logo-mark" aria-hidden="true">4U</div>
+            <div class="logo-text"><strong>4U</strong><span>Use Unity to Uplift Universe</span></div>
+          </a>
+          <p class="footer__tagline">A grassroots movement creating meaningful change through unity, compassion, and consistent action. Join us — the universe needs you.</p>
+          <div class="footer__social" aria-label="Social media links">
+            <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+
+        <nav aria-label="Footer quick links">
+          <h3 class="footer__col-title">Quick Links</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#initiatives">Initiatives</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Footer get involved links">
+          <h3 class="footer__col-title">Get Involved</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#volunteer">Become a Volunteer</a></li>
+            <li><a href="#donate">Donate</a></li>
+            <li><a href="#events">Upcoming Events</a></li>
+            <li><a href="#">Partner With Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="footer__col-title">Contact Us</h3>
+          <address class="footer__contact" style="font-style:normal;">
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Jamshedpur, Jharkhand, India
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              connect@4u-initiative.org
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.32 2 2 0 0 1 3.62 1.14h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.98 5.98l.83-.83a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +91 98765 43210
+            </div>
+          </address>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 4U – Use Unity to Uplift Universe. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+  ========================================== -->
+  <script>
+    'use strict';
+
+    /*
+      ROOT FIX – blank sections:
+      Add .js-animations to <body> SYNCHRONOUSLY before any paint.
+      The CSS only hides .reveal elements when .js-animations is present,
+      so without JS the page is always fully visible.
+      IntersectionObserver then reveals elements as they scroll in.
+    */
+    document.body.classList.add('js-animations');
+
+    /* ---- Navbar scroll shadow ---- */
+    const navbar     = document.getElementById('navbar');
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ---- Hamburger menu ---- */
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---- Scroll reveal ---- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ---- Counter animation ---- */
+    function animateCounter(el, target, duration) {
+      duration = duration || 1800;
+      const start     = performance.now();
+      const isLarge   = target >= 1000;
+      const fmt = isLarge
+        ? function(n){ return n >= 1000 ? (n/1000).toFixed(1).replace('.0','') + 'K' : String(n); }
+        : function(n){ return String(Math.round(n)); };
+
+      function step(now) {
+        var progress = Math.min((now - start) / duration, 1);
+        var ease     = 1 - Math.pow(1 - progress, 3);
+        el.textContent = fmt(Math.round(ease * target));
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = fmt(target);
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* Impact section counters – animate when visible */
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target, parseInt(entry.target.dataset.target, 10));
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.counter').forEach(function(el) {
+      counterObserver.observe(el);
+    });
+
+    /* Hero ribbon counters – animate on page load */
+    document.querySelectorAll('.hero-stat__num').forEach(function(el) {
+      var target  = parseInt(el.dataset.target, 10);
+      if (!target) return;
+      var plusEl  = el.querySelector('span');
+      var plusTxt = plusEl ? plusEl.textContent : '+';
+      el.innerHTML = '<span class="hc">0</span>' + plusTxt;
+      var span = el.querySelector('.hc');
+      setTimeout(function(){ animateCounter(span, target, 1600); }, 600);
+    });
+
+    /* ---- Active nav link on scroll ---- */
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.navbar__links a').forEach(function(link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll('section[id]').forEach(function(s) {
+      sectionObserver.observe(s);
+    });
+  </script>
+
+</body>
+</html>
