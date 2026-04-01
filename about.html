@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="4U – Use Unity to Uplift Universe is a grassroots social initiative committed to serving underprivileged communities. From cleanliness drives and food distribution to visiting orphanages and supporting the elderly, we believe small acts of kindness can create massive waves of change. Join us in our mission to uplift lives and build a stronger, more compassionate world together."/>
+  <link rel="shortcut icon" href="./assets/icon/icon.png" type="image/x-icon">
+  <title>About Us – 4U | Use Unity to Uplift Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       DESIGN TOKENS  (identical to Home Page)
+    ============================================= */
+    :root {
+      --blue-900: #0f2460;
+      --blue-800: #1E3A8A;
+      --blue-700: #2547a8;
+      --blue-600: #3b5fc4;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+
+      --green-700: #15803d;
+      --green-600: #16A34A;
+      --green-500: #22c55e;
+      --green-100: #dcfce7;
+
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white:    #ffffff;
+
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Poppins', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --shadow-sm: 0 2px 8px  rgba(30,58,138,0.08);
+      --shadow-md: 0 8px 28px rgba(30,58,138,0.13);
+      --shadow-lg: 0 20px 60px rgba(30,58,138,0.18);
+
+      --section-pad: 100px 0;
+      --container:  1200px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =============================================
+       TYPOGRAPHY UTILITIES
+    ============================================= */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 14px;
+    }
+    .section-label::before {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--green-600);
+      border-radius: 2px;
+    }
+    .section-label--center { justify-content: center; }
+    .section-label--center::before { display: none; }
+    .section-label--center::after {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--green-600);
+      border-radius: 2px;
+    }
+    .section-label--light { color: #6ee7a0; }
+    .section-label--light::before,
+    .section-label--light::after { background: #6ee7a0; }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+    .section-title span { color: var(--blue-800); }
+    .section-title--white { color: var(--white); }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--gray-500);
+      max-width: 600px;
+      line-height: 1.75;
+    }
+    .section-subtitle--white { color: rgba(255,255,255,0.72); }
+
+    /* =============================================
+       BUTTON SYSTEM
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .btn-sm  { padding: 8px 18px; font-size: 0.82rem; }
+
+    .btn-primary { background: var(--blue-800); color: var(--white); border-color: var(--blue-800); }
+    .btn-primary:hover { background: var(--blue-900); border-color: var(--blue-900); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,58,138,0.35); }
+
+    .btn-green { background: var(--green-600); color: var(--white); border-color: var(--green-600); }
+    .btn-green:hover { background: var(--green-700); border-color: var(--green-700); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,163,74,0.35); }
+
+    .btn-outline-blue { background: transparent; color: var(--blue-800); border-color: var(--blue-800); }
+    .btn-outline-blue:hover { background: var(--blue-800); color: var(--white); transform: translateY(-2px); }
+
+    .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.7); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.15); border-color: var(--white); transform: translateY(-2px); }
+
+    /* =============================================
+       NAVBAR  (identical to Home Page)
+    ============================================= */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(30,58,138,0.08);
+      transition: box-shadow var(--transition);
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .navbar__inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      height: 72px; gap: 24px;
+    }
+    .navbar__logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--blue-800), var(--green-600));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1.2rem; font-weight: 900;
+      font-family: var(--font-body); flex-shrink: 0;
+    }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-text strong { font-size: 1.2rem; font-weight: 800; color: var(--blue-800); }
+    .logo-text span   { font-size: 0.6rem; font-weight: 500; color: var(--gray-500); letter-spacing: 0.04em; }
+    .navbar__links { display: flex; align-items: center; gap: 6px; }
+    .navbar__links a {
+      font-size: 0.9rem; font-weight: 500; color: var(--gray-700);
+      padding: 8px 14px; border-radius: var(--radius-sm); transition: var(--transition);
+    }
+    .navbar__links a:hover, .navbar__links a.active { color: var(--blue-800); background: var(--blue-50); }
+    .navbar__cta { flex-shrink: 0; }
+    .navbar__hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 40px; height: 40px; cursor: pointer; background: none; border: none;
+      padding: 6px; border-radius: var(--radius-sm); transition: background var(--transition);
+    }
+    .navbar__hamburger:hover { background: var(--gray-100); }
+    .navbar__hamburger span {
+      display: block; height: 2px; background: var(--gray-700);
+      border-radius: 2px; transition: var(--transition); transform-origin: center;
+    }
+    .navbar__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .navbar__hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .navbar__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .navbar__mobile {
+      display: none; flex-direction: column; gap: 4px;
+      padding: 16px 24px 20px; border-top: 1px solid var(--gray-100); background: var(--white);
+    }
+    .navbar__mobile.open { display: flex; }
+    .navbar__mobile a {
+      font-size: 0.95rem; font-weight: 500; color: var(--gray-700);
+      padding: 12px 16px; border-radius: var(--radius-sm); transition: var(--transition);
+    }
+    .navbar__mobile a:hover { background: var(--blue-50); color: var(--blue-800); }
+    .navbar__mobile .btn { margin-top: 8px; width: 100%; justify-content: center; }
+
+    /* =============================================
+       PAGE HERO / HEADER
+    ============================================= */
+    .page-hero {
+      position: relative;
+      padding: 110px 0 90px;
+      background: var(--blue-900);
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 80% 50%, rgba(22,163,74,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 10% 60%, rgba(59,95,196,0.35) 0%, transparent 55%),
+        linear-gradient(135deg, #0f2460 0%, #1e3a8a 60%, #163b25 100%);
+    }
+    .page-hero__dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+    /* Decorative ring top-right */
+    .page-hero__ring {
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 420px; height: 420px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .page-hero__ring::after {
+      content: '';
+      position: absolute;
+      top: 40px; left: 40px; right: 40px; bottom: 40px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .page-hero__content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+    }
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 28px;
+    }
+    .breadcrumb a { color: rgba(255,255,255,0.5); transition: color var(--transition); }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    .breadcrumb__sep { font-size: 0.7rem; opacity: 0.4; }
+    .breadcrumb__current { color: rgba(255,255,255,0.85); }
+
+    .page-hero__title {
+      font-family: var(--font-head);
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      animation: fadeSlideUp 0.7s ease 0.1s both;
+    }
+    .page-hero__title em { font-style: italic; color: #6ee7a0; }
+
+    .page-hero__sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      max-width: 520px;
+      animation: fadeSlideUp 0.7s ease 0.25s both;
+    }
+
+    /* Bottom wave divider */
+    .page-hero__wave {
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      line-height: 0; z-index: 2;
+    }
+    .page-hero__wave svg { display: block; width: 100%; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       WHO WE ARE
+    ============================================= */
+    .who-we-are {
+      padding: var(--section-pad);
+      background: var(--white);
+    }
+    .who-we-are__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .who-we-are__visual {
+      position: relative;
+    }
+    /* Main illustration card */
+    .who-visual-card {
+      background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-700) 60%, #1a5c3a 100%);
+      border-radius: var(--radius-lg);
+      padding: 56px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .who-visual-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .who-visual-card__inner { position: relative; z-index: 1; }
+    .who-visual-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    }
+    .who-visual-card__title {
+      font-family: var(--font-head);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .who-visual-card__text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+    /* Floating pill badges */
+    .who-badge {
+      position: absolute;
+      display: flex; align-items: center; gap: 8px;
+      background: var(--white);
+      border-radius: 100px;
+      padding: 10px 18px;
+      box-shadow: var(--shadow-lg);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      white-space: nowrap;
+    }
+    .who-badge__dot {
+      width: 10px; height: 10px;
+      border-radius: 50%; flex-shrink: 0;
+    }
+    .who-badge--1 { bottom: -18px; left: -20px; }
+    .who-badge--2 { top: -18px; right: -16px; }
+    .who-badge--3 { bottom: 50px; right: -24px; }
+    .dot-green  { background: var(--green-600); }
+    .dot-blue   { background: var(--blue-600); }
+    .dot-amber  { background: #f59e0b; }
+
+    /* Content */
+    .who-we-are__content .section-subtitle { margin-bottom: 30px; }
+
+    .who-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0 40px;
+    }
+    .who-highlight {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: var(--transition);
+    }
+    .who-highlight:hover {
+      background: var(--blue-50);
+      border-color: var(--blue-100);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+    .who-highlight__icon { font-size: 1.5rem; margin-bottom: 10px; display: block; }
+    .who-highlight__title { font-size: 0.9rem; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+    .who-highlight__text  { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
+
+    /* =============================================
+       OUR STORY
+    ============================================= */
+    .our-story {
+      padding: var(--section-pad);
+      background: var(--gray-50);
+    }
+    .our-story__inner {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    /* Sticky sidebar */
+    .story-sidebar {
+      position: sticky;
+      top: 100px;
+    }
+    .story-sidebar .section-label { margin-bottom: 20px; }
+    .story-sidebar__quote {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--blue-800);
+      line-height: 1.5;
+      padding-left: 20px;
+      border-left: 3px solid var(--green-600);
+      margin: 28px 0 32px;
+    }
+    .story-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .story-stat-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm);
+    }
+    .story-stat-item__num {
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--blue-800); line-height: 1;
+      flex-shrink: 0;
+    }
+    .story-stat-item__num span { color: var(--green-600); }
+    .story-stat-item__label { font-size: 0.82rem; color: var(--gray-500); font-weight: 500; line-height: 1.3; }
+
+    /* Story content */
+    .story-content { display: flex; flex-direction: column; gap: 32px; }
+    .story-block { position: relative; }
+    .story-block__year {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 12px;
+    }
+    .story-block__year::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: var(--green-100);
+    }
+    .story-block__title {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .story-block__text {
+      font-size: 0.97rem;
+      color: var(--gray-600, #4b5563);
+      line-height: 1.8;
+    }
+    .story-block__text + .story-block__text { margin-top: 14px; }
+
+    /* Timeline connector */
+    .story-block + .story-block::before {
+      content: '';
+      display: block;
+      width: 2px; height: 32px;
+      background: linear-gradient(to bottom, var(--green-100), transparent);
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+
+    /* =============================================
+       MISSION & VISION
+    ============================================= */
+    .mission-vision {
+      padding: var(--section-pad);
+      background: var(--white);
+    }
+    .mission-vision__head {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 56px;
+    }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .mv-card {
+      border-radius: var(--radius-lg);
+      padding: 52px 44px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .mv-card--mission {
+      background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-900) 100%);
+    }
+    .mv-card--vision {
+      background: linear-gradient(135deg, var(--green-700) 0%, #0f4a27 100%);
+    }
+    .mv-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .mv-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .mv-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .mv-card__inner { position: relative; z-index: 1; }
+    .mv-card__tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .mv-card__icon { font-size: 2.8rem; margin-bottom: 20px; display: block; }
+    .mv-card__title {
+      font-family: var(--font-head);
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--white); line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .mv-card__text {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+    }
+
+    /* =============================================
+       CORE VALUES
+    ============================================= */
+    .core-values {
+      padding: var(--section-pad);
+      background: var(--gray-50);
+    }
+    .core-values__head {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 56px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 36px 24px 32px;
+      text-align: center;
+      border: 1px solid rgba(30,58,138,0.07);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .value-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-800), var(--green-600));
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+    .value-card:hover { box-shadow: var(--shadow-md); transform: translateY(-6px); border-color: transparent; }
+    .value-card:hover::after { transform: scaleX(1); }
+    .value-card__icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem;
+    }
+    .vi-1 { background: var(--blue-50); }
+    .vi-2 { background: var(--green-100); }
+    .vi-3 { background: #fce7f3; }
+    .vi-4 { background: #fef3c7; }
+    .vi-5 { background: #e0f2fe; }
+    .value-card__name {
+      font-size: 1rem; font-weight: 700;
+      color: var(--gray-900); margin-bottom: 10px;
+    }
+    .value-card__desc { font-size: 0.82rem; color: var(--gray-500); line-height: 1.6; }
+
+    /* =============================================
+       WHAT MAKES US DIFFERENT
+    ============================================= */
+    .differentiators {
+      padding: var(--section-pad);
+      background: var(--white);
+    }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .diff-content .section-subtitle { margin-bottom: 36px; }
+    .diff-list { display: flex; flex-direction: column; gap: 24px; }
+    .diff-item {
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .diff-item__num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-800), var(--blue-600));
+      color: var(--white);
+      font-size: 0.85rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .diff-item__body {}
+    .diff-item__title {
+      font-size: 1rem; font-weight: 700;
+      color: var(--gray-900); margin-bottom: 6px;
+    }
+    .diff-item__text { font-size: 0.88rem; color: var(--gray-500); line-height: 1.65; }
+
+    /* Right: stacked visual panels */
+    .diff-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .diff-panel {
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      transition: var(--transition);
+      cursor: default;
+    }
+    .diff-panel:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .dp-1 { background: var(--blue-800); grid-row: span 2; display: flex; flex-direction: column; justify-content: flex-end; min-height: 240px; }
+    .dp-2 { background: var(--green-600); }
+    .dp-3 { background: var(--gray-900); }
+    .diff-panel__icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .diff-panel__title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .diff-panel__text  { font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+    /* =============================================
+       TEAM SECTION – PEEK CAROUSEL
+    ============================================= */
+    .team {
+      padding: var(--section-pad);
+      background: var(--gray-50);
+    }
+    .team__head {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 52px;
+    }
+
+    /* Outer wrapper: hides overflow so only the active + peeking cards show */
+    .team-carousel-wrap {
+      position: relative;
+    }
+
+    /* The sliding track */
+    .team-carousel {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      /* padding so side cards peek in */
+      padding: 16px 0 24px;
+      will-change: transform;
+    }
+
+    /* Viewport that clips the track */
+    .team-carousel-viewport {
+      overflow: hidden;
+      /* negative margin on each side lets the peek cards bleed out */
+      margin: 0 -8px;
+      padding: 0 8px;
+      cursor: grab;
+      user-select: none;
+    }
+    .team-carousel-viewport.is-dragging { cursor: grabbing; }
+
+    /* Each card */
+    .team-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(30,58,138,0.07);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition), transform var(--transition), opacity var(--transition);
+      text-align: center;
+      /* flex-shrink:0 keeps cards from collapsing; width set by JS */
+      flex-shrink: 0;
+      opacity: 0.55;
+      transform: scale(0.93);
+    }
+    .team-card.is-active {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: var(--shadow-lg);
+    }
+    .team-card:hover { box-shadow: var(--shadow-md); }
+
+    /* Avatar area */
+    .team-card__avatar {
+      height: 45vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    /* Avatar SVG person silhouette */
+    .team-card__avatar svg {
+      width: 90px; height: 90px;
+      opacity: 0.35;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    }
+    .team-card__avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;          
+      object-position: center 20%; 
+      object-position: center 30%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    /* Colour variants – 10 distinct gradients */
+    .ta-1  { background: linear-gradient(135deg, #1E3A8A, #3b5fc4); }
+    .ta-2  { background: linear-gradient(135deg, #15803d, #22c55e); }
+    .ta-3  { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+    .ta-4  { background: linear-gradient(135deg, #0891b2, #38bdf8); }
+    .ta-5  { background: linear-gradient(135deg, #b45309, #fbbf24); }
+    .ta-6  { background: linear-gradient(135deg, #be185d, #f472b6); }
+    .ta-7  { background: linear-gradient(135deg, #0f766e, #2dd4bf); }
+    .ta-8  { background: linear-gradient(135deg, #c2410c, #fb923c); }
+    .ta-9  { background: linear-gradient(135deg, #4338ca, #818cf8); }
+    .ta-10 { background: linear-gradient(135deg, #065f46, #34d399); }
+
+    .team-card__avatar::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 48px;
+      background: linear-gradient(to top, rgba(0,0,0,0.28), transparent);
+    }
+
+    /* Role badge inside avatar */
+    .team-card__badge {
+      position: absolute;
+      bottom: 14px; left: 50%; transform: translateX(-50%);
+      z-index: 2;
+      font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--white);
+      padding: 4px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+      backdrop-filter: blur(6px);
+    }
+
+    .team-card__body { padding: 22px 20px 26px; }
+    .team-card__name {
+      font-size: 1rem; font-weight: 700;
+      color: var(--gray-900); margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .team-card__role {
+      font-size: 0.73rem; font-weight: 600;
+      color: var(--green-600);
+      text-transform: uppercase; letter-spacing: 0.07em;
+      margin-bottom: 10px;
+    }
+    .team-card__initials {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      font-size: 1rem; font-weight: 800;
+      color: var(--white);
+      margin: 0 auto 0;
+      position: relative; z-index: 1;
+    }
+
+    /* Dot indicators */
+    .team-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .team-dot {
+      width: 8px; height: 8px;
+      border-radius: 100px;
+      background: var(--gray-300);
+      cursor: pointer;
+      transition: width 0.3s ease, background 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+    .team-dot.is-active {
+      background: var(--blue-800);
+      width: 24px;
+    }
+
+    /* Arrow buttons */
+    .team-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .team-arrow {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--gray-100);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--gray-700);
+    }
+    .team-arrow:hover:not(:disabled) {
+      background: var(--blue-800);
+      border-color: var(--blue-800);
+      color: var(--white);
+      transform: scale(1.08);
+    }
+    .team-arrow:disabled { opacity: 0.35; cursor: default; }
+    .team-arrow svg { width: 18px; height: 18px; pointer-events: none; }
+
+    /* =============================================
+       CALL TO ACTION
+    ============================================= */
+    .about-cta {
+      padding: var(--section-pad);
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 55%, #163b25 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+    .about-cta__glow-1 {
+      position: absolute; top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(22,163,74,0.25) 0%, transparent 65%);
+    }
+    .about-cta__glow-2 {
+      position: absolute; bottom: -80px; left: -80px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(59,95,196,0.3) 0%, transparent 65%);
+    }
+    .about-cta__inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-cta__title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+    .about-cta__sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.68);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+    .about-cta__actions {
+      display: flex; flex-direction: column;
+      gap: 12px; flex-shrink: 0;
+    }
+
+    /* =============================================
+       FOOTER  (identical to Home Page)
+    ============================================= */
+    .footer { background: var(--gray-900); color: rgba(255,255,255,0.75); padding: 80px 0 0; }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.4fr;
+      gap: 60px; padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer__brand .navbar__logo { margin-bottom: 20px; }
+    .footer__brand .navbar__logo .logo-text strong { color: var(--white); }
+    .footer__brand .navbar__logo .logo-text span   { color: rgba(255,255,255,0.4); }
+    .footer__tagline { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
+    .footer__social  { display: flex; gap: 10px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.65); transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--blue-800); color: var(--white); transform: translateY(-2px); }
+    .footer__col-title { font-size: 0.85rem; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 22px; }
+    .footer__links { display: flex; flex-direction: column; gap: 10px; }
+    .footer__links a { font-size: 0.875rem; color: rgba(255,255,255,0.55); transition: color var(--transition); }
+    .footer__links a:hover { color: var(--white); }
+    .footer__contact { display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; font-size: 0.875rem; color: rgba(255,255,255,0.55); }
+    .footer-contact-item svg { width: 16px; height: 16px; color: var(--green-500); flex-shrink: 0; margin-top: 2px; }
+    .footer__bottom { padding: 24px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer__copy { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer__bottom-links { display: flex; gap: 20px; }
+    .footer__bottom-links a { font-size: 0.82rem; color: rgba(255,255,255,0.35); transition: color var(--transition); }
+    .footer__bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* =============================================
+       SCROLL REVEAL  (same JS-gated approach as Home)
+    ============================================= */
+    .js-animations .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .js-animations .reveal.visible        { opacity: 1; transform: translateY(0); }
+    .js-animations .reveal-delay-1 { transition-delay: 0.1s; }
+    .js-animations .reveal-delay-2 { transition-delay: 0.2s; }
+    .js-animations .reveal-delay-3 { transition-delay: 0.3s; }
+    .js-animations .reveal-delay-4 { transition-delay: 0.4s; }
+    .js-animations .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* =============================================
+       RESPONSIVE – TABLET (≤ 1024px)
+    ============================================= */
+    @media (max-width: 1024px) {
+      .who-we-are__grid    { gap: 48px; }
+      .our-story__inner    { grid-template-columns: 280px 1fr; gap: 48px; }
+      .values-grid         { grid-template-columns: repeat(3, 1fr); }
+      .team-grid           { grid-template-columns: repeat(2, 1fr); }
+      .footer__grid        { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .diff-grid           { gap: 40px; }
+      .about-cta__inner    { grid-template-columns: 1fr; gap: 36px; }
+      .about-cta__actions  { flex-direction: row; }
+    }
+
+    /* =============================================
+       RESPONSIVE – MOBILE (≤ 768px)
+    ============================================= */
+    @media (max-width: 768px) {
+      :root { --section-pad: 72px 0; }
+
+      .navbar__links, .navbar__cta { display: none; }
+      .navbar__hamburger { display: flex; }
+
+      .page-hero { padding: 80px 0 70px; }
+      .page-hero__ring { display: none; }
+
+      .who-we-are__grid  { grid-template-columns: 1fr; gap: 44px; }
+      .who-highlights    { grid-template-columns: 1fr; }
+      .who-badge--2, .who-badge--3 { display: none; }
+
+      .our-story__inner  { grid-template-columns: 1fr; }
+      .story-sidebar     { position: static; }
+
+      .mv-grid           { grid-template-columns: 1fr; }
+
+      .values-grid       { grid-template-columns: repeat(2, 1fr); }
+
+      .diff-grid         { grid-template-columns: 1fr; gap: 44px; }
+      .diff-panels       { grid-template-columns: 1fr; }
+      .dp-1              { grid-row: auto; min-height: 180px; }
+
+      .team-grid         { grid-template-columns: repeat(2, 1fr); }
+
+      .about-cta__inner  { grid-template-columns: 1fr; }
+      .about-cta__actions { flex-direction: column; }
+      .about-cta__actions .btn { width: 100%; justify-content: center; }
+
+      .footer__grid      { grid-template-columns: 1fr; gap: 36px; }
+      .footer__bottom    { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid   { grid-template-columns: 1fr; }
+      .who-badge--1 { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVBAR
+  ========================================== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container">
+      <nav class="navbar__inner" aria-label="Primary navigation">
+        <a href="index.html" class="navbar__logo" aria-label="4U Home">
+          <div class="logo-mark" aria-hidden="true">4U</div>
+          <div class="logo-text">
+            <strong>4U</strong>
+            <span>Use Unity to Uplift Universe</span>
+          </div>
+        </a>
+        <ul class="navbar__links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="#">Initiatives</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="navbar__cta">
+          <a href="#cta" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <div class="navbar__mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="#">Initiatives</a>
+      <a href="#">Events</a>
+      <a href="#">Gallery</a>
+      <a href="#">Contact</a>
+      <a href="#cta" class="btn btn-primary">Join Us</a>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE HERO
+  ========================================== -->
+  <section class="page-hero" aria-label="Page header">
+    <div class="page-hero__bg"   aria-hidden="true"></div>
+    <div class="page-hero__dots" aria-hidden="true"></div>
+    <div class="page-hero__ring" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="page-hero__content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">About Us</span>
+        </nav>
+        <h1 class="page-hero__title">
+          Driven by <em>Unity,</em><br>Committed to Change
+        </h1>
+        <p class="page-hero__sub">
+          We are not just a social group — we are a movement of ordinary people
+          doing extraordinary things. Here's the story of who we are, why we
+          started, and where we're going together.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-hero__wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 64 L0 32 Q360 0 720 32 Q1080 64 1440 32 L1440 64 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       WHO WE ARE
+  ========================================== -->
+  <section class="who-we-are" id="who-we-are" aria-labelledby="who-title">
+    <div class="container">
+      <div class="who-we-are__grid">
+
+        <!-- Visual side -->
+        <div class="who-we-are__visual reveal">
+          <div class="who-visual-card">
+            <div class="who-visual-card__inner">
+              <span class="who-visual-icon" aria-hidden="true">🌍</span>
+              <h3 class="who-visual-card__title">A Community Built<br>on Shared Purpose</h3>
+              <p class="who-visual-card__text">
+                Formed by passionate individuals who believed that small, consistent
+                acts of service could create large-scale transformation — 4U is proof
+                that unity multiplies impact.
+              </p>
+            </div>
+          </div>
+          <div class="who-badge who-badge--1">
+            <span class="who-badge__dot dot-green" aria-hidden="true"></span>
+            Fully Volunteer-Driven
+          </div>
+          <div class="who-badge who-badge--2">
+            <span class="who-badge__dot dot-blue" aria-hidden="true"></span>
+            500+ Members Strong
+          </div>
+          <div class="who-badge who-badge--3">
+            <span class="who-badge__dot dot-amber" aria-hidden="true"></span>
+            3+ Years of Service
+          </div>
+        </div>
+
+        <!-- Content side -->
+        <div class="who-we-are__content reveal reveal-delay-2">
+          <span class="section-label">Who We Are</span>
+          <h2 class="section-title" id="who-title">
+            More Than an NGO —<br>We Are a <span>Movement</span>
+          </h2>
+          <p class="section-subtitle">
+            4U – Use Unity to Uplift Universe is a grassroots social initiative
+            founded on a single, powerful belief: when people come together with
+            genuine intent to serve, no problem is too big to solve.
+          </p>
+          <p class="section-subtitle" style="margin-top:16px;">
+            We are students, professionals, homemakers, and retirees — united
+            by compassion. With zero bureaucracy and 100% heart, we show up
+            wherever we're needed and do whatever it takes.
+          </p>
+
+          <div class="who-highlights">
+            <div class="who-highlight">
+              <span class="who-highlight__icon" aria-hidden="true">🏘️</span>
+              <div class="who-highlight__title">Community-Led</div>
+              <div class="who-highlight__text">Decisions made by volunteers on the ground, not from behind a desk.</div>
+            </div>
+            <div class="who-highlight">
+              <span class="who-highlight__icon" aria-hidden="true">🔍</span>
+              <div class="who-highlight__title">Transparent</div>
+              <div class="who-highlight__text">Every rupee and every action is visible and accountable to our community.</div>
+            </div>
+            <div class="who-highlight">
+              <span class="who-highlight__icon" aria-hidden="true">⚡</span>
+              <div class="who-highlight__title">Action-First</div>
+              <div class="who-highlight__text">We don't wait for perfect conditions — we act, learn, and improve.</div>
+            </div>
+            <div class="who-highlight">
+              <span class="who-highlight__icon" aria-hidden="true">💞</span>
+              <div class="who-highlight__title">Empathy-Driven</div>
+              <div class="who-highlight__text">Every initiative starts by listening to the community we serve.</div>
+            </div>
+          </div>
+
+          <a href="#cta" class="btn btn-primary">
+            Become Part of 4U
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       OUR STORY
+  ========================================== -->
+  <section class="our-story" id="our-story" aria-labelledby="story-title">
+    <div class="container">
+      <div class="our-story__inner">
+
+        <!-- Sticky sidebar -->
+        <aside class="story-sidebar reveal">
+          <span class="section-label">Our Journey</span>
+          <h2 class="section-title" id="story-title" style="font-size:clamp(1.6rem,3vw,2.2rem);">
+            How 4U<br><span>Came to Be</span>
+          </h2>
+          <blockquote class="story-sidebar__quote">
+            "We didn't start 4U because we had all the answers. We started it
+            because we couldn't ignore the questions."
+          </blockquote>
+          <div class="story-stat">
+            <div class="story-stat-item">
+              <div class="story-stat-item__num">500<span>+</span></div>
+              <div class="story-stat-item__label">Volunteers who believed in us from Day 1</div>
+            </div>
+            <div class="story-stat-item">
+              <div class="story-stat-item__num">120<span>+</span></div>
+              <div class="story-stat-item__label">Events conducted across districts</div>
+            </div>
+            <div class="story-stat-item">
+              <div class="story-stat-item__num">8K<span>+</span></div>
+              <div class="story-stat-item__label">Lives touched through our work</div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Story blocks -->
+        <div class="story-content">
+
+          <div class="story-block reveal reveal-delay-1">
+            <div class="story-block__year">The Beginning · 2021</div>
+            <h3 class="story-block__title">A Problem We Couldn't Walk Past</h3>
+            <p class="story-block__text">
+              It started with a simple observation — people in our own neighbourhoods
+              going to bed hungry, elderly citizens in old-age homes forgotten by
+              family and society, children in orphanages starved of attention and
+              opportunity. We saw it, and instead of looking away, a small group
+              of like-minded individuals decided to act.
+            </p>
+            <p class="story-block__text">
+              The first meeting was informal — a handful of friends around a table,
+              asking: <em>"What can we actually do?"</em> The answer turned out to be
+              more than any of us expected.
+            </p>
+          </div>
+
+          <div class="story-block reveal reveal-delay-2">
+            <div class="story-block__year">First Steps · 2022</div>
+            <h3 class="story-block__title">From Conversation to Action</h3>
+            <p class="story-block__text">
+              Our first initiative was a cleanliness drive at a local park that
+              had been neglected for years. Twenty people showed up. By the time
+              we were done, the park looked transformed — but more importantly,
+              the neighbourhood noticed. Word spread. More hands showed up.
+            </p>
+            <p class="story-block__text">
+              Within months we were visiting orphanages, distributing meals to
+              daily-wage workers, and spending time with the elderly in care homes.
+              We had no budget, no office, and no roadmap — only purpose, and
+              the power of people who cared.
+            </p>
+          </div>
+
+          <div class="story-block reveal reveal-delay-3">
+            <div class="story-block__year">Growth · 2023</div>
+            <h3 class="story-block__title">A Community Finds Its Name</h3>
+            <p class="story-block__text">
+              As our volunteer base grew to over 200 members, we formalised our
+              identity under the name <strong>4U – Use Unity to Uplift Universe</strong>.
+              The name reflects our core belief: that collective action — unity —
+              is the mechanism through which we uplift individuals, communities,
+              and ultimately, the universe we all share.
+            </p>
+            <p class="story-block__text">
+              We expanded to 15 areas, launched structured monthly drives, and
+              built partnerships with local orphanages and old-age homes to ensure
+              consistent support rather than one-off visits.
+            </p>
+          </div>
+
+          <div class="story-block reveal reveal-delay-4">
+            <div class="story-block__year">Today & Beyond · 2024–Present</div>
+            <h3 class="story-block__title">Scaling What Works</h3>
+            <p class="story-block__text">
+              Today 4U operates across 25+ areas with 500+ active volunteers,
+              having directly impacted over 8,000 lives. But numbers only tell
+              part of the story. The real measure is in the smiles of children
+              who had a festival celebrated with them, in elders who felt seen
+              and valued, in cleaner streets that communities are now proud of.
+            </p>
+            <p class="story-block__text">
+              We are growing — and we're looking for people like you to grow
+              with us. The universe doesn't uplift itself. It takes unity. It
+              takes 4U.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MISSION & VISION
+  ========================================== -->
+  <section class="mission-vision" id="mission-vision" aria-labelledby="mv-title">
+    <div class="container">
+      <div class="mission-vision__head reveal">
+        <span class="section-label section-label--center">Our Purpose</span>
+        <h2 class="section-title" id="mv-title">Mission &amp; <span>Vision</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          Everything we do flows from a clearly defined purpose. Our mission
+          grounds us in the present; our vision pulls us toward the future.
+        </p>
+      </div>
+
+      <div class="mv-grid">
+
+        <div class="mv-card mv-card--mission reveal reveal-delay-1">
+          <div class="mv-card__inner">
+            <span class="mv-card__tag">Our Mission</span>
+            <span class="mv-card__icon" aria-hidden="true">🎯</span>
+            <h3 class="mv-card__title">What We Do, Every Single Day</h3>
+            <p class="mv-card__text">
+              To serve underprivileged communities through consistent, compassionate,
+              and community-led action — including cleanliness drives, food
+              distribution, orphanage visits, and elder care support — in a way
+              that preserves dignity, builds relationships, and creates lasting
+              positive change at the grassroots level.
+            </p>
+          </div>
+        </div>
+
+        <div class="mv-card mv-card--vision reveal reveal-delay-2">
+          <div class="mv-card__inner">
+            <span class="mv-card__tag">Our Vision</span>
+            <span class="mv-card__icon" aria-hidden="true">🌱</span>
+            <h3 class="mv-card__title">The World We're Working Toward</h3>
+            <p class="mv-card__text">
+              A world where unity is the default response to inequality — where
+              no child grows up without care, no elder lives without dignity, and
+              no community is left behind. We envision 4U as a replicable model
+              of citizen-led social change that inspires action across every city,
+              every town, and every corner of India and beyond.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CORE VALUES
+  ========================================== -->
+  <section class="core-values" id="values" aria-labelledby="values-title">
+    <div class="container">
+      <div class="core-values__head reveal">
+        <span class="section-label section-label--center">What We Stand For</span>
+        <h2 class="section-title" id="values-title">Our Core <span>Values</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          These aren't words on a wall — they are the principles that guide
+          every decision, every initiative, and every interaction we have.
+        </p>
+      </div>
+
+      <div class="values-grid">
+
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-card__icon vi-1" aria-hidden="true">🤝</div>
+          <h3 class="value-card__name">Unity</h3>
+          <p class="value-card__desc">
+            We believe the most complex problems dissolve when people come
+            together with shared intent. Unity is our foundation and our method.
+          </p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-card__icon vi-2" aria-hidden="true">🙏</div>
+          <h3 class="value-card__name">Service</h3>
+          <p class="value-card__desc">
+            Service is not an act — it is an attitude. We show up consistently,
+            humbly, and wholeheartedly, without expectation of recognition.
+          </p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-3">
+          <div class="value-card__icon vi-3" aria-hidden="true">💛</div>
+          <h3 class="value-card__name">Compassion</h3>
+          <p class="value-card__desc">
+            Before we plan any initiative, we listen. Compassion means seeing
+            the person, not just the problem — and responding with genuine care.
+          </p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-4">
+          <div class="value-card__icon vi-4" aria-hidden="true">⚖️</div>
+          <h3 class="value-card__name">Integrity</h3>
+          <p class="value-card__desc">
+            We operate with complete transparency — in our finances, our
+            actions, and our communication. Trust is earned, not assumed.
+          </p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-5">
+          <div class="value-card__icon vi-5" aria-hidden="true">🚀</div>
+          <h3 class="value-card__name">Impact</h3>
+          <p class="value-card__desc">
+            Good intentions are not enough. We measure, reflect, and improve
+            to ensure our efforts create real, sustained change in real lives.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       WHAT MAKES US DIFFERENT
+  ========================================== -->
+  <section class="differentiators" id="differentiators" aria-labelledby="diff-title">
+    <div class="container">
+      <div class="diff-grid">
+
+        <!-- Content -->
+        <div class="diff-content reveal">
+          <span class="section-label">Why Choose 4U</span>
+          <h2 class="section-title" id="diff-title">
+            What Makes Us <span>Different</span>
+          </h2>
+          <p class="section-subtitle">
+            There are many organisations doing good work. Here's what sets
+            4U apart — and why people who join us tend to stay for life.
+          </p>
+
+          <div class="diff-list" style="margin-top:36px;">
+            <div class="diff-item">
+              <div class="diff-item__num" aria-hidden="true">01</div>
+              <div class="diff-item__body">
+                <h3 class="diff-item__title">Real Field Work, Not Just Fundraising</h3>
+                <p class="diff-item__text">Our volunteers don't just donate money — they show up in person, get their hands dirty, and build real relationships with the communities they serve.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <div class="diff-item__num" aria-hidden="true">02</div>
+              <div class="diff-item__body">
+                <h3 class="diff-item__title">Grassroots, Ground-Up Decision Making</h3>
+                <p class="diff-item__text">Our initiatives are identified and designed by the communities we serve — not decided in boardrooms. This ensures relevance, ownership, and lasting impact.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <div class="diff-item__num" aria-hidden="true">03</div>
+              <div class="diff-item__body">
+                <h3 class="diff-item__title">Radical Transparency</h3>
+                <p class="diff-item__text">Every resource, every expense, and every outcome is communicated openly with our volunteer community. We have nothing to hide and everything to share.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <div class="diff-item__num" aria-hidden="true">04</div>
+              <div class="diff-item__body">
+                <h3 class="diff-item__title">Consistency Over Spectacle</h3>
+                <p class="diff-item__text">We don't chase viral moments. We show up monthly, year after year, building trust and continuity with the families and communities who depend on us.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual panels -->
+        <div class="diff-panels reveal reveal-delay-2">
+          <div class="diff-panel dp-1">
+            <span class="diff-panel__icon" aria-hidden="true">🌿</span>
+            <h3 class="diff-panel__title">Grassroots Impact</h3>
+            <p class="diff-panel__text">Every initiative begins and ends with the community — not an agenda.</p>
+          </div>
+          <div class="diff-panel dp-2">
+            <span class="diff-panel__icon" aria-hidden="true">👐</span>
+            <h3 class="diff-panel__title">Hands-On Service</h3>
+            <p class="diff-panel__text">Our volunteers are on the ground, not behind screens.</p>
+          </div>
+          <div class="diff-panel dp-3">
+            <span class="diff-panel__icon" aria-hidden="true">📊</span>
+            <h3 class="diff-panel__title">Measured Outcomes</h3>
+            <p class="diff-panel__text">We track what we do so we can always do it better.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TEAM SECTION – PEEK CAROUSEL
+  ========================================== -->
+  <section class="team" id="team" aria-labelledby="team-title">
+    <div class="container">
+      <div class="team__head reveal">
+        <span class="section-label section-label--center">The People Behind 4U</span>
+        <h2 class="section-title" id="team-title">Meet Our <span>Core Team</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          A passionate group of volunteers who give their time, energy, and
+          skills to keep 4U moving forward — every single day.
+        </p>
+      </div>
+
+      <!-- Carousel -->
+      <div class="team-carousel-wrap reveal">
+        <div class="team-carousel-viewport" id="teamViewport">
+          <div class="team-carousel" id="teamCarousel" role="list" aria-label="Team members">
+
+            <!-- 1. President -->
+            <article class="team-card is-active" role="listitem" aria-label="Raj Kumar Singh Munda">
+              <div class="team-card__avatar ta-1">
+                <img src="./assets/core-members/img.png" alt="Raj Kumar Singh Munda" class="team-card__avatar-img">
+                <span class="team-card__badge">President</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Raj Kumar Singh Munda</h3>
+                <div class="team-card__role">President</div>
+              </div>
+            </article>
+
+            <!-- 2. Vice President -->
+            <article class="team-card" role="listitem" aria-label="Balram Korah">
+              <div class="team-card__avatar ta-2">
+                <!--<svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>-->
+                <img src="./assets/core-members/balram.jpeg" alt="Balram Korah" class="team-card__avatar-img">
+                <span class="team-card__badge">Vice President</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Balram Korah</h3>
+                <div class="team-card__role">Vice President</div>
+              </div>
+            </article>
+
+            <!-- 3. Founder & Secretary -->
+            <article class="team-card" role="listitem" aria-label="Prakash Kumar">
+              <div class="team-card__avatar ta-3">
+                <!--<svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>-->
+                  <img src="./assets/core-members/pk.jpeg" alt="Prakash Kumar" class="team-card__avatar-img">
+                <span class="team-card__badge">Founder &amp; Secretary</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Prakash Kumar</h3>
+                <div class="team-card__role">Founder &amp; Secretary</div>
+              </div>
+            </article>
+
+            <!-- 4. Board Member 1 -->
+            <article class="team-card" role="listitem" aria-label="Vijay Kr. Sharma">
+              <div class="team-card__avatar ta-4">
+                <img src="./assets/core-members/img.png" alt="Vijay Kr. Sharma" class="team-card__avatar-img">
+                <span class="team-card__badge">Board Member</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Vijay Kr. Sharma</h3>
+                <div class="team-card__role">Board Member</div>
+              </div>
+            </article>
+
+            <!-- 5. Board Member 2 -->
+            <article class="team-card" role="listitem" aria-label="Shreyansh Prasad">
+              <div class="team-card__avatar ta-5">
+                <img src="./assets/core-members/shreyansh.jpeg" alt="Shreyansh Prasad" class="team-card__avatar-img">
+                <span class="team-card__badge">Board Member</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Shreyansh Prasad</h3>
+                <div class="team-card__role">Board Member</div>
+              </div>
+            </article>
+
+            <!-- 6. Board Member 3 -->
+            <article class="team-card" role="listitem" aria-label="Amit Kumar">
+              <div class="team-card__avatar ta-6">
+                <img src="./assets/core-members/img.png" alt="Amit Kumar" class="team-card__avatar-img">
+                <span class="team-card__badge">Board Member</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Amit Kumar</h3>
+                <div class="team-card__role">Board Member</div>
+              </div>
+            </article>
+
+            <!-- 7. Board Member 4 -->
+            <article class="team-card" role="listitem" aria-label="Jyotish Kumar">
+              <div class="team-card__avatar ta-7">
+                <img src="./assets/core-members/img.png" alt="Jyotish Kumar" class="team-card__avatar-img">
+                <span class="team-card__badge">Board Member</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Jyotish Kumar</h3>
+                <div class="team-card__role">Board Member</div>
+              </div>
+            </article>
+
+            <!-- 8. Board Member 5 -->
+            <article class="team-card" role="listitem" aria-label="Anil Kr. Yadav">
+              <div class="team-card__avatar ta-8">
+                <img src="./assets/core-members/img.png" alt="Anil Kr. Yadav" class="team-card__avatar-img">
+                <span class="team-card__badge">Board Member</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Anil Kr. Yadav</h3>
+                <div class="team-card__role">Board Member</div>
+              </div>
+            </article>
+
+            <!-- 9. Board Member 6 -->
+            <article class="team-card" role="listitem" aria-label="Jugesh Kumar">
+              <div class="team-card__avatar ta-9">
+                <img src="./assets/core-members/img.png" alt="Jugesh Kumar" class="team-card__avatar-img">
+                <span class="team-card__badge">Board Member</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Jugesh Kumar</h3>
+                <div class="team-card__role">Board Member</div>
+              </div>
+            </article>
+
+            <!-- 10. Board Member 7 -->
+            <article class="team-card" role="listitem" aria-label="Nikhil Gope">
+              <div class="team-card__avatar ta-10">
+                <img src="./assets/core-members/img.png" alt="Nikhil Gope" class="team-card__avatar-img">
+                <span class="team-card__badge">Board Member</span>
+              </div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Nikhil Gope</h3>
+                <div class="team-card__role">Board Member</div>
+              </div>
+            </article>
+
+          </div><!-- /team-carousel -->
+        </div><!-- /team-carousel-viewport -->
+
+        <!-- Arrow controls -->
+        <div class="team-arrows" role="group" aria-label="Carousel controls">
+          <button class="team-arrow" id="teamPrev" aria-label="Previous member">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="team-dots" id="teamDots" role="tablist" aria-label="Go to member"></div>
+          <button class="team-arrow" id="teamNext" aria-label="Next member">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div><!-- /team-carousel-wrap -->
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CALL TO ACTION
+  ========================================== -->
+  <section class="about-cta" id="cta" aria-labelledby="cta-title">
+    <div class="about-cta__glow-1" aria-hidden="true"></div>
+    <div class="about-cta__glow-2" aria-hidden="true"></div>
+    <div class="container">
+      <div class="about-cta__inner reveal">
+        <div>
+          <h2 class="about-cta__title" id="cta-title">
+            You've Read Our Story.<br>Now Help Us Write the Next Chapter.
+          </h2>
+          <p class="about-cta__sub">
+            Whether you want to volunteer your time, contribute resources, or simply
+            spread the word — every form of participation makes 4U stronger. The
+            universe won't uplift itself. That's where you come in.
+          </p>
+        </div>
+        <div class="about-cta__actions">
+          <a href="#" class="btn btn-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Join Us
+          </a>
+          <a href="#" class="btn btn-outline-white">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+  ========================================== -->
+  <footer class="footer" id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo" aria-label="4U Home">
+            <div class="logo-mark" aria-hidden="true">4U</div>
+            <div class="logo-text"><strong>4U</strong><span>Use Unity to Uplift Universe</span></div>
+          </a>
+          <p class="footer__tagline">A grassroots movement creating meaningful change through unity, compassion, and consistent action. Join us — the universe needs you.</p>
+          <div class="footer__social" aria-label="Social media links">
+            <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+
+        <nav aria-label="Footer quick links">
+          <h3 class="footer__col-title">Quick Links</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#">Initiatives</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Footer get involved links">
+          <h3 class="footer__col-title">Get Involved</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#">Become a Volunteer</a></li>
+            <li><a href="#">Donate</a></li>
+            <li><a href="#">Upcoming Events</a></li>
+            <li><a href="#">Partner With Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="footer__col-title">Contact Us</h3>
+          <address class="footer__contact" style="font-style:normal;">
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Jamshedpur, Jharkhand, India
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc9f939292999f88bcc889d195929588959d88958a99d2938e9b">[email&#160;protected]</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.32 2 2 0 0 1 3.62 1.14h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.98 5.98l.83-.83a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +91 98765 43210
+            </div>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 4U – Use Unity to Uplift Universe. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+  ========================================== -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    'use strict';
+
+    /* Enable animation classes only when JS runs — prevents blank sections */
+    document.body.classList.add('js-animations');
+
+    /* ---- Navbar scroll shadow ---- */
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ---- Hamburger menu ---- */
+    var hamburger  = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---- Scroll reveal ---- */
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+
+    /* ---- Active nav link ---- */
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.navbar__links a').forEach(function(link) {
+            link.classList.toggle('active',
+              link.getAttribute('href') === 'about.html' && entry.target.tagName === 'SECTION'
+            );
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('section[id]').forEach(function(s) {
+      sectionObserver.observe(s);
+    });
+
+   /* ================================================
+       TEAM CAROUSEL
+       Peek-style: active card centred, neighbours
+       partially visible on each side.
+       Now with continuous auto-looping!
+    ================================================ */
+    (function() {
+      var viewport  = document.getElementById('teamViewport');
+      var carousel  = document.getElementById('teamCarousel');
+      var dotsWrap  = document.getElementById('teamDots');
+      var btnPrev   = document.getElementById('teamPrev');
+      var btnNext   = document.getElementById('teamNext');
+
+      if (!viewport || !carousel) return;
+
+      var cards   = Array.from(carousel.querySelectorAll('.team-card'));
+      var total   = cards.length;
+      var current = 0;
+      var PEEK    = 80;   /* px of neighbour card visible each side */
+      var GAP     = 24;   /* matches CSS gap */
+      var cardW   = 0;    /* set on init & resize */
+      var autoplayTimer;  /* stores the auto-loop interval */
+
+      /* ---- Size cards ---- */
+      function sizeCards() {
+        var vw = viewport.offsetWidth;
+        cardW  = vw - PEEK * 2 - GAP * 2;
+        cardW  = Math.max(200, Math.min(cardW, 380));
+        cards.forEach(function(c) { c.style.width = cardW + 'px'; });
+      }
+
+      /* ---- Translate-X to centre card[idx] ---- */
+      function offsetFor(idx) {
+        var vw         = viewport.offsetWidth;
+        var step       = cardW + GAP;
+        var centreVP   = vw / 2;
+        var centreCard = idx * step + cardW / 2;
+        return centreVP - centreCard;
+      }
+
+      /* ---- Go to slide ---- */
+      function goTo(idx, animate) {
+        if (animate === undefined) animate = true;
+        
+        // Continuous Loop Logic: Wrap around boundaries
+        if (idx >= total) {
+          idx = 0;
+        } else if (idx < 0) {
+          idx = total - 1;
+        }
+        
+        current = idx;
+
+        carousel.style.transition = animate
+          ? 'transform 0.45s cubic-bezier(0.4,0,0.2,1)'
+          : 'none';
+        carousel.style.transform = 'translateX(' + offsetFor(idx) + 'px)';
+
+        cards.forEach(function(c, i) {
+          c.classList.toggle('is-active', i === idx);
+          c.setAttribute('aria-current', i === idx ? 'true' : 'false');
+        });
+
+        Array.from(dotsWrap.querySelectorAll('.team-dot')).forEach(function(d, i) {
+          d.classList.toggle('is-active', i === idx);
+          d.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        });
+      }
+
+      /* ---- Autoplay controls ---- */
+      function startAutoplay() {
+        stopAutoplay(); // Prevent multiple intervals
+        autoplayTimer = setInterval(function() {
+          goTo(current + 1);
+        }, 3000); // 3000ms = 3 seconds delay between slides
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+        }
+      }
+
+      /* ---- Build dots ---- */
+      function buildDots() {
+        dotsWrap.innerHTML = '';
+        cards.forEach(function(_, i) {
+          var d = document.createElement('button');
+          d.className = 'team-dot' + (i === 0 ? ' is-active' : '');
+          d.setAttribute('role', 'tab');
+          d.setAttribute('aria-label', 'Go to member ' + (i + 1));
+          d.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+          d.addEventListener('click', function() { 
+            goTo(i); 
+            startAutoplay(); // Reset timer on manual click
+          });
+          dotsWrap.appendChild(d);
+        });
+      }
+
+      btnPrev.addEventListener('click', function() { goTo(current - 1); startAutoplay(); });
+      btnNext.addEventListener('click', function() { goTo(current + 1); startAutoplay(); });
+
+      /* Pause on Hover */
+      viewport.addEventListener('mouseenter', stopAutoplay);
+      viewport.addEventListener('mouseleave', startAutoplay);
+
+      /* Keyboard */
+      viewport.setAttribute('tabindex', '0');
+      viewport.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft')  { goTo(current - 1); startAutoplay(); e.preventDefault(); }
+        if (e.key === 'ArrowRight') { goTo(current + 1); startAutoplay(); e.preventDefault(); }
+      });
+
+      /* Touch / pointer drag */
+      var dragStart = null;
+      var dragStartTX = 0;
+
+      viewport.addEventListener('pointerdown', function(e) {
+        stopAutoplay(); // Pause when user interacts
+        dragStart   = e.clientX;
+        dragStartTX = offsetFor(current);
+        viewport.classList.add('is-dragging');
+        carousel.style.transition = 'none';
+        viewport.setPointerCapture(e.pointerId);
+      });
+
+      viewport.addEventListener('pointermove', function(e) {
+        if (dragStart === null) return;
+        var delta = e.clientX - dragStart;
+        carousel.style.transform = 'translateX(' + (dragStartTX + delta) + 'px)';
+      });
+
+      viewport.addEventListener('pointerup', function(e) {
+        if (dragStart === null) return;
+        var delta = e.clientX - dragStart;
+        viewport.classList.remove('is-dragging');
+        dragStart = null;
+        if (Math.abs(delta) > cardW * 0.28) {
+          goTo(delta < 0 ? current + 1 : current - 1);
+        } else {
+          goTo(current);
+        }
+        startAutoplay(); // Resume looping after drag
+      });
+
+      /* Init */
+      function init() {
+        sizeCards();
+        buildDots();
+        goTo(0, false);
+        startAutoplay();
+      }
+
+      init();
+      window.addEventListener('resize', function() {
+        sizeCards();
+        goTo(current, false);
+      });
+    })();
+
+  </script>
+</body>
+</html>
