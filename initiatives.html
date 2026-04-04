@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Initiatives – 4U | Use Unity to Uplift Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --blue-900: #0f2460;
+      --blue-800: #1E3A8A;
+      --blue-700: #2547a8;
+      --blue-600: #3b5fc4;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+
+      --green-700: #15803d;
+      --green-600: #16A34A;
+      --green-500: #22c55e;
+      --green-100: #dcfce7;
+
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white:    #ffffff;
+
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Poppins', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --shadow-sm: 0 2px 8px rgba(30,58,138,0.08);
+      --shadow-md: 0 8px 28px rgba(30,58,138,0.13);
+      --shadow-lg: 0 20px 60px rgba(30,58,138,0.18);
+
+      --section-pad: 100px 0;
+      --container: 1200px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+
+      /* Initiative accent colours */
+      --clean-clr: #0891b2;
+      --clean-bg:  #e0f2fe;
+      --orph-clr:  #16A34A;
+      --orph-bg:   #dcfce7;
+      --elder-clr: #7c3aed;
+      --elder-bg:  #ede9fe;
+      --food-clr:  #b45309;
+      --food-bg:   #fef3c7;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    /* =============================================
+       TYPOGRAPHY UTILITIES
+    ============================================= */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green-600); margin-bottom: 14px;
+    }
+    .section-label::before { content:''; width:28px; height:2px; background:var(--green-600); border-radius:2px; }
+    .section-label--center { justify-content:center; }
+    .section-label--center::before { display:none; }
+    .section-label--center::after  { content:''; width:28px; height:2px; background:var(--green-600); border-radius:2px; }
+    .section-label--light { color:#6ee7a0; }
+    .section-label--light::before,
+    .section-label--light::after  { background:#6ee7a0; }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem,4vw,2.8rem);
+      font-weight: 700; color: var(--gray-900);
+      line-height: 1.25; margin-bottom: 18px;
+    }
+    .section-title span { color: var(--blue-800); }
+    .section-subtitle {
+      font-size: 1.05rem; color: var(--gray-500);
+      max-width: 600px; line-height: 1.75;
+    }
+
+    /* =============================================
+       BUTTON SYSTEM
+    ============================================= */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+      padding: 14px 32px; border-radius: var(--radius-sm);
+      border: 2px solid transparent; cursor: pointer;
+      transition: var(--transition); text-decoration: none;
+      white-space: nowrap; line-height: 1;
+    }
+    .btn svg { width:18px; height:18px; flex-shrink:0; }
+    .btn-sm  { padding:9px 20px; font-size:0.82rem; }
+
+    .btn-primary     { background:var(--blue-800); color:var(--white); border-color:var(--blue-800); }
+    .btn-primary:hover { background:var(--blue-900); border-color:var(--blue-900); transform:translateY(-2px); box-shadow:0 8px 24px rgba(30,58,138,0.35); }
+    .btn-green       { background:var(--green-600); color:var(--white); border-color:var(--green-600); }
+    .btn-green:hover { background:var(--green-700); border-color:var(--green-700); transform:translateY(-2px); box-shadow:0 8px 24px rgba(22,163,74,0.35); }
+    .btn-outline-blue { background:transparent; color:var(--blue-800); border-color:var(--blue-800); }
+    .btn-outline-blue:hover { background:var(--blue-800); color:var(--white); transform:translateY(-2px); }
+    .btn-outline-white { background:transparent; color:var(--white); border-color:rgba(255,255,255,0.7); }
+    .btn-outline-white:hover { background:rgba(255,255,255,0.15); border-color:var(--white); transform:translateY(-2px); }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position:sticky; top:0; z-index:1000;
+      background:rgba(255,255,255,0.96);
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(30,58,138,0.08);
+      transition:box-shadow var(--transition);
+    }
+    .navbar.scrolled { box-shadow:var(--shadow-md); }
+    .navbar__inner { display:flex; align-items:center; justify-content:space-between; height:72px; gap:24px; }
+    .navbar__logo  { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .logo-mark {
+      width:44px; height:44px;
+      background:linear-gradient(135deg,var(--blue-800),var(--green-600));
+      border-radius:12px; display:flex; align-items:center; justify-content:center;
+      color:var(--white); font-size:1.2rem; font-weight:900;
+      font-family:var(--font-body); flex-shrink:0;
+    }
+    .logo-text { display:flex; flex-direction:column; line-height:1.1; }
+    .logo-text strong { font-size:1.2rem; font-weight:800; color:var(--blue-800); }
+    .logo-text span   { font-size:0.6rem; font-weight:500; color:var(--gray-500); letter-spacing:0.04em; }
+    .navbar__links { display:flex; align-items:center; gap:6px; }
+    .navbar__links a { font-size:0.9rem; font-weight:500; color:var(--gray-700); padding:8px 14px; border-radius:var(--radius-sm); transition:var(--transition); }
+    .navbar__links a:hover, .navbar__links a.active { color:var(--blue-800); background:var(--blue-50); }
+    .navbar__cta { flex-shrink:0; }
+    .navbar__hamburger {
+      display:none; flex-direction:column; justify-content:center; gap:5px;
+      width:40px; height:40px; cursor:pointer; background:none; border:none;
+      padding:6px; border-radius:var(--radius-sm); transition:background var(--transition);
+    }
+    .navbar__hamburger:hover { background:var(--gray-100); }
+    .navbar__hamburger span { display:block; height:2px; background:var(--gray-700); border-radius:2px; transition:var(--transition); transform-origin:center; }
+    .navbar__hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .navbar__hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .navbar__hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .navbar__mobile {
+      display:none; flex-direction:column; gap:4px;
+      padding:16px 24px 20px; border-top:1px solid var(--gray-100); background:var(--white);
+    }
+    .navbar__mobile.open { display:flex; }
+    .navbar__mobile a { font-size:0.95rem; font-weight:500; color:var(--gray-700); padding:12px 16px; border-radius:var(--radius-sm); transition:var(--transition); }
+    .navbar__mobile a:hover { background:var(--blue-50); color:var(--blue-800); }
+    .navbar__mobile .btn { margin-top:8px; width:100%; justify-content:center; }
+
+    /* =============================================
+       PAGE HERO
+    ============================================= */
+    .page-hero {
+      position:relative;
+      padding:110px 0 90px;
+      background:var(--blue-900);
+      overflow:hidden;
+    }
+    .page-hero__bg {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 65% 70% at 85% 40%, rgba(8,145,178,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 10% 65%, rgba(59,95,196,0.35) 0%, transparent 55%),
+        linear-gradient(135deg, #0f2460 0%, #1e3a8a 60%, #0c4a6e 100%);
+    }
+    .page-hero__dots {
+      position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size:36px 36px;
+    }
+    /* Floating accent rings */
+    .page-hero__ring {
+      position:absolute; border-radius:50%;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .page-hero__ring--1 { width:420px; height:420px; top:-100px; right:-80px; }
+    .page-hero__ring--2 { width:240px; height:240px; top:-20px; right:40px; border-color:rgba(255,255,255,0.04); }
+    .page-hero__ring--3 { width:160px; height:160px; bottom:40px; left:-40px; border-color:rgba(22,163,74,0.15); }
+
+    .page-hero__content { position:relative; z-index:2; max-width:680px; }
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:500; color:rgba(255,255,255,0.5); margin-bottom:28px; }
+    .breadcrumb a { color:rgba(255,255,255,0.5); transition:color var(--transition); }
+    .breadcrumb a:hover { color:rgba(255,255,255,0.85); }
+    .breadcrumb__sep { opacity:0.4; }
+    .breadcrumb__current { color:rgba(255,255,255,0.85); }
+
+    .page-hero__title {
+      font-family:var(--font-head);
+      font-size:clamp(2.6rem,6vw,4rem);
+      font-weight:700; color:var(--white);
+      line-height:1.15; margin-bottom:20px;
+      animation:fadeSlideUp 0.7s ease 0.1s both;
+    }
+    .page-hero__title em { font-style:italic; color:#6ee7a0; }
+    .page-hero__sub {
+      font-size:1.1rem; color:rgba(255,255,255,0.72);
+      max-width:520px; line-height:1.7;
+      animation:fadeSlideUp 0.7s ease 0.25s both;
+    }
+    /* Quick-nav pills */
+    .page-hero__pills {
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:36px;
+      animation:fadeSlideUp 0.7s ease 0.4s both;
+    }
+    .hero-pill {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.18);
+      backdrop-filter:blur(6px);
+      color:rgba(255,255,255,0.85);
+      font-size:0.8rem; font-weight:600;
+      padding:8px 16px; border-radius:100px;
+      transition:var(--transition); cursor:pointer;
+      text-decoration:none;
+    }
+    .hero-pill:hover { background:rgba(255,255,255,0.2); color:var(--white); }
+    .hero-pill__dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+    .page-hero__wave { position:absolute; bottom:-2px; left:0; right:0; line-height:0; z-index:2; }
+    .page-hero__wave svg { display:block; width:100%; }
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* =============================================
+       INTRO SECTION
+    ============================================= */
+    .intro {
+      padding: var(--section-pad);
+      background: var(--white);
+    }
+    .intro__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .intro__content .section-subtitle { margin-bottom: 32px; }
+
+    .focus-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 36px;
+    }
+    .focus-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 16px; border-radius: 100px;
+      border: 1.5px solid;
+    }
+    .ft-clean  { color:var(--clean-clr); background:var(--clean-bg);  border-color:rgba(8,145,178,0.2);  }
+    .ft-orph   { color:var(--orph-clr);  background:var(--orph-bg);   border-color:rgba(22,163,74,0.2);  }
+    .ft-elder  { color:var(--elder-clr); background:var(--elder-bg);  border-color:rgba(124,58,237,0.2); }
+    .ft-food   { color:var(--food-clr);  background:var(--food-bg);   border-color:rgba(180,83,9,0.2);   }
+
+    /* Right side: stat ring visual */
+    .intro__visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .intro-ring-wrap {
+      position: relative;
+      width: 360px; height: 360px;
+    }
+    .intro-ring-bg {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--clean-clr) 0deg 90deg,
+        var(--orph-clr)  90deg 180deg,
+        var(--elder-clr) 180deg 270deg,
+        var(--food-clr)  270deg 360deg
+      );
+      padding: 18px;
+    }
+    .intro-ring-inner {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 4px;
+    }
+    .intro-ring-inner strong {
+      font-size: 3rem; font-weight: 800;
+      color: var(--blue-800); line-height: 1;
+    }
+    .intro-ring-inner span {
+      font-size: 0.85rem; color: var(--gray-500);
+      font-weight: 500; max-width: 100px;
+    }
+    /* Floating legend dots */
+    .intro-legend {
+      position: absolute;
+      display: flex; flex-direction: column; gap: 10px;
+      right: -20px; top: 50%; transform: translateY(-50%);
+    }
+    .intro-legend-item {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      box-shadow: var(--shadow-sm);
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--gray-700);
+      white-space: nowrap;
+    }
+    .intro-legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* =============================================
+       FILTER TABS
+    ============================================= */
+    .filter-bar {
+      padding: 0 0 56px;
+      background: var(--gray-50);
+    }
+    .filter-bar__inner {
+      padding-top: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .filter-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .filter-tab {
+      font-size: 0.85rem; font-weight: 600;
+      padding: 9px 22px; border-radius: 100px;
+      border: 2px solid var(--gray-200, #e5e7eb);
+      background: var(--white);
+      color: var(--gray-500);
+      cursor: pointer; transition: var(--transition);
+    }
+    .filter-tab:hover { border-color: var(--blue-800); color: var(--blue-800); }
+    .filter-tab.active {
+      background: var(--blue-800); color: var(--white);
+      border-color: var(--blue-800);
+    }
+
+    /* =============================================
+       INITIATIVES GRID
+    ============================================= */
+    .initiatives-grid-section {
+      padding: 0 0 var(--section-pad);
+      background: var(--gray-50);
+    }
+    .init-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .init-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(30,58,138,0.07);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex; flex-direction: column;
+    }
+    .init-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+      border-color: transparent;
+    }
+
+    /* Coloured image banner */
+    .init-card__banner {
+      height: 220px;
+      position: relative;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .init-card__banner-bg {
+      position: absolute; inset: 0;
+    }
+    .init-card__banner-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .init-card__banner-icon {
+      position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%,-60%);
+      font-size: 5rem;
+      filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));
+      user-select: none;
+    }
+    .init-card__banner-label {
+      position: relative; z-index: 2;
+      margin: 16px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px;
+    }
+
+    /* Banner colour themes */
+    .banner-clean  { background:linear-gradient(135deg,#0c4a6e,#0891b2); }
+    .banner-orph   { background:linear-gradient(135deg,#14532d,#16A34A); }
+    .banner-elder  { background:linear-gradient(135deg,#4c1d95,#7c3aed); }
+    .banner-food   { background:linear-gradient(135deg,#78350f,#b45309); }
+
+    .init-card__body { padding: 28px 28px 24px; flex: 1; display: flex; flex-direction: column; }
+    .init-card__title {
+      font-family: var(--font-head);
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--gray-900); margin-bottom: 10px;
+    }
+    .init-card__desc {
+      font-size: 0.92rem; color: var(--gray-500);
+      line-height: 1.7; margin-bottom: 22px;
+    }
+
+    /* Impact chips */
+    .impact-chips {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 24px;
+    }
+    .impact-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 6px 12px; border-radius: var(--radius-sm);
+    }
+    .chip-clean  { background:var(--clean-bg);  color:var(--clean-clr); }
+    .chip-orph   { background:var(--orph-bg);   color:var(--orph-clr); }
+    .chip-elder  { background:var(--elder-bg);  color:var(--elder-clr); }
+    .chip-food   { background:var(--food-bg);   color:var(--food-clr); }
+
+    .init-card__footer {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid var(--gray-100);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .init-card__stat {
+      font-size: 0.82rem; color: var(--gray-500); font-weight: 500;
+    }
+    .init-card__stat strong { color: var(--gray-900); }
+
+    /* =============================================
+       DETAILED INITIATIVE SECTIONS
+    ============================================= */
+    .initiative-detail {
+      padding: var(--section-pad);
+    }
+    .initiative-detail:nth-child(odd)  { background: var(--white); }
+    .initiative-detail:nth-child(even) { background: var(--gray-50); }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .detail-grid--reverse { direction: rtl; }
+    .detail-grid--reverse > * { direction: ltr; }
+
+    /* Visual side */
+    .detail-visual { position: relative; }
+    .detail-img-main {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      height: 380px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .detail-img-main__icon {
+      font-size: 7rem;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2));
+      position: relative; z-index: 1;
+    }
+    .detail-img-main__overlay {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* Floating info card */
+    .detail-float-card {
+      position: absolute;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      box-shadow: var(--shadow-lg);
+      min-width: 170px;
+    }
+    .detail-float-card--tl { top: -18px; left: -22px; }
+    .detail-float-card--br { bottom: -18px; right: -22px; }
+    .detail-float-card__num {
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--blue-800); line-height: 1;
+      margin-bottom: 2px;
+    }
+    .detail-float-card__num span { color: var(--green-600); }
+    .detail-float-card__label { font-size: 0.75rem; color: var(--gray-500); font-weight: 500; }
+
+    /* Content side */
+    .detail-content .section-subtitle { margin-bottom: 28px; }
+    .detail-activities {
+      display: flex; flex-direction: column; gap: 14px;
+      margin: 0 0 32px;
+    }
+    .detail-activity {
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .detail-activity__bullet {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 0.9rem;
+    }
+    .detail-activity__text { font-size: 0.92rem; color: var(--gray-700); line-height: 1.6; padding-top: 4px; }
+
+    /* Outcome pills */
+    .outcomes {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 32px;
+    }
+    .outcome-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 14px; border-radius: var(--radius-sm);
+      background: var(--gray-50); color: var(--gray-700);
+      border: 1px solid var(--gray-100);
+    }
+    .outcome-pill__icon { font-size: 1rem; }
+
+    /* =============================================
+       IMPACT HIGHLIGHTS
+    ============================================= */
+    .impact-highlights {
+      padding: var(--section-pad);
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 55%, #0c4a6e 100%);
+      position: relative; overflow: hidden;
+    }
+    .impact-highlights::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size:40px 40px;
+    }
+    .impact-highlights__inner { position:relative; z-index:1; }
+
+    .impact-highlights__head {
+      text-align:center; margin-bottom:60px;
+    }
+    .impact-highlights__head .section-title { color:var(--white); }
+    .impact-highlights__head .section-subtitle { color:rgba(255,255,255,0.7); margin:0 auto; }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .highlight-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-md);
+      padding: 36px 24px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .highlight-card:hover {
+      background: rgba(255,255,255,0.13);
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.25);
+    }
+    .highlight-card__icon { font-size:2.2rem; margin-bottom:14px; display:block; }
+    .highlight-card__num  {
+      font-size: clamp(2rem,4vw,3rem); font-weight:800;
+      color:var(--white); line-height:1; margin-bottom:6px;
+    }
+    .highlight-card__num .plus { color:var(--green-500); }
+    .highlight-card__label { font-size:0.88rem; color:rgba(255,255,255,0.65); font-weight:500; }
+
+    /* Initiative breakdown bar */
+    .breakdown {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
+      padding: 32px 36px;
+    }
+    .breakdown__title {
+      font-size: 1rem; font-weight: 700; color: var(--white);
+      margin-bottom: 24px;
+    }
+    .breakdown-bars { display: flex; flex-direction: column; gap: 16px; }
+    .breakdown-bar  { display: flex; align-items: center; gap: 16px; }
+    .breakdown-bar__label {
+      font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.75);
+      width: 160px; flex-shrink: 0;
+    }
+    .breakdown-bar__track {
+      flex: 1; height: 8px; background: rgba(255,255,255,0.12);
+      border-radius: 100px; overflow: hidden;
+    }
+    .breakdown-bar__fill {
+      height: 100%; border-radius: 100px;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+      width: 0; /* animated by JS */
+    }
+    .fill-clean { background: linear-gradient(90deg,#0891b2,#38bdf8); }
+    .fill-orph  { background: linear-gradient(90deg,var(--green-600),var(--green-500)); }
+    .fill-elder { background: linear-gradient(90deg,#7c3aed,#a78bfa); }
+    .fill-food  { background: linear-gradient(90deg,#b45309,#fbbf24); }
+    .breakdown-bar__pct {
+      font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.7);
+      width: 36px; text-align: right; flex-shrink: 0;
+    }
+
+    /* =============================================
+       HOW TO CONTRIBUTE
+    ============================================= */
+    .contribute {
+      padding: var(--section-pad);
+      background: var(--white);
+    }
+    .contribute__head {
+      text-align: center; max-width: 580px;
+      margin: 0 auto 56px;
+    }
+    .contribute-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 52px;
+    }
+    .contribute-card {
+      border-radius: var(--radius-md);
+      padding: 40px 32px;
+      border: 1px solid rgba(30,58,138,0.07);
+      background: var(--gray-50);
+      text-align: center;
+      transition: var(--transition);
+    }
+    .contribute-card:hover {
+      background: var(--white);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-6px);
+      border-color: transparent;
+    }
+    .contribute-card__icon-wrap {
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .cw-blue   { background: var(--blue-50); }
+    .cw-green  { background: var(--green-100); }
+    .cw-amber  { background: #fef3c7; }
+
+    .contribute-card__title {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--gray-900); margin-bottom: 12px;
+    }
+    .contribute-card__desc {
+      font-size: 0.88rem; color: var(--gray-500);
+      line-height: 1.7; margin-bottom: 24px;
+    }
+    .contribute-card__link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--blue-800);
+      transition: gap var(--transition), color var(--transition);
+    }
+    .contribute-card:hover .contribute-card__link { gap: 10px; color: var(--green-600); }
+
+    .contribute__ctas {
+      display: flex; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .final-cta {
+      padding: var(--section-pad);
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 50%, #163b25 100%);
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size:32px 32px;
+    }
+    .final-cta__glow {
+      position:absolute; top:-100px; right:-100px;
+      width:400px; height:400px;
+      background:radial-gradient(circle, rgba(22,163,74,0.25) 0%, transparent 65%);
+    }
+    .final-cta__inner {
+      position:relative; z-index:1;
+      text-align:center; max-width:660px; margin:0 auto;
+    }
+    .final-cta__title {
+      font-family:var(--font-head);
+      font-size:clamp(2rem,5vw,3rem);
+      font-weight:700; color:var(--white);
+      line-height:1.25; margin-bottom:18px;
+    }
+    .final-cta__sub {
+      font-size:1.05rem; color:rgba(255,255,255,0.72);
+      line-height:1.75; margin-bottom:40px;
+    }
+    .final-cta__actions {
+      display:flex; justify-content:center;
+      flex-wrap:wrap; gap:14px;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer { background:var(--gray-900); color:rgba(255,255,255,0.75); padding:80px 0 0; }
+    .footer__grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:60px; padding-bottom:60px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .footer__brand .navbar__logo { margin-bottom:20px; }
+    .footer__brand .navbar__logo .logo-text strong { color:var(--white); }
+    .footer__brand .navbar__logo .logo-text span   { color:rgba(255,255,255,0.4); }
+    .footer__tagline { font-size:0.88rem; line-height:1.7; color:rgba(255,255,255,0.55); margin-bottom:28px; }
+    .footer__social  { display:flex; gap:10px; }
+    .social-btn { width:38px; height:38px; border-radius:var(--radius-sm); background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.65); transition:var(--transition); }
+    .social-btn:hover { background:var(--blue-800); color:var(--white); transform:translateY(-2px); }
+    .footer__col-title { font-size:0.85rem; font-weight:700; color:var(--white); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:22px; }
+    .footer__links { display:flex; flex-direction:column; gap:10px; }
+    .footer__links a { font-size:0.875rem; color:rgba(255,255,255,0.55); transition:color var(--transition); }
+    .footer__links a:hover { color:var(--white); }
+    .footer__contact { display:flex; flex-direction:column; gap:14px; }
+    .footer-contact-item { display:flex; align-items:flex-start; gap:12px; font-size:0.875rem; color:rgba(255,255,255,0.55); }
+    .footer-contact-item svg { width:16px; height:16px; color:var(--green-500); flex-shrink:0; margin-top:2px; }
+    .footer__bottom { padding:24px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .footer__copy { font-size:0.82rem; color:rgba(255,255,255,0.35); }
+    .footer__bottom-links { display:flex; gap:20px; }
+    .footer__bottom-links a { font-size:0.82rem; color:rgba(255,255,255,0.35); transition:color var(--transition); }
+    .footer__bottom-links a:hover { color:rgba(255,255,255,0.7); }
+
+    /* =============================================
+       SCROLL REVEAL
+    ============================================= */
+    .js-animations .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity 0.65s ease, transform 0.65s ease;
+    }
+    .js-animations .reveal.visible      { opacity:1; transform:translateY(0); }
+    .js-animations .reveal-delay-1 { transition-delay:0.1s; }
+    .js-animations .reveal-delay-2 { transition-delay:0.2s; }
+    .js-animations .reveal-delay-3 { transition-delay:0.3s; }
+    .js-animations .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* =============================================
+       RESPONSIVE – TABLET (≤ 1024px)
+    ============================================= */
+    @media (max-width: 1024px) {
+      .intro__grid       { grid-template-columns:1fr; gap:48px; }
+      .intro__visual     { display:none; }
+      .init-grid         { grid-template-columns:1fr; }
+      .detail-grid       { grid-template-columns:1fr; gap:44px; }
+      .detail-grid--reverse { direction:ltr; }
+      .highlights-grid   { grid-template-columns:repeat(2,1fr); }
+      .contribute-grid   { grid-template-columns:repeat(2,1fr); }
+      .footer__grid      { grid-template-columns:1fr 1fr; gap:40px; }
+      .intro-legend      { display:none; }
+    }
+
+    /* =============================================
+       RESPONSIVE – MOBILE (≤ 768px)
+    ============================================= */
+    @media (max-width: 768px) {
+      :root { --section-pad:72px 0; }
+      .navbar__links, .navbar__cta { display:none; }
+      .navbar__hamburger { display:flex; }
+      .page-hero { padding:80px 0 70px; }
+      .page-hero__ring { display:none; }
+      .page-hero__pills { gap:8px; }
+      .init-grid         { grid-template-columns:1fr; gap:20px; }
+      .detail-float-card { display:none; }
+      .highlights-grid   { grid-template-columns:repeat(2,1fr); gap:16px; }
+      .contribute-grid   { grid-template-columns:1fr; }
+      .breakdown-bar__label { width:100px; font-size:0.75rem; }
+      .footer__grid      { grid-template-columns:1fr; gap:36px; }
+      .footer__bottom    { flex-direction:column; text-align:center; }
+      .final-cta__actions { flex-direction:column; align-items:center; }
+      .final-cta__actions .btn { width:100%; justify-content:center; max-width:320px; }
+    }
+    @media (max-width: 480px) {
+      .highlights-grid { grid-template-columns:1fr 1fr; }
+      .filter-tabs { gap:6px; }
+      .filter-tab  { padding:7px 14px; font-size:0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVBAR
+  ========================================== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container">
+      <nav class="navbar__inner" aria-label="Primary navigation">
+        <a href="index.html" class="navbar__logo" aria-label="4U Home">
+          <div class="logo-mark" aria-hidden="true">4U</div>
+          <div class="logo-text">
+            <strong>4U</strong>
+            <span>Use Unity to Uplift Universe</span>
+          </div>
+        </a>
+        <ul class="navbar__links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="initiatives.html" class="active">Initiatives</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="navbar__cta">
+          <a href="#final-cta" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <div class="navbar__mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="initiatives.html">Initiatives</a>
+      <a href="#">Events</a>
+      <a href="#">Gallery</a>
+      <a href="#">Contact</a>
+      <a href="#final-cta" class="btn btn-primary">Join Us</a>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE HERO
+  ========================================== -->
+  <section class="page-hero" aria-label="Page header">
+    <div class="page-hero__bg"     aria-hidden="true"></div>
+    <div class="page-hero__dots"   aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--1" aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--2" aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="page-hero__content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Initiatives</span>
+        </nav>
+        <h1 class="page-hero__title">
+          Creating Impact Through<br><em>Collective Action</em>
+        </h1>
+        <p class="page-hero__sub">
+          Four focused areas. Hundreds of volunteers. Thousands of lives changed.
+          Explore everything 4U is doing on the ground — and find your place in it.
+        </p>
+        <div class="page-hero__pills" role="list" aria-label="Jump to initiative">
+          <a href="#cleanliness" class="hero-pill" role="listitem">
+            <span class="hero-pill__dot" style="background:#38bdf8;" aria-hidden="true"></span>
+            Cleanliness Drives
+          </a>
+          <a href="#orphanage" class="hero-pill" role="listitem">
+            <span class="hero-pill__dot" style="background:#22c55e;" aria-hidden="true"></span>
+            Orphanage Visits
+          </a>
+          <a href="#eldercare" class="hero-pill" role="listitem">
+            <span class="hero-pill__dot" style="background:#a78bfa;" aria-hidden="true"></span>
+            Elder Care
+          </a>
+          <a href="#food" class="hero-pill" role="listitem">
+            <span class="hero-pill__dot" style="background:#fbbf24;" aria-hidden="true"></span>
+            Food Distribution
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-hero__wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 64 L0 32 Q360 0 720 32 Q1080 64 1440 32 L1440 64 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       INTRO SECTION
+  ========================================== -->
+  <section class="intro" id="intro" aria-labelledby="intro-title">
+    <div class="container">
+      <div class="intro__grid">
+        <div class="intro__content reveal">
+          <span class="section-label">Our Focus Areas</span>
+          <h2 class="section-title" id="intro-title">
+            Four Pillars of<br><span>Social Change</span>
+          </h2>
+          <p class="section-subtitle">
+            Every initiative we run is rooted in listening first. We identified
+            these four areas by spending time with communities and asking a simple
+            question: "Where is the need greatest right now?" The answers shaped
+            everything 4U does today.
+          </p>
+          <p class="section-subtitle" style="margin-top:14px;">
+            We don't spread thin across dozens of causes. Instead, we go deep —
+            showing up consistently, building trust, and creating change that sticks.
+          </p>
+          <div class="focus-tags" style="margin-top:28px;">
+            <span class="focus-tag ft-clean">🧹 Cleanliness</span>
+            <span class="focus-tag ft-orph" >🏠 Child Welfare</span>
+            <span class="focus-tag ft-elder">🧓 Elder Care</span>
+            <span class="focus-tag ft-food" >🍱 Food Security</span>
+          </div>
+          <a href="#initiatives-grid" class="btn btn-primary">
+            Explore All Initiatives
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Visual ring -->
+        <div class="intro__visual reveal reveal-delay-2" aria-hidden="true">
+          <div class="intro-ring-wrap">
+            <div class="intro-ring-bg">
+              <div class="intro-ring-inner">
+                <strong>4</strong>
+                <span>Core Initiative Areas</span>
+              </div>
+            </div>
+          </div>
+          <div class="intro-legend">
+            <div class="intro-legend-item">
+              <span class="intro-legend-dot" style="background:var(--clean-clr);"></span>Cleanliness
+            </div>
+            <div class="intro-legend-item">
+              <span class="intro-legend-dot" style="background:var(--orph-clr);"></span>Orphanage
+            </div>
+            <div class="intro-legend-item">
+              <span class="intro-legend-dot" style="background:var(--elder-clr);"></span>Elder Care
+            </div>
+            <div class="intro-legend-item">
+              <span class="intro-legend-dot" style="background:var(--food-clr);"></span>Food Drive
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FILTER + INITIATIVES GRID
+  ========================================== -->
+  <div class="filter-bar" id="initiatives-grid">
+    <div class="container">
+      <div class="filter-bar__inner reveal">
+        <div>
+          <span class="section-label">All Initiatives</span>
+          <h2 class="section-title" style="margin-bottom:0;">What We Do</h2>
+        </div>
+        <div class="filter-tabs" role="tablist" aria-label="Filter initiatives">
+          <button class="filter-tab active" data-filter="all"       role="tab" aria-selected="true" >All</button>
+          <button class="filter-tab"        data-filter="clean"     role="tab" aria-selected="false">Cleanliness</button>
+          <button class="filter-tab"        data-filter="orph"      role="tab" aria-selected="false">Orphanage</button>
+          <button class="filter-tab"        data-filter="elder"     role="tab" aria-selected="false">Elder Care</button>
+          <button class="filter-tab"        data-filter="food"      role="tab" aria-selected="false">Food Drive</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="initiatives-grid-section" aria-label="Initiatives overview cards">
+    <div class="container">
+      <div class="init-grid" id="initGrid">
+
+        <!-- Card 1: Cleanliness -->
+        <article class="init-card reveal reveal-delay-1" data-category="clean" id="cleanliness-card">
+          <div class="init-card__banner">
+            <div class="init-card__banner-bg banner-clean"></div>
+            <div class="init-card__banner-pattern"></div>
+            <div class="init-card__banner-icon" aria-hidden="true">🧹</div>
+            <span class="init-card__banner-label">Initiative 01</span>
+          </div>
+          <div class="init-card__body">
+            <h3 class="init-card__title">Cleanliness Drives</h3>
+            <p class="init-card__desc">
+              We organise regular neighbourhood clean-up drives targeting
+              neglected public spaces — parks, roadsides, water bodies, and
+              community areas. Each drive leaves a visibly transformed space
+              and a community that takes pride in keeping it clean.
+            </p>
+            <div class="impact-chips">
+              <span class="impact-chip chip-clean">📍 25+ Areas Covered</span>
+              <span class="impact-chip chip-clean">🗑️ 40+ Drives Completed</span>
+              <span class="impact-chip chip-clean">👐 1,200+ Volunteers</span>
+            </div>
+            <div class="init-card__footer">
+              <span class="init-card__stat">Impact: <strong>10,000+ sq. ft.</strong> cleaned</span>
+              <a href="#cleanliness" class="btn btn-outline-blue btn-sm">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Orphanage -->
+        <article class="init-card reveal reveal-delay-2" data-category="orph" id="orphanage-card">
+          <div class="init-card__banner">
+            <div class="init-card__banner-bg banner-orph"></div>
+            <div class="init-card__banner-pattern"></div>
+            <div class="init-card__banner-icon" aria-hidden="true">🏠</div>
+            <span class="init-card__banner-label">Initiative 02</span>
+          </div>
+          <div class="init-card__body">
+            <h3 class="init-card__title">Orphanage Visits</h3>
+            <p class="init-card__desc">
+              We make regular visits to orphanages bringing food, essentials,
+              educational materials, and — most importantly — time. Our volunteers
+              play with children, celebrate festivals together, and ensure every
+              child feels seen, heard, and valued.
+            </p>
+            <div class="impact-chips">
+              <span class="impact-chip chip-orph">🏠 8+ Orphanages Visited</span>
+              <span class="impact-chip chip-orph">🧒 600+ Children Reached</span>
+              <span class="impact-chip chip-orph">🎁 30+ Events Organised</span>
+            </div>
+            <div class="init-card__footer">
+              <span class="init-card__stat">Monthly visits across <strong>4 districts</strong></span>
+              <a href="#orphanage" class="btn btn-outline-blue btn-sm">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Elder Care -->
+        <article class="init-card reveal reveal-delay-3" data-category="elder" id="eldercare-card">
+          <div class="init-card__banner">
+            <div class="init-card__banner-bg banner-elder"></div>
+            <div class="init-card__banner-pattern"></div>
+            <div class="init-card__banner-icon" aria-hidden="true">🧓</div>
+            <span class="init-card__banner-label">Initiative 03</span>
+          </div>
+          <div class="init-card__body">
+            <h3 class="init-card__title">Old Age Home Support</h3>
+            <p class="init-card__desc">
+              Our elder care visits focus on dignity and connection. We spend
+              quality time with residents, bring essential supplies, host
+              cultural programs, and advocate for the well-being of those
+              who built the communities we live in.
+            </p>
+            <div class="impact-chips">
+              <span class="impact-chip chip-elder">🧓 500+ Elders Supported</span>
+              <span class="impact-chip chip-elder">🏥 10+ Homes Visited</span>
+              <span class="impact-chip chip-elder">🎭 20+ Cultural Events</span>
+            </div>
+            <div class="init-card__footer">
+              <span class="init-card__stat">Bi-monthly visits, <strong>year-round</strong></span>
+              <a href="#eldercare" class="btn btn-outline-blue btn-sm">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4: Food Distribution -->
+        <article class="init-card reveal reveal-delay-4" data-category="food" id="food-card">
+          <div class="init-card__banner">
+            <div class="init-card__banner-bg banner-food"></div>
+            <div class="init-card__banner-pattern"></div>
+            <div class="init-card__banner-icon" aria-hidden="true">🍱</div>
+            <span class="init-card__banner-label">Initiative 04</span>
+          </div>
+          <div class="init-card__body">
+            <h3 class="init-card__title">Food Distribution</h3>
+            <p class="init-card__desc">
+              We distribute freshly prepared, nutritious meals to daily-wage
+              workers, homeless individuals, and families in financial distress.
+              Our drives run on weekends, public holidays, and during festivals
+              when need is highest and support is scarce.
+            </p>
+            <div class="impact-chips">
+              <span class="impact-chip chip-food">🍱 5,000+ Meals Served</span>
+              <span class="impact-chip chip-food">📦 50+ Distribution Drives</span>
+              <span class="impact-chip chip-food">🌆 15+ Locations Covered</span>
+            </div>
+            <div class="init-card__footer">
+              <span class="init-card__stat">Every weekend in <strong>peak seasons</strong></span>
+              <a href="#food" class="btn btn-outline-blue btn-sm">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       DETAILED: CLEANLINESS DRIVES
+  ========================================== -->
+  <section class="initiative-detail" id="cleanliness" aria-labelledby="clean-title">
+    <div class="container">
+      <div class="detail-grid">
+        <!-- Visual -->
+        <div class="detail-visual reveal">
+          <div class="detail-img-main banner-clean">
+            <div class="detail-img-main__overlay"></div>
+            <div class="detail-img-main__icon" aria-hidden="true">🧹</div>
+          </div>
+          <div class="detail-float-card detail-float-card--tl">
+            <div class="detail-float-card__num">40<span>+</span></div>
+            <div class="detail-float-card__label">Drives Completed</div>
+          </div>
+          <div class="detail-float-card detail-float-card--br">
+            <div class="detail-float-card__num">25<span>+</span></div>
+            <div class="detail-float-card__label">Areas Covered</div>
+          </div>
+        </div>
+        <!-- Content -->
+        <div class="detail-content reveal reveal-delay-2">
+          <span class="section-label" style="color:var(--clean-clr);">Initiative 01</span>
+          <h2 class="section-title" id="clean-title">Cleanliness <span>Drives</span></h2>
+          <p class="section-subtitle">
+            A clean environment is a right, not a privilege. 4U organises
+            structured clean-up drives to reclaim and restore public spaces
+            that communities deserve to enjoy.
+          </p>
+          <div class="detail-activities">
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--clean-bg);color:var(--clean-clr);" aria-hidden="true">🗑️</div>
+              <p class="detail-activity__text"><strong>Park & Roadside Cleanups</strong> — Removing litter, clearing overgrowth, and restoring walkways in public parks and community roads.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--clean-bg);color:var(--clean-clr);" aria-hidden="true">💧</div>
+              <p class="detail-activity__text"><strong>Water Body Restoration</strong> — Clearing plastic and debris from ponds and river banks to support healthier local ecosystems.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--clean-bg);color:var(--clean-clr);" aria-hidden="true">🏫</div>
+              <p class="detail-activity__text"><strong>School & Community Area Drives</strong> — Working with local schools and residents to maintain hygiene in shared spaces.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--clean-bg);color:var(--clean-clr);" aria-hidden="true">🌱</div>
+              <p class="detail-activity__text"><strong>Awareness & Behaviour Change</strong> — Distributing materials and engaging communities on sustainable waste habits.</p>
+            </div>
+          </div>
+          <div class="outcomes">
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Cleaner public spaces</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Increased civic pride</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Better health outcomes</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Community ownership</span>
+          </div>
+          <a href="#final-cta" class="btn btn-primary">
+            Volunteer for a Drive
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       DETAILED: ORPHANAGE VISITS
+  ========================================== -->
+  <section class="initiative-detail" id="orphanage" aria-labelledby="orph-title">
+    <div class="container">
+      <div class="detail-grid detail-grid--reverse">
+        <!-- Content -->
+        <div class="detail-content reveal">
+          <span class="section-label" style="color:var(--orph-clr);">Initiative 02</span>
+          <h2 class="section-title" id="orph-title">Orphanage <span>Visits</span></h2>
+          <p class="section-subtitle">
+            Every child deserves a festival, a birthday, a hug. For children
+            in orphanages, 4U's visits are more than supplies — they are proof
+            that someone out there cares about them deeply.
+          </p>
+          <div class="detail-activities">
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--orph-bg);color:var(--orph-clr);" aria-hidden="true">🎉</div>
+              <p class="detail-activity__text"><strong>Festival Celebrations</strong> — We celebrate Diwali, Holi, Christmas, and birthdays with children — with decorations, games, gifts, and joy.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--orph-bg);color:var(--orph-clr);" aria-hidden="true">📚</div>
+              <p class="detail-activity__text"><strong>Educational Support</strong> — Providing stationery, books, and tutoring sessions to support children's learning journeys.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--orph-bg);color:var(--orph-clr);" aria-hidden="true">🍽️</div>
+              <p class="detail-activity__text"><strong>Food & Essentials Distribution</strong> — Bringing nutritious meals, clothing, hygiene kits, and daily essentials on every visit.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--orph-bg);color:var(--orph-clr);" aria-hidden="true">💬</div>
+              <p class="detail-activity__text"><strong>Emotional Connection</strong> — Volunteers spend unstructured time listening, playing, and building relationships that go beyond single visits.</p>
+            </div>
+          </div>
+          <div class="outcomes">
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Emotional well-being</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Better nutrition</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Educational access</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Sense of belonging</span>
+          </div>
+          <a href="#final-cta" class="btn btn-primary">
+            Visit With Us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <!-- Visual -->
+        <div class="detail-visual reveal reveal-delay-2">
+          <div class="detail-img-main banner-orph">
+            <div class="detail-img-main__overlay"></div>
+            <div class="detail-img-main__icon" aria-hidden="true">🏠</div>
+          </div>
+          <div class="detail-float-card detail-float-card--tl">
+            <div class="detail-float-card__num">600<span>+</span></div>
+            <div class="detail-float-card__label">Children Reached</div>
+          </div>
+          <div class="detail-float-card detail-float-card--br">
+            <div class="detail-float-card__num">8<span>+</span></div>
+            <div class="detail-float-card__label">Homes Visited</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       DETAILED: ELDER CARE
+  ========================================== -->
+  <section class="initiative-detail" id="eldercare" aria-labelledby="elder-title">
+    <div class="container">
+      <div class="detail-grid">
+        <!-- Visual -->
+        <div class="detail-visual reveal">
+          <div class="detail-img-main banner-elder">
+            <div class="detail-img-main__overlay"></div>
+            <div class="detail-img-main__icon" aria-hidden="true">🧓</div>
+          </div>
+          <div class="detail-float-card detail-float-card--tl">
+            <div class="detail-float-card__num">500<span>+</span></div>
+            <div class="detail-float-card__label">Elders Supported</div>
+          </div>
+          <div class="detail-float-card detail-float-card--br">
+            <div class="detail-float-card__num">10<span>+</span></div>
+            <div class="detail-float-card__label">Homes Covered</div>
+          </div>
+        </div>
+        <!-- Content -->
+        <div class="detail-content reveal reveal-delay-2">
+          <span class="section-label" style="color:var(--elder-clr);">Initiative 03</span>
+          <h2 class="section-title" id="elder-title">Old Age Home <span>Support</span></h2>
+          <p class="section-subtitle">
+            Our elders built the world we live in. 4U ensures they are never
+            forgotten — visiting them regularly, listening to their stories,
+            and providing the care and dignity every human deserves.
+          </p>
+          <div class="detail-activities">
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--elder-bg);color:var(--elder-clr);" aria-hidden="true">🎭</div>
+              <p class="detail-activity__text"><strong>Cultural & Recreation Programs</strong> — Hosting music, storytelling, and interactive sessions that bring joy and stimulation to daily life.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--elder-bg);color:var(--elder-clr);" aria-hidden="true">🧴</div>
+              <p class="detail-activity__text"><strong>Essentials & Healthcare Kits</strong> — Distributing medicines, clothing, personal hygiene products, and comfort items.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--elder-bg);color:var(--elder-clr);" aria-hidden="true">🗣️</div>
+              <p class="detail-activity__text"><strong>Companion Visits</strong> — Volunteers sit, listen, and converse — because loneliness is as harmful as illness at this age.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--elder-bg);color:var(--elder-clr);" aria-hidden="true">🎂</div>
+              <p class="detail-activity__text"><strong>Birthday & Festival Celebrations</strong> — Ensuring every elder experiences special occasions with warmth and celebration.</p>
+            </div>
+          </div>
+          <div class="outcomes">
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Reduced loneliness</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Improved mental health</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Dignity & respect</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Material support</span>
+          </div>
+          <a href="#final-cta" class="btn btn-primary">
+            Spend Time With Elders
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       DETAILED: FOOD DISTRIBUTION
+  ========================================== -->
+  <section class="initiative-detail" id="food" aria-labelledby="food-title">
+    <div class="container">
+      <div class="detail-grid detail-grid--reverse">
+        <!-- Content -->
+        <div class="detail-content reveal">
+          <span class="section-label" style="color:var(--food-clr);">Initiative 04</span>
+          <h2 class="section-title" id="food-title">Food <span>Distribution</span></h2>
+          <p class="section-subtitle">
+            Hunger doesn't take a day off. Neither do we. 4U's food drives
+            ensure that those working the hardest and earning the least
+            are never without a meal when they need it most.
+          </p>
+          <div class="detail-activities">
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--food-bg);color:var(--food-clr);" aria-hidden="true">🍛</div>
+              <p class="detail-activity__text"><strong>Hot Meal Drives</strong> — Distributing freshly cooked, nutritious meals to workers, the homeless, and struggling families every weekend.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--food-bg);color:var(--food-clr);" aria-hidden="true">📦</div>
+              <p class="detail-activity__text"><strong>Dry Ration Kits</strong> — Providing monthly grocery packages — rice, dal, oil, and essentials — to families without stable income.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--food-bg);color:var(--food-clr);" aria-hidden="true">🎊</div>
+              <p class="detail-activity__text"><strong>Festival & Special Occasion Drives</strong> — Scaling up distribution on Labour Day, Diwali, and other dates when vulnerability peaks.</p>
+            </div>
+            <div class="detail-activity">
+              <div class="detail-activity__bullet" style="background:var(--food-bg);color:var(--food-clr);" aria-hidden="true">🚚</div>
+              <p class="detail-activity__text"><strong>Mobile Distribution</strong> — Reaching remote and underserved areas where food insecurity is hidden from plain sight.</p>
+            </div>
+          </div>
+          <div class="outcomes">
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Zero hunger drives</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Community nourishment</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Worker dignity</span>
+            <span class="outcome-pill"><span class="outcome-pill__icon">✅</span>Crisis response</span>
+          </div>
+          <a href="#final-cta" class="btn btn-primary">
+            Support a Meal Drive
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <!-- Visual -->
+        <div class="detail-visual reveal reveal-delay-2">
+          <div class="detail-img-main banner-food">
+            <div class="detail-img-main__overlay"></div>
+            <div class="detail-img-main__icon" aria-hidden="true">🍱</div>
+          </div>
+          <div class="detail-float-card detail-float-card--tl">
+            <div class="detail-float-card__num">5K<span>+</span></div>
+            <div class="detail-float-card__label">Meals Served</div>
+          </div>
+          <div class="detail-float-card detail-float-card--br">
+            <div class="detail-float-card__num">50<span>+</span></div>
+            <div class="detail-float-card__label">Distribution Drives</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       IMPACT HIGHLIGHTS
+  ========================================== -->
+  <section class="impact-highlights" id="impact" aria-labelledby="impact-title">
+    <div class="impact-highlights__inner">
+      <div class="container">
+        <div class="impact-highlights__head reveal">
+          <span class="section-label section-label--center section-label--light">Combined Impact</span>
+          <h2 class="section-title" id="impact-title" style="color:var(--white);">
+            Numbers That<br>Speak for Themselves
+          </h2>
+          <p class="section-subtitle" style="color:rgba(255,255,255,0.7);margin:0 auto;">
+            Across all four initiatives, here's the measurable difference
+            4U has made — and we're just getting started.
+          </p>
+        </div>
+
+        <div class="highlights-grid">
+          <div class="highlight-card reveal reveal-delay-1">
+            <span class="highlight-card__icon" aria-hidden="true">🚀</span>
+            <div class="highlight-card__num"><span class="counter" data-target="120">120</span><span class="plus">+</span></div>
+            <div class="highlight-card__label">Total Drives & Events</div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-2">
+            <span class="highlight-card__icon" aria-hidden="true">❤️</span>
+            <div class="highlight-card__num"><span class="counter" data-target="8000">8K</span><span class="plus">+</span></div>
+            <div class="highlight-card__label">Total Beneficiaries</div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-3">
+            <span class="highlight-card__icon" aria-hidden="true">📍</span>
+            <div class="highlight-card__num"><span class="counter" data-target="25">25</span><span class="plus">+</span></div>
+            <div class="highlight-card__label">Communities Reached</div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-4">
+            <span class="highlight-card__icon" aria-hidden="true">🙋</span>
+            <div class="highlight-card__num"><span class="counter" data-target="500">500</span><span class="plus">+</span></div>
+            <div class="highlight-card__label">Active Volunteers</div>
+          </div>
+        </div>
+
+        <!-- Breakdown bars -->
+        <div class="breakdown reveal">
+          <div class="breakdown__title">Initiative Reach Breakdown</div>
+          <div class="breakdown-bars">
+            <div class="breakdown-bar">
+              <div class="breakdown-bar__label">🧹 Cleanliness Drives</div>
+              <div class="breakdown-bar__track">
+                <div class="breakdown-bar__fill fill-clean" data-width="85"></div>
+              </div>
+              <div class="breakdown-bar__pct">85%</div>
+            </div>
+            <div class="breakdown-bar">
+              <div class="breakdown-bar__label">🏠 Orphanage Visits</div>
+              <div class="breakdown-bar__track">
+                <div class="breakdown-bar__fill fill-orph" data-width="70"></div>
+              </div>
+              <div class="breakdown-bar__pct">70%</div>
+            </div>
+            <div class="breakdown-bar">
+              <div class="breakdown-bar__label">🧓 Elder Care Support</div>
+              <div class="breakdown-bar__track">
+                <div class="breakdown-bar__fill fill-elder" data-width="60"></div>
+              </div>
+              <div class="breakdown-bar__pct">60%</div>
+            </div>
+            <div class="breakdown-bar">
+              <div class="breakdown-bar__label">🍱 Food Distribution</div>
+              <div class="breakdown-bar__track">
+                <div class="breakdown-bar__fill fill-food" data-width="78"></div>
+              </div>
+              <div class="breakdown-bar__pct">78%</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       HOW TO CONTRIBUTE
+  ========================================== -->
+  <section class="contribute" id="contribute" aria-labelledby="contrib-title">
+    <div class="container">
+      <div class="contribute__head reveal">
+        <span class="section-label section-label--center">Get Involved</span>
+        <h2 class="section-title" id="contrib-title">How You Can <span>Contribute</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          You don't need to do everything — just something. Here are three
+          meaningful ways to be part of 4U's mission right now.
+        </p>
+      </div>
+
+      <div class="contribute-grid">
+
+        <div class="contribute-card reveal reveal-delay-1">
+          <div class="contribute-card__icon-wrap cw-blue" aria-hidden="true">🙋</div>
+          <h3 class="contribute-card__title">Volunteer Your Time</h3>
+          <p class="contribute-card__desc">
+            Join us on the ground for cleanliness drives, orphanage visits,
+            elder care programs, or food distribution. No special skills needed
+            — just willingness to show up and make a difference.
+          </p>
+          <a href="#final-cta" class="contribute-card__link">
+            Register as Volunteer
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="contribute-card reveal reveal-delay-2">
+          <div class="contribute-card__icon-wrap cw-green" aria-hidden="true">💚</div>
+          <h3 class="contribute-card__title">Donate Resources</h3>
+          <p class="contribute-card__desc">
+            Financial donations help us buy food, essentials, educational
+            materials, and supplies. Even a small contribution directly
+            funds a real initiative. 100% of donations go to the ground.
+          </p>
+          <a href="#final-cta" class="contribute-card__link">
+            Support an Initiative
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="contribute-card reveal reveal-delay-3">
+          <div class="contribute-card__icon-wrap cw-amber" aria-hidden="true">📢</div>
+          <h3 class="contribute-card__title">Spread Awareness</h3>
+          <p class="contribute-card__desc">
+            Share our work on social media, tell your network, invite friends
+            to events, or write about us. Visibility brings volunteers, donors,
+            and partners — multiplying our collective impact.
+          </p>
+          <a href="#final-cta" class="contribute-card__link">
+            Connect With Us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="contribute__ctas">
+        <a href="#final-cta" class="btn btn-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Join as Volunteer
+        </a>
+        <a href="#final-cta" class="btn btn-outline-blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Support Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FINAL CTA
+  ========================================== -->
+  <section class="final-cta" id="final-cta" aria-labelledby="fcta-title">
+    <div class="final-cta__glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="final-cta__inner reveal">
+        <h2 class="final-cta__title" id="fcta-title">
+          Every Initiative Needs<br>More Hands Like Yours
+        </h2>
+        <p class="final-cta__sub">
+          The world becomes a better place not through grand gestures, but
+          through consistent, collective effort. Pick an initiative. Find your
+          role. Show up. That's all it takes to be part of 4U.
+        </p>
+        <div class="final-cta__actions">
+          <a href="#" class="btn btn-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Join Us
+          </a>
+          <a href="#" class="btn btn-outline-white">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+  ========================================== -->
+  <footer class="footer" id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo" aria-label="4U Home">
+            <div class="logo-mark" aria-hidden="true">4U</div>
+            <div class="logo-text"><strong>4U</strong><span>Use Unity to Uplift Universe</span></div>
+          </a>
+          <p class="footer__tagline">A grassroots movement creating meaningful change through unity, compassion, and consistent action. Join us — the universe needs you.</p>
+          <div class="footer__social" aria-label="Social media links">
+            <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+        <nav aria-label="Footer quick links">
+          <h3 class="footer__col-title">Quick Links</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="initiatives.html">Initiatives</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Initiatives links">
+          <h3 class="footer__col-title">Initiatives</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#cleanliness">Cleanliness Drives</a></li>
+            <li><a href="#orphanage">Orphanage Visits</a></li>
+            <li><a href="#eldercare">Elder Care Support</a></li>
+            <li><a href="#food">Food Distribution</a></li>
+            <li><a href="#contribute">How to Contribute</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3 class="footer__col-title">Contact Us</h3>
+          <address class="footer__contact" style="font-style:normal;">
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Jamshedpur, Jharkhand, India
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              connect@4u-initiative.org
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.32 2 2 0 0 1 3.62 1.14h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.98 5.98l.83-.83a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +91 98765 43210
+            </div>
+          </address>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 4U – Use Unity to Uplift Universe. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+  ========================================== -->
+  <script>
+    'use strict';
+
+    /* Enable animations only when JS is running — prevents blank sections */
+    document.body.classList.add('js-animations');
+
+    /* ---- Navbar scroll shadow ---- */
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ---- Hamburger ---- */
+    var hamburger  = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---- Scroll reveal ---- */
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+
+    /* ---- Counter animation ---- */
+    function animateCounter(el, target, duration) {
+      duration = duration || 1800;
+      var start = performance.now();
+      var isLarge = target >= 1000;
+      var fmt = isLarge
+        ? function(n) { return n >= 1000 ? (n/1000).toFixed(1).replace('.0','')+'K' : String(n); }
+        : function(n) { return String(Math.round(n)); };
+      function step(now) {
+        var progress = Math.min((now - start) / duration, 1);
+        var ease     = 1 - Math.pow(1 - progress, 3);
+        el.textContent = fmt(Math.round(ease * target));
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = fmt(target);
+      }
+      requestAnimationFrame(step);
+    }
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target, parseInt(entry.target.dataset.target, 10));
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.counter').forEach(function(el) {
+      counterObserver.observe(el);
+    });
+
+    /* ---- Progress bar animation ---- */
+    var barObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.breakdown-bar__fill').forEach(function(bar) {
+            bar.style.width = bar.dataset.width + '%';
+          });
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    var breakdown = document.querySelector('.breakdown');
+    if (breakdown) barObserver.observe(breakdown);
+
+    /* ---- Filter tabs ---- */
+    var filterTabs = document.querySelectorAll('.filter-tab');
+    var initCards  = document.querySelectorAll('.init-card');
+
+    filterTabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var filter = tab.dataset.filter;
+
+        /* Update active tab */
+        filterTabs.forEach(function(t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        /* Show / hide cards */
+        initCards.forEach(function(card) {
+          var match = filter === 'all' || card.dataset.category === filter;
+          card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          if (match) {
+            card.style.display = 'flex';
+            /* Force reflow then fade in */
+            requestAnimationFrame(function() {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(12px)';
+            setTimeout(function() {
+              if (card.dataset.category !== filter && filter !== 'all') {
+                card.style.display = 'none';
+              }
+            }, 300);
+          }
+        });
+      });
+    });
+
+    /* ---- Active nav link ---- */
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.navbar__links a').forEach(function(link) {
+            link.classList.toggle('active', link.getAttribute('href') === 'initiatives.html');
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('section[id]').forEach(function(s) {
+      sectionObserver.observe(s);
+    });
+  </script>
+
+</body>
+</html>

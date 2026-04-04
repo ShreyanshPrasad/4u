@@ -983,6 +983,10 @@
     @media (max-width: 768px) {
       :root { --section-pad: 72px 0; }
 
+      .team-card__avatar {
+        height: 300px; 
+      }
+
       .navbar__links, .navbar__cta { display: none; }
       .navbar__hamburger { display: flex; }
 
@@ -1039,7 +1043,7 @@
         <ul class="navbar__links" role="list">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html" class="active">About</a></li>
-          <li><a href="#">Initiatives</a></li>
+          <li><a href="initiatives.html">Initiatives</a></li>
           <li><a href="#">Events</a></li>
           <li><a href="#">Gallery</a></li>
           <li><a href="#">Contact</a></li>
@@ -1832,8 +1836,14 @@
       /* ---- Size cards ---- */
       function sizeCards() {
         var vw = viewport.offsetWidth;
-        cardW  = vw - PEEK * 2 - GAP * 2;
-        cardW  = Math.max(200, Math.min(cardW, 380));
+        
+        // Use 20px peek on mobile, and the default 80px peek on desktop
+        var currentPeek = vw < 768 ? 20 : PEEK; 
+        
+        cardW  = vw - currentPeek * 2 - GAP * 2;
+        // Allow the card to shrink down to 220px on very small phones
+        cardW  = Math.max(220, Math.min(cardW, 380)); 
+        
         cards.forEach(function(c) { c.style.width = cardW + 'px'; });
       }
 
