@@ -131,7 +131,7 @@ We welcome contributions to improve our website and expand our reach:
 ## Contact Information
 
 - **Website**: [4U Official Website](https://mission-4u.netlify.app)
-- **Email**: contact@4u-initiative.org (placeholder)
+- **Email**: contact@4u-initiative.org
 - **Social Media**: Follow us on social platforms for updates
 - **Location**: India (operating across multiple cities and towns)
 
