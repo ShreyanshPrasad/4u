@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support Us – 4U | Use Unity to Uplift Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --blue-900: #0f2460;
+      --blue-800: #1E3A8A;
+      --blue-700: #2547a8;
+      --blue-600: #3b5fc4;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+
+      --green-700: #15803d;
+      --green-600: #16A34A;
+      --green-500: #22c55e;
+      --green-100: #dcfce7;
+      --green-50:  #f0fdf4;
+
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white:    #ffffff;
+
+      /* WhatsApp brand */
+      --wa-green: #25D366;
+      --wa-dark:  #128C7E;
+
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Poppins', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --shadow-sm: 0 2px 8px  rgba(30,58,138,0.08);
+      --shadow-md: 0 8px 28px rgba(30,58,138,0.13);
+      --shadow-lg: 0 20px 60px rgba(30,58,138,0.18);
+
+      --section-pad: 100px 0;
+      --container: 1200px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    /* =============================================
+       TYPOGRAPHY UTILITIES
+    ============================================= */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green-600); margin-bottom: 14px;
+    }
+    .section-label::before { content:''; width:28px; height:2px; background:var(--green-600); border-radius:2px; }
+    .section-label--center { justify-content:center; }
+    .section-label--center::before { display:none; }
+    .section-label--center::after  { content:''; width:28px; height:2px; background:var(--green-600); border-radius:2px; }
+    .section-label--light { color:#6ee7a0; }
+    .section-label--light::before,
+    .section-label--light::after { background:#6ee7a0; }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem,4vw,2.8rem);
+      font-weight: 700; color: var(--gray-900);
+      line-height: 1.25; margin-bottom: 18px;
+    }
+    .section-title span { color: var(--blue-800); }
+    .section-subtitle {
+      font-size: 1.05rem; color: var(--gray-500);
+      max-width: 600px; line-height: 1.75;
+    }
+
+    /* =============================================
+       BUTTON SYSTEM
+    ============================================= */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+      padding: 14px 32px; border-radius: var(--radius-sm);
+      border: 2px solid transparent; cursor: pointer;
+      transition: var(--transition); text-decoration: none;
+      white-space: nowrap; line-height: 1;
+    }
+    .btn svg { width:18px; height:18px; flex-shrink:0; }
+    .btn-sm  { padding:9px 20px; font-size:0.82rem; }
+
+    .btn-primary { background:var(--blue-800); color:var(--white); border-color:var(--blue-800); }
+    .btn-primary:hover { background:var(--blue-900); border-color:var(--blue-900); transform:translateY(-2px); box-shadow:0 8px 24px rgba(30,58,138,0.35); }
+    .btn-green   { background:var(--green-600); color:var(--white); border-color:var(--green-600); }
+    .btn-green:hover { background:var(--green-700); border-color:var(--green-700); transform:translateY(-2px); box-shadow:0 8px 24px rgba(22,163,74,0.35); }
+    .btn-outline-blue  { background:transparent; color:var(--blue-800); border-color:var(--blue-800); }
+    .btn-outline-blue:hover  { background:var(--blue-800); color:var(--white); transform:translateY(-2px); }
+    .btn-outline-white { background:transparent; color:var(--white); border-color:rgba(255,255,255,0.7); }
+    .btn-outline-white:hover { background:rgba(255,255,255,0.15); border-color:var(--white); transform:translateY(-2px); }
+
+    /* WhatsApp button */
+    .btn-whatsapp {
+      background: var(--wa-green);
+      color: var(--white);
+      border-color: var(--wa-green);
+      font-size: 1.05rem;
+      padding: 16px 36px;
+    }
+    .btn-whatsapp:hover {
+      background: var(--wa-dark);
+      border-color: var(--wa-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(37,211,102,0.4);
+    }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position:sticky; top:0; z-index:1000;
+      background:rgba(255,255,255,0.96);
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(30,58,138,0.08);
+      transition:box-shadow var(--transition);
+    }
+    .navbar.scrolled { box-shadow:var(--shadow-md); }
+    .navbar__inner { display:flex; align-items:center; justify-content:space-between; height:72px; gap:24px; }
+    .navbar__logo  { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .logo-mark {
+      width:44px; height:44px;
+      background:linear-gradient(135deg,var(--blue-800),var(--green-600));
+      border-radius:12px; display:flex; align-items:center; justify-content:center;
+      color:var(--white); font-size:1.2rem; font-weight:900; font-family:var(--font-body); flex-shrink:0;
+    }
+    .logo-text { display:flex; flex-direction:column; line-height:1.1; }
+    .logo-text strong { font-size:1.2rem; font-weight:800; color:var(--blue-800); }
+    .logo-text span   { font-size:0.6rem; font-weight:500; color:var(--gray-500); letter-spacing:0.04em; }
+    .navbar__links { display:flex; align-items:center; gap:6px; }
+    .navbar__links a { font-size:0.9rem; font-weight:500; color:var(--gray-700); padding:8px 14px; border-radius:var(--radius-sm); transition:var(--transition); }
+    .navbar__links a:hover, .navbar__links a.active { color:var(--blue-800); background:var(--blue-50); }
+    .navbar__cta { flex-shrink:0; }
+    .navbar__hamburger {
+      display:none; flex-direction:column; justify-content:center; gap:5px;
+      width:40px; height:40px; cursor:pointer; background:none; border:none;
+      padding:6px; border-radius:var(--radius-sm); transition:background var(--transition);
+    }
+    .navbar__hamburger:hover { background:var(--gray-100); }
+    .navbar__hamburger span { display:block; height:2px; background:var(--gray-700); border-radius:2px; transition:var(--transition); transform-origin:center; }
+    .navbar__hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .navbar__hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .navbar__hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .navbar__mobile { display:none; flex-direction:column; gap:4px; padding:16px 24px 20px; border-top:1px solid var(--gray-100); background:var(--white); }
+    .navbar__mobile.open { display:flex; }
+    .navbar__mobile a { font-size:0.95rem; font-weight:500; color:var(--gray-700); padding:12px 16px; border-radius:var(--radius-sm); transition:var(--transition); }
+    .navbar__mobile a:hover { background:var(--blue-50); color:var(--blue-800); }
+    .navbar__mobile .btn { margin-top:8px; width:100%; justify-content:center; }
+
+    /* =============================================
+       PAGE HERO
+    ============================================= */
+    .page-hero {
+      position:relative; padding:110px 0 90px;
+      background:var(--blue-900); overflow:hidden;
+    }
+    .page-hero__bg {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 65% 70% at 85% 35%, rgba(22,163,74,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 65% at 8%  70%, rgba(59,95,196,0.35) 0%, transparent 55%),
+        linear-gradient(135deg,#0f2460 0%,#1e3a8a 55%,#0f3d20 100%);
+    }
+    .page-hero__dots {
+      position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size:36px 36px;
+    }
+    .page-hero__ring {
+      position:absolute; border-radius:50%;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .page-hero__ring--1 { width:460px;height:460px; top:-130px;right:-60px; }
+    .page-hero__ring--2 { width:280px;height:280px; top:-20px;right:80px; border-color:rgba(255,255,255,0.04); }
+
+    .page-hero__inner {
+      position:relative; z-index:2;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:60px; align-items:center;
+    }
+
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:500; color:rgba(255,255,255,0.5); margin-bottom:28px; }
+    .breadcrumb a { color:rgba(255,255,255,0.5); transition:color var(--transition); }
+    .breadcrumb a:hover { color:rgba(255,255,255,0.85); }
+    .breadcrumb__sep { opacity:0.4; }
+    .breadcrumb__current { color:rgba(255,255,255,0.85); }
+
+    .page-hero__title {
+      font-family:var(--font-head);
+      font-size:clamp(2.6rem,6vw,4rem);
+      font-weight:700; color:var(--white);
+      line-height:1.15; margin-bottom:20px;
+      animation:fadeSlideUp 0.7s ease 0.1s both;
+    }
+    .page-hero__title em { font-style:italic; color:#6ee7a0; }
+    .page-hero__sub {
+      font-size:1.1rem; color:rgba(255,255,255,0.72);
+      max-width:480px; line-height:1.75; margin-bottom:36px;
+      animation:fadeSlideUp 0.7s ease 0.25s both;
+    }
+
+    /* Impact quick-bar */
+    .hero-impact-bar {
+      display:flex; flex-wrap:wrap; gap:20px;
+      animation:fadeSlideUp 0.7s ease 0.4s both;
+    }
+    .hib-item {
+      display:flex; align-items:center; gap:10px;
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:var(--radius-sm);
+      padding:10px 16px;
+    }
+    .hib-item__icon { font-size:1.2rem; }
+    .hib-item__text { font-size:0.8rem; color:rgba(255,255,255,0.85); font-weight:500; line-height:1.3; }
+    .hib-item__text strong { display:block; font-size:0.7rem; color:#6ee7a0; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; }
+
+    /* Right card: donation summary */
+    .hero-donate-card {
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      backdrop-filter:blur(16px);
+      border-radius:var(--radius-lg);
+      padding:36px;
+      animation:fadeSlideUp 0.8s ease 0.3s both;
+    }
+    .hero-donate-card__title { font-size:1rem; font-weight:700; color:var(--white); margin-bottom:20px; }
+    .hdc-amounts {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:10px; margin-bottom:24px;
+    }
+    .hdc-amount {
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:var(--radius-sm);
+      padding:14px;
+      text-align:center;
+      cursor:pointer;
+      transition:var(--transition);
+    }
+    .hdc-amount:hover, .hdc-amount.selected {
+      background:rgba(22,163,74,0.25);
+      border-color:rgba(22,163,74,0.5);
+    }
+    .hdc-amount__num { font-size:1.1rem; font-weight:800; color:var(--white); }
+    .hdc-amount__label { font-size:0.68rem; color:rgba(255,255,255,0.55); margin-top:3px; }
+    .hero-donate-card .btn { width:100%; justify-content:center; }
+    .hdc-note { font-size:0.72rem; color:rgba(255,255,255,0.4); text-align:center; margin-top:12px; }
+
+    .page-hero__wave { position:absolute; bottom:-2px; left:0; right:0; line-height:0; z-index:3; }
+    .page-hero__wave svg { display:block; width:100%; }
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* =============================================
+       WHY DONATE
+    ============================================= */
+    .why-donate {
+      padding:var(--section-pad);
+      background:var(--white);
+    }
+    .why-donate__grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:80px; align-items:center;
+    }
+    .why-donate__content .section-subtitle { margin-bottom:32px; }
+    .why-list { display:flex; flex-direction:column; gap:18px; }
+    .why-item {
+      display:flex; gap:16px; align-items:flex-start;
+      padding:18px 20px;
+      background:var(--gray-50);
+      border-radius:var(--radius-md);
+      border:1px solid var(--gray-100);
+      transition:var(--transition);
+    }
+    .why-item:hover { background:var(--blue-50); border-color:var(--blue-100); transform:translateX(4px); }
+    .why-item__icon {
+      width:44px; height:44px; border-radius:var(--radius-sm);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; flex-shrink:0;
+    }
+    .wi-1 { background:var(--blue-50); }
+    .wi-2 { background:var(--green-100); }
+    .wi-3 { background:#ede9fe; }
+    .wi-4 { background:#fef3c7; }
+    .why-item__body {}
+    .why-item__title { font-size:0.92rem; font-weight:700; color:var(--gray-900); margin-bottom:3px; }
+    .why-item__desc  { font-size:0.82rem; color:var(--gray-500); line-height:1.55; }
+
+    /* Right: big impact visual */
+    .why-donate__visual { position:relative; display:flex; justify-content:center; }
+    .impact-ring-wrap {
+      position:relative;
+      width:320px; height:320px;
+    }
+    .impact-ring-bg {
+      width:100%; height:100%; border-radius:50%;
+      background:conic-gradient(
+        var(--blue-800)   0deg  90deg,
+        var(--green-600)  90deg 180deg,
+        #7c3aed          180deg 270deg,
+        #b45309          270deg 360deg
+      );
+      padding:18px;
+    }
+    .impact-ring-inner {
+      width:100%; height:100%; border-radius:50%;
+      background:var(--white);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; gap:4px;
+    }
+    .impact-ring-inner__emoji { font-size:2.4rem; margin-bottom:6px; }
+    .impact-ring-inner strong { font-size:2rem; font-weight:800; color:var(--blue-800); line-height:1; }
+    .impact-ring-inner span   { font-size:0.82rem; color:var(--gray-500); font-weight:500; max-width:90px; }
+    /* Floating badges */
+    .impact-badge {
+      position:absolute;
+      background:var(--white);
+      border-radius:var(--radius-sm);
+      padding:10px 16px;
+      box-shadow:var(--shadow-lg);
+      font-size:0.78rem; font-weight:600;
+      color:var(--gray-900);
+      white-space:nowrap;
+      display:flex; align-items:center; gap:8px;
+    }
+    .ib-1 { top:-10px; right:-20px; }
+    .ib-2 { bottom:-10px; left:-20px; }
+    .ib-3 { bottom:60px;  right:-28px; }
+    .impact-badge__dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .dot-blue   { background:var(--blue-800); }
+    .dot-green  { background:var(--green-600); }
+    .dot-purple { background:#7c3aed; }
+
+    /* =============================================
+       IMPACT AMOUNTS
+    ============================================= */
+    .impact-amounts {
+      padding:var(--section-pad);
+      background:var(--gray-50);
+    }
+    .impact-amounts__head { text-align:center; max-width:560px; margin:0 auto 52px; }
+    .amounts-grid {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:22px;
+    }
+    .amount-card {
+      background:var(--white);
+      border-radius:var(--radius-md);
+      border:2px solid var(--gray-100);
+      padding:32px 24px 28px;
+      text-align:center;
+      cursor:pointer;
+      transition:var(--transition);
+      position:relative; overflow:hidden;
+    }
+    .amount-card::before {
+      content:''; position:absolute;
+      top:0; left:0; right:0; height:4px;
+      background:linear-gradient(90deg,var(--blue-800),var(--green-600));
+      transform:scaleX(0); transition:transform var(--transition);
+    }
+    .amount-card:hover { box-shadow:var(--shadow-md); transform:translateY(-6px); border-color:transparent; }
+    .amount-card:hover::before { transform:scaleX(1); }
+    .amount-card.featured {
+      border-color:var(--blue-800);
+      box-shadow:0 0 0 3px rgba(30,58,138,0.1);
+    }
+    .amount-card.featured::before { transform:scaleX(1); }
+    .amount-card__badge {
+      position:absolute; top:12px; right:12px;
+      background:var(--blue-800); color:var(--white);
+      font-size:0.62rem; font-weight:700;
+      letter-spacing:0.06em; text-transform:uppercase;
+      padding:3px 8px; border-radius:100px;
+    }
+    .amount-card__emoji { font-size:2rem; margin-bottom:16px; display:block; }
+    .amount-card__amount {
+      font-size:1.7rem; font-weight:800;
+      color:var(--blue-800); line-height:1;
+      margin-bottom:8px;
+    }
+    .amount-card__equals { font-size:0.78rem; color:var(--gray-400); margin-bottom:6px; font-weight:500; }
+    .amount-card__impact { font-size:0.85rem; font-weight:600; color:var(--gray-700); line-height:1.4; }
+
+    .amounts-note {
+      text-align:center;
+      margin-top:28px;
+      font-size:0.88rem; color:var(--gray-500);
+    }
+    .amounts-note a { color:var(--blue-800); font-weight:600; }
+    .amounts-note a:hover { text-decoration:underline; }
+
+    /* =============================================
+       QR CODE SECTION (CORE)
+    ============================================= */
+    .qr-section {
+      padding:var(--section-pad);
+      background:var(--white);
+    }
+    .qr-section__inner {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:72px; align-items:center;
+    }
+
+    /* Left: QR panel */
+    .qr-panel {
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .qr-card {
+      background:var(--white);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-lg);
+      border:1px solid var(--gray-100);
+      padding:36px;
+      width:100%; max-width:360px;
+      text-align:center;
+    }
+    .qr-card__header {
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      margin-bottom:24px;
+    }
+    .qr-card__logo {
+      width:36px; height:36px;
+      background:linear-gradient(135deg,var(--blue-800),var(--green-600));
+      border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--white); font-size:0.85rem; font-weight:900;
+    }
+    .qr-card__name { font-size:0.95rem; font-weight:700; color:var(--gray-900); }
+
+    /* QR placeholder — developer replaces img src */
+    .donation-qr {
+      width:200px; height:200px;
+      border-radius:var(--radius-md);
+      margin:0 auto 20px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--gray-50);
+      border:2px dashed var(--gray-300);
+      position:relative; overflow:hidden;
+    }
+    .donation-qr img {
+      width:100%; height:100%;
+      object-fit:contain; border-radius:var(--radius-sm);
+    }
+    /* Placeholder pattern shown when no img loaded */
+    .qr-placeholder {
+      display:flex; flex-direction:column; align-items:center;
+      justify-content:center; gap:8px;
+      color:var(--gray-400);
+    }
+    .qr-placeholder__grid {
+      display:grid; grid-template-columns:repeat(7,1fr);
+      gap:3px; width:120px;
+    }
+    .qr-placeholder__cell {
+      aspect-ratio:1; border-radius:1px;
+      background:var(--gray-300);
+    }
+    .qr-placeholder__cell--dark { background:var(--gray-700); }
+    .qr-placeholder__cell--white { background:var(--white); border:1px solid var(--gray-200); }
+    .qr-placeholder__label { font-size:0.7rem; font-weight:600; color:var(--gray-400); letter-spacing:0.04em; text-transform:uppercase; margin-top:4px; }
+
+    .qr-card__upi-label {
+      font-size:0.75rem; color:var(--gray-400); margin-bottom:6px; font-weight:500;
+    }
+    .qr-card__upi-id {
+      font-size:0.9rem; font-weight:700; color:var(--blue-800);
+      background:var(--blue-50); padding:8px 16px;
+      border-radius:var(--radius-sm); margin-bottom:24px;
+      display:inline-block;
+      letter-spacing:0.02em;
+    }
+
+    /* Temp notice */
+    .qr-notice {
+      display:flex; gap:12px; align-items:flex-start;
+      background:#fffbeb;
+      border:1.5px solid #fcd34d;
+      border-radius:var(--radius-sm);
+      padding:14px 16px;
+      text-align:left;
+      margin-top:4px;
+    }
+    .qr-notice__icon { font-size:1.1rem; flex-shrink:0; margin-top:1px; }
+    .qr-notice__text { font-size:0.78rem; color:#92400e; line-height:1.55; font-weight:500; }
+    .qr-notice__text strong { color:#78350f; }
+
+    /* Right: payment instructions */
+    .qr-instructions { }
+    .qr-instructions .section-subtitle { margin-bottom:32px; }
+
+    .pay-steps { display:flex; flex-direction:column; gap:0; margin-bottom:36px; }
+    .pay-step  { display:flex; gap:18px; align-items:flex-start; }
+    .pay-step__line { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+    .pay-step__num {
+      width:38px; height:38px; border-radius:50%;
+      background:linear-gradient(135deg,var(--blue-800),var(--blue-600));
+      color:var(--white);
+      font-size:0.85rem; font-weight:800;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      box-shadow:0 4px 12px rgba(30,58,138,0.3);
+    }
+    .pay-step__connector {
+      width:2px; height:28px;
+      background:linear-gradient(to bottom, var(--blue-100), transparent);
+      margin:4px 0;
+    }
+    .pay-step__body { padding-bottom:24px; flex:1; padding-top:6px; }
+    .pay-step__title { font-size:0.95rem; font-weight:700; color:var(--gray-900); margin-bottom:4px; }
+    .pay-step__desc  { font-size:0.85rem; color:var(--gray-500); line-height:1.6; }
+
+    .upi-logos {
+      display:flex; gap:10px; align-items:center;
+      margin-top:8px; flex-wrap:wrap;
+    }
+    .upi-logo {
+      background:var(--gray-100); border-radius:var(--radius-sm);
+      padding:6px 12px;
+      font-size:0.72rem; font-weight:700; color:var(--gray-600,#4b5563);
+      letter-spacing:0.03em;
+    }
+
+    /* =============================================
+       WHATSAPP CONFIRMATION (HIGH PRIORITY)
+    ============================================= */
+    .wa-confirm {
+      padding:var(--section-pad);
+      background:var(--gray-50);
+    }
+    .wa-confirm__card {
+      background:var(--white);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow-lg);
+      overflow:hidden;
+      display:grid; grid-template-columns:1fr 380px;
+    }
+
+    /* Left content */
+    .wa-confirm__body { padding:56px 52px; }
+    .wa-confirm__body .section-label { color:var(--wa-dark); }
+    .wa-confirm__body .section-label::before { background:var(--wa-dark); }
+    .wa-confirm__body .section-subtitle { margin-bottom:32px; }
+
+    .wa-steps {
+      display:flex; flex-direction:column; gap:16px;
+      margin-bottom:36px;
+    }
+    .wa-step {
+      display:flex; gap:14px; align-items:flex-start;
+      padding:14px 18px;
+      background:var(--gray-50);
+      border-radius:var(--radius-sm);
+      border-left:3px solid var(--wa-green);
+    }
+    .wa-step__icon { font-size:1rem; flex-shrink:0; padding-top:2px; }
+    .wa-step__text { font-size:0.88rem; color:var(--gray-700); line-height:1.55; font-weight:500; }
+    .wa-step__text strong { color:var(--gray-900); }
+
+    .btn-whatsapp-wrap {
+      display:flex; flex-direction:column; align-items:flex-start; gap:12px;
+    }
+    .wa-privacy {
+      font-size:0.75rem; color:var(--gray-400);
+      display:flex; align-items:center; gap:6px;
+    }
+    .wa-privacy svg { width:14px; height:14px; }
+
+    /* Right: WhatsApp preview panel */
+    .wa-confirm__visual {
+      background:linear-gradient(160deg, #128C7E, #25D366);
+      display:flex; align-items:center; justify-content:center;
+      padding:40px 36px;
+      position:relative; overflow:hidden;
+    }
+    .wa-confirm__visual::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size:22px 22px;
+    }
+    .wa-phone-mock {
+      position:relative; z-index:1;
+      background:var(--white);
+      border-radius:20px;
+      padding:16px;
+      width:220px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    }
+    .wa-phone-mock__bar {
+      background:#128C7E;
+      border-radius:10px 10px 0 0;
+      padding:10px 14px;
+      display:flex; align-items:center; gap:8px;
+      margin:-16px -16px 0;
+    }
+    .wa-bar-avatar {
+      width:28px; height:28px; border-radius:50%;
+      background:rgba(255,255,255,0.25);
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.7rem; font-weight:700; color:var(--white);
+    }
+    .wa-bar-info { flex:1; }
+    .wa-bar-name  { font-size:0.75rem; font-weight:700; color:var(--white); }
+    .wa-bar-status{ font-size:0.62rem; color:rgba(255,255,255,0.7); }
+    .wa-messages { padding:12px 0 0; display:flex; flex-direction:column; gap:8px; }
+    .wa-msg {
+      background:#dcf8c6;
+      border-radius:10px 0 10px 10px;
+      padding:8px 10px;
+      font-size:0.68rem; color:#111;
+      line-height:1.45;
+      align-self:flex-end;
+      max-width:90%;
+      box-shadow:0 1px 2px rgba(0,0,0,0.1);
+    }
+    .wa-msg--in {
+      background:#fff;
+      border-radius:0 10px 10px 10px;
+      align-self:flex-start;
+      color:var(--gray-700);
+    }
+    .wa-msg__time { font-size:0.58rem; color:rgba(0,0,0,0.35); text-align:right; margin-top:3px; }
+
+    /* =============================================
+       TRANSPARENCY & TRUST
+    ============================================= */
+    .trust-section {
+      padding:var(--section-pad);
+      background:var(--white);
+    }
+    .trust-section__head { text-align:center; max-width:560px; margin:0 auto 52px; }
+    .trust-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+    .trust-card {
+      background:var(--gray-50);
+      border-radius:var(--radius-md);
+      padding:36px 28px;
+      border:1px solid var(--gray-100);
+      text-align:center; transition:var(--transition);
+    }
+    .trust-card:hover { background:var(--white); box-shadow:var(--shadow-md); transform:translateY(-5px); }
+    .trust-card__icon {
+      width:64px; height:64px; border-radius:50%;
+      margin:0 auto 20px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.7rem;
+    }
+    .tc-1 { background:var(--green-100); }
+    .tc-2 { background:var(--blue-50); }
+    .tc-3 { background:#fef3c7; }
+    .trust-card__title { font-size:1rem; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .trust-card__desc  { font-size:0.85rem; color:var(--gray-500); line-height:1.65; }
+
+    /* =============================================
+       OTHER WAYS TO SUPPORT
+    ============================================= */
+    .other-support {
+      padding:var(--section-pad);
+      background:var(--gray-50);
+    }
+    .other-support__head { text-align:center; max-width:540px; margin:0 auto 48px; }
+    .other-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:24px; margin-bottom:44px;
+    }
+    .other-card {
+      background:var(--white);
+      border-radius:var(--radius-md);
+      padding:36px 32px;
+      border:1px solid var(--gray-100);
+      display:flex; gap:22px; align-items:flex-start;
+      box-shadow:var(--shadow-sm);
+      transition:var(--transition);
+    }
+    .other-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); border-color:transparent; }
+    .other-card__icon {
+      width:56px; height:56px; border-radius:var(--radius-md);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; flex-shrink:0;
+    }
+    .oc-1 { background:var(--blue-50); }
+    .oc-2 { background:var(--green-100); }
+    .other-card__body { flex:1; }
+    .other-card__title { font-size:1rem; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
+    .other-card__desc  { font-size:0.88rem; color:var(--gray-500); line-height:1.65; margin-bottom:16px; }
+
+    .other-support__ctas { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .final-cta {
+      padding:var(--section-pad);
+      background:linear-gradient(135deg,var(--blue-900) 0%,var(--blue-800) 50%,#163b25 100%);
+      position:relative; overflow:hidden;
+    }
+    .final-cta::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size:32px 32px;
+    }
+    .final-cta__glow {
+      position:absolute; top:-100px; right:-100px;
+      width:400px; height:400px;
+      background:radial-gradient(circle, rgba(22,163,74,0.25) 0%, transparent 65%);
+    }
+    .final-cta__inner {
+      position:relative; z-index:1;
+      text-align:center; max-width:640px; margin:0 auto;
+    }
+    .final-cta__title {
+      font-family:var(--font-head);
+      font-size:clamp(2rem,5vw,3rem);
+      font-weight:700; color:var(--white);
+      line-height:1.25; margin-bottom:16px;
+    }
+    .final-cta__sub {
+      font-size:1.05rem; color:rgba(255,255,255,0.72);
+      line-height:1.75; margin-bottom:40px;
+    }
+    .final-cta__actions { display:flex; justify-content:center; flex-wrap:wrap; gap:14px; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer { background:var(--gray-900); color:rgba(255,255,255,0.75); padding:80px 0 0; }
+    .footer__grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:60px; padding-bottom:60px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .footer__brand .navbar__logo { margin-bottom:20px; }
+    .footer__brand .navbar__logo .logo-text strong { color:var(--white); }
+    .footer__brand .navbar__logo .logo-text span   { color:rgba(255,255,255,0.4); }
+    .footer__tagline { font-size:0.88rem; line-height:1.7; color:rgba(255,255,255,0.55); margin-bottom:28px; }
+    .footer__social  { display:flex; gap:10px; }
+    .social-btn { width:38px; height:38px; border-radius:var(--radius-sm); background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.65); transition:var(--transition); }
+    .social-btn:hover { background:var(--blue-800); color:var(--white); transform:translateY(-2px); }
+    .footer__col-title { font-size:0.85rem; font-weight:700; color:var(--white); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:22px; }
+    .footer__links { display:flex; flex-direction:column; gap:10px; }
+    .footer__links a { font-size:0.875rem; color:rgba(255,255,255,0.55); transition:color var(--transition); }
+    .footer__links a:hover { color:var(--white); }
+    .footer__contact { display:flex; flex-direction:column; gap:14px; }
+    .footer-contact-item { display:flex; align-items:flex-start; gap:12px; font-size:0.875rem; color:rgba(255,255,255,0.55); }
+    .footer-contact-item svg { width:16px; height:16px; color:var(--green-500); flex-shrink:0; margin-top:2px; }
+    .footer__bottom { padding:24px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .footer__copy { font-size:0.82rem; color:rgba(255,255,255,0.35); }
+    .footer__bottom-links { display:flex; gap:20px; }
+    .footer__bottom-links a { font-size:0.82rem; color:rgba(255,255,255,0.35); transition:color var(--transition); }
+    .footer__bottom-links a:hover { color:rgba(255,255,255,0.7); }
+
+    /* =============================================
+       SCROLL REVEAL
+    ============================================= */
+    .js-animations .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity 0.65s ease, transform 0.65s ease;
+    }
+    .js-animations .reveal.visible      { opacity:1; transform:translateY(0); }
+    .js-animations .reveal-delay-1 { transition-delay:0.1s; }
+    .js-animations .reveal-delay-2 { transition-delay:0.2s; }
+    .js-animations .reveal-delay-3 { transition-delay:0.3s; }
+    .js-animations .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* =============================================
+       RESPONSIVE – TABLET (≤ 1024px)
+    ============================================= */
+    @media (max-width: 1024px) {
+      .page-hero__inner    { grid-template-columns:1fr; gap:44px; }
+      .hero-donate-card    { display:none; }
+      .why-donate__grid    { grid-template-columns:1fr; gap:48px; }
+      .why-donate__visual  { display:none; }
+      .amounts-grid        { grid-template-columns:repeat(2,1fr); }
+      .qr-section__inner   { grid-template-columns:1fr; gap:48px; }
+      .qr-panel            { align-items:flex-start; }
+      .wa-confirm__card    { grid-template-columns:1fr; }
+      .wa-confirm__visual  { display:none; }
+      .trust-grid          { grid-template-columns:repeat(2,1fr); }
+      .other-grid          { grid-template-columns:1fr; }
+      .footer__grid        { grid-template-columns:1fr 1fr; gap:40px; }
+    }
+
+    /* =============================================
+       RESPONSIVE – MOBILE (≤ 768px)
+    ============================================= */
+    @media (max-width: 768px) {
+      :root { --section-pad:72px 0; }
+      .navbar__links, .navbar__cta { display:none; }
+      .navbar__hamburger { display:flex; }
+      .page-hero { padding:80px 0 70px; }
+      .page-hero__ring { display:none; }
+      .hero-impact-bar { gap:10px; }
+      .hib-item { padding:8px 12px; }
+      .amounts-grid   { grid-template-columns:repeat(2,1fr); }
+      .trust-grid     { grid-template-columns:1fr; }
+      .wa-confirm__body { padding:36px 24px; }
+      .footer__grid   { grid-template-columns:1fr; gap:36px; }
+      .footer__bottom { flex-direction:column; text-align:center; }
+      .final-cta__actions { flex-direction:column; align-items:center; }
+      .final-cta__actions .btn { width:100%; justify-content:center; max-width:320px; }
+      .btn-whatsapp-wrap { align-items:stretch; }
+      .btn-whatsapp-wrap .btn-whatsapp { justify-content:center; }
+      .qr-card { max-width:100%; }
+      .other-support__ctas { flex-direction:column; align-items:center; }
+      .other-support__ctas .btn { width:100%; max-width:320px; justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVBAR
+  ========================================== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container">
+      <nav class="navbar__inner" aria-label="Primary navigation">
+        <a href="index.html" class="navbar__logo" aria-label="4U Home">
+          <div class="logo-mark" aria-hidden="true">4U</div>
+          <div class="logo-text">
+            <strong>4U</strong>
+            <span>Use Unity to Uplift Universe</span>
+          </div>
+        </a>
+        <ul class="navbar__links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="initiatives.html">Initiatives</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="navbar__cta">
+          <a href="volunteer.html" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <div class="navbar__mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="initiatives.html">Initiatives</a>
+      <a href="events.html">Events</a>
+      <a href="#">Gallery</a>
+      <a href="#">Contact</a>
+      <a href="volunteer.html" class="btn btn-primary">Join Us</a>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE HERO
+  ========================================== -->
+  <section class="page-hero" aria-label="Page header">
+    <div class="page-hero__bg"   aria-hidden="true"></div>
+    <div class="page-hero__dots" aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--1" aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--2" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="page-hero__inner">
+        <!-- Left -->
+        <div>
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb__sep" aria-hidden="true">›</span>
+            <span class="breadcrumb__current">Support Us</span>
+          </nav>
+          <h1 class="page-hero__title">
+            Support the <em>Cause.</em><br>Change a Life.
+          </h1>
+          <p class="page-hero__sub">
+            Your contribution — however small — directly funds cleanliness drives,
+            orphanage visits, elder care, and food distribution across our communities.
+          </p>
+          <div class="hero-impact-bar" role="list" aria-label="How donations help">
+            <div class="hib-item" role="listitem">
+              <span class="hib-item__icon" aria-hidden="true">🍱</span>
+              <div class="hib-item__text">
+                <strong>₹100 impact</strong>Feeds 4 people
+              </div>
+            </div>
+            <div class="hib-item" role="listitem">
+              <span class="hib-item__icon" aria-hidden="true">🧹</span>
+              <div class="hib-item__text">
+                <strong>₹500 impact</strong>Funds a drive
+              </div>
+            </div>
+            <div class="hib-item" role="listitem">
+              <span class="hib-item__icon" aria-hidden="true">🏠</span>
+              <div class="hib-item__text">
+                <strong>₹1000 impact</strong>Supports a visit
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: donation preview card -->
+        <div class="hero-donate-card" aria-hidden="true">
+          <div class="hero-donate-card__title">Choose your impact level</div>
+          <div class="hdc-amounts" role="radiogroup" aria-label="Donation amounts">
+            <div class="hdc-amount selected">
+              <div class="hdc-amount__num">₹100</div>
+              <div class="hdc-amount__label">Meals for 4</div>
+            </div>
+            <div class="hdc-amount">
+              <div class="hdc-amount__num">₹500</div>
+              <div class="hdc-amount__label">Cleanliness drive</div>
+            </div>
+            <div class="hdc-amount">
+              <div class="hdc-amount__num">₹1000</div>
+              <div class="hdc-amount__label">Orphanage visit</div>
+            </div>
+            <div class="hdc-amount">
+              <div class="hdc-amount__num">₹2500</div>
+              <div class="hdc-amount__label">Elder care month</div>
+            </div>
+          </div>
+          <a href="#qr-donate" class="btn btn-green">
+            Donate via QR Code
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <p class="hdc-note">UPI · Instant · No registration needed</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-hero__wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 64 L0 32 Q360 0 720 32 Q1080 64 1440 32 L1440 64 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       WHY DONATE
+  ========================================== -->
+  <section class="why-donate" id="why" aria-labelledby="why-title">
+    <div class="container">
+      <div class="why-donate__grid">
+        <!-- Content -->
+        <div class="reveal">
+          <span class="section-label">Your Money at Work</span>
+          <h2 class="section-title" id="why-title">
+            Where Your <span>Donation Goes</span>
+          </h2>
+          <p class="section-subtitle">
+            Every rupee you contribute goes directly to the ground — no middlemen,
+            no administrative overhead. Here's exactly what your support funds.
+          </p>
+          <div class="why-list" style="margin-top:28px;">
+            <div class="why-item">
+              <div class="why-item__icon wi-1" aria-hidden="true">🧹</div>
+              <div class="why-item__body">
+                <div class="why-item__title">Cleanliness Drives</div>
+                <div class="why-item__desc">Equipment, waste disposal, safety gear, and community awareness materials for our monthly neighbourhood clean-ups.</div>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-item__icon wi-2" aria-hidden="true">🏠</div>
+              <div class="why-item__body">
+                <div class="why-item__title">Orphanage & Elder Care Visits</div>
+                <div class="why-item__desc">Food, essentials, educational materials, medicines, and celebration supplies for children and elders during our visits.</div>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-item__icon wi-3" aria-hidden="true">🍱</div>
+              <div class="why-item__body">
+                <div class="why-item__title">Food Distribution Drives</div>
+                <div class="why-item__desc">Cooking and packaging nutritious meals, dry ration kits, and water for homeless individuals and daily-wage workers.</div>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-item__icon wi-4" aria-hidden="true">🌍</div>
+              <div class="why-item__body">
+                <div class="why-item__title">Community Initiatives</div>
+                <div class="why-item__desc">Event logistics, transport, communication, and outreach to expand 4U's reach into new communities and districts.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Visual ring -->
+        <div class="why-donate__visual reveal reveal-delay-2" aria-hidden="true">
+          <div class="impact-ring-wrap">
+            <div class="impact-ring-bg">
+              <div class="impact-ring-inner">
+                <span class="impact-ring-inner__emoji">❤️</span>
+                <strong>100%</strong>
+                <span>Goes to the community</span>
+              </div>
+            </div>
+            <div class="impact-badge ib-1">
+              <span class="impact-badge__dot dot-blue"></span>25% Cleanliness
+            </div>
+            <div class="impact-badge ib-2">
+              <span class="impact-badge__dot dot-green"></span>35% Food Drives
+            </div>
+            <div class="impact-badge ib-3">
+              <span class="impact-badge__dot dot-purple"></span>40% Care Visits
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       IMPACT OF YOUR CONTRIBUTION
+  ========================================== -->
+  <section class="impact-amounts" id="impact" aria-labelledby="impact-title">
+    <div class="container">
+      <div class="impact-amounts__head reveal">
+        <span class="section-label section-label--center">Choose Your Impact</span>
+        <h2 class="section-title" id="impact-title">What Your Donation <span>Achieves</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          No amount is too small. See exactly how much difference your contribution
+          makes — and then scroll down to donate in seconds via QR.
+        </p>
+      </div>
+
+      <div class="amounts-grid">
+
+        <div class="amount-card reveal reveal-delay-1">
+          <span class="amount-card__emoji" aria-hidden="true">🍱</span>
+          <div class="amount-card__amount">₹100</div>
+          <div class="amount-card__equals">provides</div>
+          <div class="amount-card__impact">A nutritious meal for 4 people during a food distribution drive</div>
+        </div>
+
+        <div class="amount-card featured reveal reveal-delay-2">
+          <div class="amount-card__badge">Popular</div>
+          <span class="amount-card__emoji" aria-hidden="true">🧹</span>
+          <div class="amount-card__amount">₹500</div>
+          <div class="amount-card__equals">funds</div>
+          <div class="amount-card__impact">Supplies for one cleanliness drive — bags, gloves, and equipment</div>
+        </div>
+
+        <div class="amount-card reveal reveal-delay-3">
+          <span class="amount-card__emoji" aria-hidden="true">🏠</span>
+          <div class="amount-card__amount">₹1,000</div>
+          <div class="amount-card__equals">sponsors</div>
+          <div class="amount-card__impact">Essentials & celebration kit for one orphanage or elder care visit</div>
+        </div>
+
+        <div class="amount-card reveal reveal-delay-4">
+          <span class="amount-card__emoji" aria-hidden="true">🌍</span>
+          <div class="amount-card__amount">₹2,500</div>
+          <div class="amount-card__equals">supports</div>
+          <div class="amount-card__impact">A complete month of elder care support for one old age home</div>
+        </div>
+
+      </div>
+
+      <p class="amounts-note reveal">
+        Want to donate a custom amount? Any contribution is welcome.
+        <a href="#qr-donate">Scroll to donate →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       QR CODE DONATION (CORE SECTION)
+  ========================================== -->
+  <section class="qr-section" id="qr-donate" aria-labelledby="qr-title">
+    <div class="container">
+      <div class="qr-section__inner">
+
+        <!-- QR Panel -->
+        <div class="qr-panel reveal">
+          <div class="qr-card">
+            <div class="qr-card__header">
+              <div class="qr-card__logo" aria-hidden="true">4U</div>
+              <span class="qr-card__name">4U – Use Unity to Uplift Universe</span>
+            </div>
+
+            <!--
+              DEVELOPER NOTE:
+              Replace the placeholder below with the actual QR code image.
+              Class: donation-qr
+              Recommended size: 200×200px minimum
+              Example: <img src="assets/qr-code.png" alt="4U Donation QR Code" />
+            -->
+            <div class="donation-qr" role="img" aria-label="UPI QR Code for 4U donation">
+              <img src="./assets/payment-qr/qr-code.jpg" alt="kr.prakash942-2@okicici">
+            </div>
+
+            <div class="qr-card__upi-label">UPI ID</div>
+            <div class="qr-card__upi-id">kr.prakash942-2@okicici</div>
+
+            <!-- ⚠️ Temporary Notice -->
+            <div class="qr-notice" role="note" aria-label="Important notice">
+              <span class="qr-notice__icon" aria-hidden="true">⚠️</span>
+              <p class="qr-notice__text">
+                <strong>Temporary Payment method.</strong> This is a temporary method. A secure payment system will be added shortly. Please share payment details to us via <br/><a
+                href="https://wa.me/917870507804?text=Hello%204U%2C%20I%20have%20made%20a%20donation.%20Here%20are%20my%20details%3A%0A%0AName%3A%20%0AAmount%20Paid%3A%20%E2%82%B9%0APayment%20Screenshot%3A%20%5Battached%5D"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Confirm donation via WhatsApp"
+                > 👉🏻 WhatsApp 👈🏻</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="qr-instructions reveal reveal-delay-2">
+          <span class="section-label">Scan &amp; Pay</span>
+          <h2 class="section-title" id="qr-title">
+            Donate in <span>3 Simple Steps</span>
+          </h2>
+          <p class="section-subtitle">
+            No registration. No bank details. Just scan the QR with any UPI
+            app and complete the payment in seconds.
+          </p>
+
+          <div class="pay-steps" style="margin-top:32px;">
+            <div class="pay-step">
+              <div class="pay-step__line">
+                <div class="pay-step__num">1</div>
+                <div class="pay-step__connector"></div>
+              </div>
+              <div class="pay-step__body">
+                <div class="pay-step__title">Open Any UPI App</div>
+                <div class="pay-step__desc">
+                  Use any UPI-enabled app on your phone to scan and pay.
+                  <div class="upi-logos" aria-label="Supported UPI apps">
+                    <span class="upi-logo">GPay</span>
+                    <span class="upi-logo">PhonePe</span>
+                    <span class="upi-logo">Paytm</span>
+                    <span class="upi-logo">BHIM</span>
+                    <span class="upi-logo">Any UPI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pay-step">
+              <div class="pay-step__line">
+                <div class="pay-step__num">2</div>
+                <div class="pay-step__connector"></div>
+              </div>
+              <div class="pay-step__body">
+                <div class="pay-step__title">Scan the QR Code</div>
+                <div class="pay-step__desc">Point your phone's camera at the QR code. Enter your chosen donation amount and complete the payment securely via UPI.</div>
+              </div>
+            </div>
+            <div class="pay-step">
+              <div class="pay-step__line">
+                <div class="pay-step__num">3</div>
+              </div>
+              <div class="pay-step__body">
+                <div class="pay-step__title">Confirm on WhatsApp</div>
+                <div class="pay-step__desc">After payment, send us a quick WhatsApp message with your name, amount, and payment screenshot so we can acknowledge your contribution.</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#wa-confirm" class="btn btn-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            How to Confirm Payment
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       WHATSAPP CONFIRMATION
+  ========================================== -->
+  <section class="wa-confirm" id="wa-confirm" aria-labelledby="wa-title">
+    <div class="container">
+      <div class="wa-confirm__card">
+
+        <!-- Content -->
+        <div class="wa-confirm__body reveal">
+          <span class="section-label">After Payment</span>
+          <h2 class="section-title" id="wa-title">
+            Confirm Your Donation<br>via <span>WhatsApp</span>
+          </h2>
+          <p class="section-subtitle">
+            Once your payment is complete, please send us a quick WhatsApp message
+            so we can acknowledge your contribution and issue a confirmation.
+          </p>
+
+          <div class="wa-steps">
+            <div class="wa-step">
+              <span class="wa-step__icon" aria-hidden="true">👤</span>
+              <div class="wa-step__text">
+                <strong>Your Full Name</strong> — so we can address you personally in our acknowledgement.
+              </div>
+            </div>
+            <div class="wa-step">
+              <span class="wa-step__icon" aria-hidden="true">💰</span>
+              <div class="wa-step__text">
+                <strong>Amount Paid</strong> — the exact amount transferred via UPI.
+              </div>
+            </div>
+            <div class="wa-step">
+              <span class="wa-step__icon" aria-hidden="true">📸</span>
+              <div class="wa-step__text">
+                <strong>Screenshot of Payment</strong> — the transaction confirmation from your UPI app.
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-whatsapp-wrap">
+            <a
+              href="https://wa.me/917870507804?text=Hello%204U%2C%20I%20have%20made%20a%20donation.%20Here%20are%20my%20details%3A%0A%0AName%3A%20%0AAmount%20Paid%3A%20%E2%82%B9%0APayment%20Screenshot%3A%20%5Battached%5D"
+              class="btn btn-whatsapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Confirm donation via WhatsApp"
+            >
+              <!-- WhatsApp SVG icon -->
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+              </svg>
+              Confirm via WhatsApp
+            </a>
+            <p class="wa-privacy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Your personal details are safe. We only use this to confirm and acknowledge your donation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phone mock -->
+        <div class="wa-confirm__visual" aria-hidden="true">
+          <div class="wa-phone-mock">
+            <div class="wa-phone-mock__bar">
+              <div class="wa-bar-avatar">4U</div>
+              <div class="wa-bar-info">
+                <div class="wa-bar-name">4U Initiative</div>
+                <div class="wa-bar-status">Online</div>
+              </div>
+            </div>
+            <div class="wa-messages">
+              <div class="wa-msg">
+                Hello 4U, I have made a donation. Here are my details:<br><br>
+                Name: Rahul Kumar<br>
+                Amount Paid: ₹500<br>
+                Screenshot: [attached]
+                <div class="wa-msg__time">14:32 ✓✓</div>
+              </div>
+              <div class="wa-msg wa-msg--in">
+                Thank you so much, Rahul! 🙏 Your donation of ₹500 has been confirmed. It will fund a full cleanliness drive. You're a hero! ❤️
+                <div class="wa-msg__time">14:35 ✓✓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TRANSPARENCY & TRUST
+  ========================================== -->
+  <section class="trust-section" id="trust" aria-labelledby="trust-title">
+    <div class="container">
+      <div class="trust-section__head reveal">
+        <span class="section-label section-label--center">You Can Trust Us</span>
+        <h2 class="section-title" id="trust-title">Our Commitment to <span>Transparency</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          We understand that trust must be earned. Here's how we ensure every
+          donation is used responsibly and makes the maximum possible impact.
+        </p>
+      </div>
+
+      <div class="trust-grid">
+
+        <div class="trust-card reveal reveal-delay-1">
+          <div class="trust-card__icon tc-1" aria-hidden="true">📊</div>
+          <h3 class="trust-card__title">100% Goes to the Ground</h3>
+          <p class="trust-card__desc">
+            We are a fully volunteer-run initiative. There is no paid staff and
+            no administrative overhead. Every rupee you donate goes directly
+            to funding an initiative, not an office.
+          </p>
+        </div>
+
+        <div class="trust-card reveal reveal-delay-2">
+          <div class="trust-card__icon tc-2" aria-hidden="true">📢</div>
+          <h3 class="trust-card__title">Public Impact Reporting</h3>
+          <p class="trust-card__desc">
+            After every event, we share photos, outcomes, and spending on
+            our social media. Donors can see exactly what their contribution
+            funded — people, supplies, and results.
+          </p>
+        </div>
+
+        <div class="trust-card reveal reveal-delay-3">
+          <div class="trust-card__icon tc-3" aria-hidden="true">🤝</div>
+          <h3 class="trust-card__title">Community-First Decisions</h3>
+          <p class="trust-card__desc">
+            Every spending decision is made collectively by our core team based
+            on what communities tell us they need. Donors are never pressured
+            and can choose which initiative their funds support.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       OTHER WAYS TO SUPPORT
+  ========================================== -->
+  <section class="other-support" id="other-ways" aria-labelledby="other-title">
+    <div class="container">
+      <div class="other-support__head reveal">
+        <span class="section-label section-label--center">More Ways to Help</span>
+        <h2 class="section-title" id="other-title">Not Ready to Donate? <span>That's Okay.</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          Financial contributions are just one way to support 4U. Your time
+          and voice are equally powerful.
+        </p>
+      </div>
+
+      <div class="other-grid">
+
+        <div class="other-card reveal reveal-delay-1">
+          <div class="other-card__icon oc-1" aria-hidden="true">🙋</div>
+          <div class="other-card__body">
+            <h3 class="other-card__title">Volunteer Your Time</h3>
+            <p class="other-card__desc">
+              Join us on the ground for cleanliness drives, orphanage visits,
+              elder care programs, or food distribution. No donation needed —
+              just your energy and compassion. We'll match you to the right role.
+            </p>
+            <a href="volunteer.html" class="btn btn-primary btn-sm">
+              Join as Volunteer
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="other-card reveal reveal-delay-2">
+          <div class="other-card__icon oc-2" aria-hidden="true">📢</div>
+          <div class="other-card__body">
+            <h3 class="other-card__title">Spread the Word</h3>
+            <p class="other-card__desc">
+              Share 4U's story with your network. Follow us on social media,
+              tag us in your posts, and invite friends to join our events.
+              Every share brings more volunteers and donors who multiply impact.
+            </p>
+            <a href="#" class="btn btn-outline-blue btn-sm">
+              Contact Us
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="other-support__ctas">
+        <a href="volunteer.html" class="btn btn-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Join Us
+        </a>
+        <a href="#" class="btn btn-outline-blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FINAL CTA
+  ========================================== -->
+  <section class="final-cta" id="final-cta" aria-labelledby="fcta-title">
+    <div class="final-cta__glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="final-cta__inner reveal">
+        <h2 class="final-cta__title" id="fcta-title">
+          Every Contribution<br>Creates Real Change
+        </h2>
+        <p class="final-cta__sub">
+          ₹100. ₹500. ₹1000. Whatever you can give, it will reach someone who
+          needs it — directly and immediately. Scan the QR code, complete the
+          payment, and confirm on WhatsApp. It takes 2 minutes to change a life.
+        </p>
+        <div class="final-cta__actions">
+          <a href="#qr-donate" class="btn btn-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/></svg>
+            Scan QR &amp; Donate
+          </a>
+          <a
+            href="https://wa.me/919876543210?text=Hello%204U%2C%20I%20have%20made%20a%20donation.%20Here%20are%20my%20details%3A%0A%0AName%3A%20%0AAmount%20Paid%3A%20%E2%82%B9%0APayment%20Screenshot%3A%20%5Battached%5D"
+            class="btn btn-whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Confirm on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+  ========================================== -->
+  <footer class="footer" id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo" aria-label="4U Home">
+            <div class="logo-mark" aria-hidden="true">4U</div>
+            <div class="logo-text"><strong>4U</strong><span>Use Unity to Uplift Universe</span></div>
+          </a>
+          <p class="footer__tagline">A grassroots movement creating meaningful change through unity, compassion, and consistent action. Join us — the universe needs you.</p>
+          <div class="footer__social" aria-label="Social media links">
+            <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+        <nav aria-label="Footer quick links">
+          <h3 class="footer__col-title">Quick Links</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="initiatives.html">Initiatives</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Donation links">
+          <h3 class="footer__col-title">Support Us</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#qr-donate">Donate via QR</a></li>
+            <li><a href="#wa-confirm">Confirm on WhatsApp</a></li>
+            <li><a href="#impact">Impact of Donation</a></li>
+            <li><a href="volunteer.html">Volunteer Instead</a></li>
+            <li><a href="#trust">Transparency</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3 class="footer__col-title">Contact Us</h3>
+          <address class="footer__contact" style="font-style:normal;">
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Jamshedpur, Jharkhand, India
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              connect@4u-initiative.org
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.32 2 2 0 0 1 3.62 1.14h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.98 5.98l.83-.83a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +91 98765 43210
+            </div>
+          </address>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 4U – Use Unity to Uplift Universe. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+  ========================================== -->
+  <script>
+    'use strict';
+
+    /* Prevent blank sections */
+    document.body.classList.add('js-animations');
+
+    /* ---- Navbar scroll ---- */
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ---- Hamburger ---- */
+    var hamburger  = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---- Scroll reveal ---- */
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+
+    /* ---- Hero amount card selection ---- */
+    document.querySelectorAll('.hdc-amount').forEach(function(card) {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.hdc-amount').forEach(function(c) { c.classList.remove('selected'); });
+        card.classList.add('selected');
+      });
+    });
+
+    /* ---- Amount card hover effect ---- */
+    document.querySelectorAll('.amount-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.amount-card').forEach(function(c) {
+          c.classList.remove('featured');
+          c.querySelector('.amount-card__badge') && (c.querySelector('.amount-card__badge').style.display = 'none');
+        });
+        card.classList.add('featured');
+        /* Scroll to QR */
+        document.getElementById('qr-donate').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  </script>
+
+</body>
+</html>
