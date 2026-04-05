@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events & Activities – 4U | Use Unity to Uplift Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --blue-900: #0f2460;
+      --blue-800: #1E3A8A;
+      --blue-700: #2547a8;
+      --blue-600: #3b5fc4;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+
+      --green-700: #15803d;
+      --green-600: #16A34A;
+      --green-500: #22c55e;
+      --green-100: #dcfce7;
+
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white:    #ffffff;
+
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Poppins', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --shadow-sm: 0 2px 8px rgba(30,58,138,0.08);
+      --shadow-md: 0 8px 28px rgba(30,58,138,0.13);
+      --shadow-lg: 0 20px 60px rgba(30,58,138,0.18);
+
+      --section-pad: 100px 0;
+      --container: 1200px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    /* =============================================
+       TYPOGRAPHY UTILITIES
+    ============================================= */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green-600); margin-bottom: 14px;
+    }
+    .section-label::before { content:''; width:28px; height:2px; background:var(--green-600); border-radius:2px; }
+    .section-label--center { justify-content: center; }
+    .section-label--center::before { display: none; }
+    .section-label--center::after  { content:''; width:28px; height:2px; background:var(--green-600); border-radius:2px; }
+    .section-label--light { color: #6ee7a0; }
+    .section-label--light::before,
+    .section-label--light::after  { background: #6ee7a0; }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem,4vw,2.8rem);
+      font-weight: 700; color: var(--gray-900);
+      line-height: 1.25; margin-bottom: 18px;
+    }
+    .section-title span { color: var(--blue-800); }
+    .section-subtitle {
+      font-size: 1.05rem; color: var(--gray-500);
+      max-width: 600px; line-height: 1.75;
+    }
+
+    /* =============================================
+       BUTTON SYSTEM
+    ============================================= */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+      padding: 14px 32px; border-radius: var(--radius-sm);
+      border: 2px solid transparent; cursor: pointer;
+      transition: var(--transition); text-decoration: none;
+      white-space: nowrap; line-height: 1;
+    }
+    .btn svg { width:18px; height:18px; flex-shrink:0; }
+    .btn-sm  { padding:9px 20px; font-size:0.82rem; }
+
+    .btn-primary { background:var(--blue-800); color:var(--white); border-color:var(--blue-800); }
+    .btn-primary:hover { background:var(--blue-900); border-color:var(--blue-900); transform:translateY(-2px); box-shadow:0 8px 24px rgba(30,58,138,0.35); }
+    .btn-green   { background:var(--green-600); color:var(--white); border-color:var(--green-600); }
+    .btn-green:hover { background:var(--green-700); border-color:var(--green-700); transform:translateY(-2px); box-shadow:0 8px 24px rgba(22,163,74,0.35); }
+    .btn-outline-blue  { background:transparent; color:var(--blue-800); border-color:var(--blue-800); }
+    .btn-outline-blue:hover  { background:var(--blue-800); color:var(--white); transform:translateY(-2px); }
+    .btn-outline-white { background:transparent; color:var(--white); border-color:rgba(255,255,255,0.7); }
+    .btn-outline-white:hover { background:rgba(255,255,255,0.15); border-color:var(--white); transform:translateY(-2px); }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .navbar {
+      position:sticky; top:0; z-index:1000;
+      background:rgba(255,255,255,0.96);
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(30,58,138,0.08);
+      transition:box-shadow var(--transition);
+    }
+    .navbar.scrolled { box-shadow:var(--shadow-md); }
+    .navbar__inner { display:flex; align-items:center; justify-content:space-between; height:72px; gap:24px; }
+    .navbar__logo  { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .logo-mark {
+      width:44px; height:44px;
+      background:linear-gradient(135deg,var(--blue-800),var(--green-600));
+      border-radius:12px; display:flex; align-items:center; justify-content:center;
+      color:var(--white); font-size:1.2rem; font-weight:900;
+      font-family:var(--font-body); flex-shrink:0;
+    }
+    .logo-text { display:flex; flex-direction:column; line-height:1.1; }
+    .logo-text strong { font-size:1.2rem; font-weight:800; color:var(--blue-800); }
+    .logo-text span   { font-size:0.6rem; font-weight:500; color:var(--gray-500); letter-spacing:0.04em; }
+    .navbar__links { display:flex; align-items:center; gap:6px; }
+    .navbar__links a { font-size:0.9rem; font-weight:500; color:var(--gray-700); padding:8px 14px; border-radius:var(--radius-sm); transition:var(--transition); }
+    .navbar__links a:hover, .navbar__links a.active { color:var(--blue-800); background:var(--blue-50); }
+    .navbar__cta { flex-shrink:0; }
+    .navbar__hamburger {
+      display:none; flex-direction:column; justify-content:center; gap:5px;
+      width:40px; height:40px; cursor:pointer; background:none; border:none;
+      padding:6px; border-radius:var(--radius-sm); transition:background var(--transition);
+    }
+    .navbar__hamburger:hover { background:var(--gray-100); }
+    .navbar__hamburger span { display:block; height:2px; background:var(--gray-700); border-radius:2px; transition:var(--transition); transform-origin:center; }
+    .navbar__hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .navbar__hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .navbar__hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .navbar__mobile { display:none; flex-direction:column; gap:4px; padding:16px 24px 20px; border-top:1px solid var(--gray-100); background:var(--white); }
+    .navbar__mobile.open { display:flex; }
+    .navbar__mobile a { font-size:0.95rem; font-weight:500; color:var(--gray-700); padding:12px 16px; border-radius:var(--radius-sm); transition:var(--transition); }
+    .navbar__mobile a:hover { background:var(--blue-50); color:var(--blue-800); }
+    .navbar__mobile .btn { margin-top:8px; width:100%; justify-content:center; }
+
+    /* =============================================
+       PAGE HERO
+    ============================================= */
+    .page-hero {
+      position:relative; padding:110px 0 90px;
+      background:var(--blue-900); overflow:hidden;
+    }
+    .page-hero__bg {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 30%, rgba(22,163,74,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 65% at 10% 70%, rgba(59,95,196,0.35) 0%, transparent 55%),
+        linear-gradient(135deg, #0f2460 0%, #1e3a8a 55%, #0f3d20 100%);
+    }
+    .page-hero__dots {
+      position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size:36px 36px;
+    }
+    .page-hero__ring {
+      position:absolute; border-radius:50%;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .page-hero__ring--1 { width:440px; height:440px; top:-120px; right:-60px; }
+    .page-hero__ring--2 { width:260px; height:260px; top:-10px;  right:80px; border-color:rgba(255,255,255,0.04); }
+    .page-hero__ring--3 { width:180px; height:180px; bottom:20px; left:-50px; border-color:rgba(22,163,74,0.12); }
+
+    .page-hero__content { position:relative; z-index:2; max-width:720px; }
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:500; color:rgba(255,255,255,0.5); margin-bottom:28px; }
+    .breadcrumb a { color:rgba(255,255,255,0.5); transition:color var(--transition); }
+    .breadcrumb a:hover { color:rgba(255,255,255,0.85); }
+    .breadcrumb__sep { opacity:0.4; }
+    .breadcrumb__current { color:rgba(255,255,255,0.85); }
+
+    .page-hero__title {
+      font-family:var(--font-head);
+      font-size:clamp(2.6rem,6vw,4rem);
+      font-weight:700; color:var(--white);
+      line-height:1.15; margin-bottom:20px;
+      animation:fadeSlideUp 0.7s ease 0.1s both;
+    }
+    .page-hero__title em { font-style:italic; color:#6ee7a0; }
+    .page-hero__sub {
+      font-size:1.1rem; color:rgba(255,255,255,0.72);
+      max-width:540px; line-height:1.7;
+      animation:fadeSlideUp 0.7s ease 0.25s both;
+    }
+
+    /* Hero quick stats strip */
+    .page-hero__strip {
+      display:flex; flex-wrap:wrap; gap:32px;
+      margin-top:44px;
+      animation:fadeSlideUp 0.7s ease 0.4s both;
+    }
+    .hero-strip-stat { display:flex; flex-direction:column; gap:2px; }
+    .hero-strip-stat__num {
+      font-size:1.8rem; font-weight:800;
+      color:var(--white); line-height:1;
+    }
+    .hero-strip-stat__num span { color:#6ee7a0; }
+    .hero-strip-stat__label { font-size:0.75rem; color:rgba(255,255,255,0.55); font-weight:500; }
+    .hero-strip-divider { width:1px; background:rgba(255,255,255,0.15); align-self:stretch; }
+
+    .page-hero__wave { position:absolute; bottom:-2px; left:0; right:0; line-height:0; z-index:2; }
+    .page-hero__wave svg { display:block; width:100%; }
+
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* =============================================
+       INTRO + FILTER BAR
+    ============================================= */
+    .events-intro {
+      padding: 80px 0 0;
+      background: var(--white);
+    }
+    .events-intro__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .events-intro__content .section-subtitle { margin-bottom: 0; }
+
+    /* Calendar visual on right */
+    .events-intro__visual {
+      display: flex; justify-content: center;
+    }
+    .cal-preview {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-100);
+      overflow: hidden;
+      width: 100%; max-width: 340px;
+    }
+    .cal-preview__header {
+      background: linear-gradient(135deg, var(--blue-800), var(--blue-700));
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cal-preview__month {
+      font-size: 1rem; font-weight: 700; color: var(--white);
+    }
+    .cal-preview__year { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+    .cal-preview__body { padding: 20px 24px 24px; }
+    .cal-days-head {
+      display: grid; grid-template-columns: repeat(7,1fr);
+      gap: 4px; margin-bottom: 8px;
+    }
+    .cal-days-head span {
+      font-size: 0.68rem; font-weight: 600; color: var(--gray-400,#9ca3af);
+      text-align: center; text-transform: uppercase;
+    }
+    .cal-days {
+      display: grid; grid-template-columns: repeat(7,1fr);
+      gap: 4px;
+    }
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 500; color: var(--gray-500);
+      border-radius: var(--radius-sm);
+      cursor: default;
+    }
+    .cal-day--empty  { color: transparent; }
+    .cal-day--event  {
+      background: var(--blue-50); color: var(--blue-800); font-weight: 700;
+      position: relative;
+    }
+    .cal-day--event::after {
+      content:''; position:absolute; bottom:3px; left:50%; transform:translateX(-50%);
+      width:4px; height:4px; border-radius:50%; background:var(--blue-800);
+    }
+    .cal-day--today  { background: var(--green-600); color: var(--white); font-weight: 700; }
+    .cal-day--past   { opacity: 0.4; }
+
+    /* Filter tabs */
+    .filter-row {
+      padding: 40px 0 0;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .filter-tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .filter-tab {
+      font-size:0.85rem; font-weight:600;
+      padding:9px 22px; border-radius:100px;
+      border:2px solid var(--gray-200,#e5e7eb);
+      background:var(--white); color:var(--gray-500);
+      cursor:pointer; transition:var(--transition);
+    }
+    .filter-tab:hover { border-color:var(--blue-800); color:var(--blue-800); }
+    .filter-tab.active { background:var(--blue-800); color:var(--white); border-color:var(--blue-800); }
+    .events-count {
+      font-size:0.85rem; color:var(--gray-500); font-weight:500;
+    }
+    .events-count strong { color:var(--gray-900); }
+
+    /* =============================================
+       UPCOMING EVENTS
+    ============================================= */
+    .upcoming-events {
+      padding: 60px 0 var(--section-pad);
+      background: var(--white);
+    }
+    .upcoming-events__head {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px; flex-wrap: wrap; gap: 16px;
+    }
+
+    /* Featured (first) event — full-width hero card */
+    .event-featured {
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 55%, #163b25 100%);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      margin-bottom: 28px;
+    }
+    .event-featured::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size:28px 28px;
+    }
+    .event-featured__glow {
+      position:absolute; top:-80px; right:100px;
+      width:320px; height:320px;
+      background:radial-gradient(circle, rgba(22,163,74,0.25) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .event-featured__body {
+      position:relative; z-index:1;
+      padding: 52px 48px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .featured-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(34,197,94,0.2);
+      border: 1px solid rgba(34,197,94,0.4);
+      color: #6ee7a0;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 100px;
+      margin-bottom: 24px;
+      width: fit-content;
+    }
+    .featured-badge__dot {
+      width: 7px; height: 7px;
+      background: var(--green-500);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow:0 0 0 0 rgba(34,197,94,0.5); }
+      50%      { box-shadow:0 0 0 5px rgba(34,197,94,0); }
+    }
+    .event-featured__title {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem,3.5vw,2.2rem);
+      font-weight: 700; color: var(--white);
+      line-height: 1.25; margin-bottom: 14px;
+    }
+    .event-featured__desc {
+      font-size: 0.97rem; color: rgba(255,255,255,0.7);
+      line-height: 1.7; margin-bottom: 32px;
+      max-width: 440px;
+    }
+    .event-featured__meta {
+      display: flex; flex-wrap: wrap; gap: 20px;
+      margin-bottom: 36px;
+    }
+    .event-meta-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.7); font-weight: 500;
+    }
+    .event-meta-item svg { width:16px; height:16px; color: #6ee7a0; flex-shrink:0; }
+    .event-featured__actions { display:flex; gap:12px; flex-wrap:wrap; }
+
+    /* Featured image panel */
+    .event-featured__visual {
+      background: linear-gradient(160deg, rgba(22,163,74,0.2) 0%, rgba(30,58,138,0.4) 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; min-height: 340px;
+    }
+    .event-featured__icon {
+      font-size: 7rem;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+      position: relative; z-index: 1;
+    }
+    .event-featured__visual-pattern {
+      position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size:24px 24px;
+    }
+
+    /* Regular upcoming event cards — 3 column grid */
+    .upcoming-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .event-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex; flex-direction: column;
+    }
+    .event-card:hover { box-shadow: var(--shadow-md); transform: translateY(-5px); border-color: transparent; }
+
+    /* Colour-coded top bar per category */
+    .event-card__top {
+      height: 6px;
+    }
+    .top-green  { background: linear-gradient(90deg, var(--green-600), var(--green-500)); }
+    .top-blue   { background: linear-gradient(90deg, var(--blue-700),  var(--blue-600)); }
+    .top-purple { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .top-amber  { background: linear-gradient(90deg, #b45309, #fbbf24); }
+    .top-teal   { background: linear-gradient(90deg, #0891b2, #38bdf8); }
+
+    .event-card__header {
+      padding: 22px 22px 0;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .event-date-box {
+      flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      padding: 10px 13px; text-align: center;
+      min-width: 52px;
+    }
+    .edb-green  { background: var(--green-600); color: var(--white); }
+    .edb-blue   { background: var(--blue-800);  color: var(--white); }
+    .edb-purple { background: #7c3aed;           color: var(--white); }
+    .edb-amber  { background: #b45309;           color: var(--white); }
+    .edb-teal   { background: #0891b2;           color: var(--white); }
+    .event-date-box__day   { font-size:1.4rem; font-weight:800; line-height:1; display:block; }
+    .event-date-box__month { font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; opacity:0.85; }
+
+    .event-card__head-info { flex:1; }
+    .event-tag {
+      display: inline-block;
+      font-size:0.68rem; font-weight:700; letter-spacing:0.06em;
+      text-transform:uppercase; padding:4px 10px; border-radius:100px;
+      margin-bottom:7px;
+    }
+    .tag-green  { background:var(--green-100); color:var(--green-700); }
+    .tag-blue   { background:var(--blue-100);  color:var(--blue-700); }
+    .tag-purple { background:#ede9fe; color:#6d28d9; }
+    .tag-amber  { background:#fef3c7; color:#b45309; }
+    .tag-teal   { background:#e0f2fe; color:#0891b2; }
+
+    .event-card__title { font-size:0.97rem; font-weight:700; color:var(--gray-900); line-height:1.3; }
+
+    .event-card__body { padding:16px 22px 22px; flex:1; display:flex; flex-direction:column; }
+    .event-card__desc { font-size:0.85rem; color:var(--gray-500); line-height:1.65; flex:1; margin-bottom:18px; }
+    .event-card__metas {
+      display:flex; flex-direction:column; gap:7px;
+      margin-bottom:18px;
+    }
+    .event-card__meta-row {
+      display:flex; align-items:center; gap:8px;
+      font-size:0.78rem; color:var(--gray-500); font-weight:500;
+    }
+    .event-card__meta-row svg { width:14px; height:14px; color:var(--gray-400,#9ca3af); flex-shrink:0; }
+    .event-card__footer {
+      padding-top:14px; border-top:1px solid var(--gray-100);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .spots-left {
+      display:flex; align-items:center; gap:6px;
+      font-size:0.75rem; font-weight:600; color:var(--green-700);
+    }
+    .spots-left__dot { width:6px; height:6px; background:var(--green-500); border-radius:50%; animation:pulse 2s infinite; }
+
+    /* =============================================
+       PAST EVENTS
+    ============================================= */
+    .past-events {
+      padding: var(--section-pad);
+      background: var(--gray-50);
+    }
+    .past-events__head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 44px; flex-wrap: wrap; gap: 16px;
+    }
+
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .past-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-100);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .past-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: transparent; }
+
+    /* Mini image banner */
+    .past-card__banner {
+      height: 140px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; font-size: 3.5rem;
+    }
+    .past-card__banner-pattern {
+      position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size:20px 20px;
+    }
+    .past-card__banner-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%);
+    }
+    .past-card__banner-date {
+      position:absolute; bottom:10px; left:14px; z-index:2;
+      font-size:0.68rem; font-weight:600;
+      color:rgba(255,255,255,0.85);
+      letter-spacing:0.04em;
+    }
+    .pb-clean  { background:linear-gradient(135deg,#0c4a6e,#0891b2); }
+    .pb-orph   { background:linear-gradient(135deg,#14532d,#16A34A); }
+    .pb-elder  { background:linear-gradient(135deg,#4c1d95,#7c3aed); }
+    .pb-food   { background:linear-gradient(135deg,#78350f,#b45309); }
+    .pb-multi  { background:linear-gradient(135deg,var(--blue-900),#163b25); }
+
+    .past-card__body { padding:20px 20px 22px; }
+    .past-card__tag  { margin-bottom:8px; }
+    .past-card__title { font-size:0.95rem; font-weight:700; color:var(--gray-900); margin-bottom:8px; }
+    .past-card__desc  { font-size:0.82rem; color:var(--gray-500); line-height:1.6; margin-bottom:14px; }
+    .past-card__stats {
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .past-stat {
+      display:flex; align-items:center; gap:5px;
+      font-size:0.75rem; font-weight:600; color:var(--gray-600,#4b5563);
+    }
+    .past-stat__icon { font-size:0.85rem; }
+
+    /* =============================================
+       EVENT HIGHLIGHTS
+    ============================================= */
+    .event-highlights {
+      padding: var(--section-pad);
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 55%, #163b25 100%);
+      position: relative; overflow: hidden;
+    }
+    .event-highlights::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size:40px 40px;
+    }
+    .event-highlights__inner { position:relative; z-index:1; }
+    .event-highlights__head  { text-align:center; margin-bottom:56px; }
+    .event-highlights__head .section-title { color:var(--white); }
+    .event-highlights__head .section-subtitle { color:rgba(255,255,255,0.7); margin:0 auto; }
+
+    .highlights-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .hl-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-md);
+      padding: 36px 24px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .hl-card:hover { background:rgba(255,255,255,0.13); transform:translateY(-4px); border-color:rgba(255,255,255,0.25); }
+    .hl-card__icon  { font-size:2.2rem; margin-bottom:14px; display:block; }
+    .hl-card__num   { font-size:clamp(2rem,4vw,3rem); font-weight:800; color:var(--white); line-height:1; margin-bottom:6px; }
+    .hl-card__num .plus { color:var(--green-500); }
+    .hl-card__label { font-size:0.88rem; color:rgba(255,255,255,0.65); font-weight:500; }
+
+    /* Timeline of recent highlights */
+    .timeline {
+      max-width: 800px; margin: 0 auto;
+    }
+    .timeline__title {
+      font-size:1rem; font-weight:700; color:var(--white);
+      text-align:center; margin-bottom:32px;
+      letter-spacing:0.04em;
+    }
+    .timeline-list { display:flex; flex-direction:column; gap:0; }
+    .timeline-item {
+      display:flex; gap:0; position:relative;
+    }
+    /* Connector line */
+    .timeline-item:not(:last-child) .tl-line::after {
+      content:'';
+      position:absolute;
+      top:40px; left:19px;
+      width:2px; bottom:-20px;
+      background:linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+    }
+    .tl-line {
+      display:flex; flex-direction:column; align-items:center;
+      margin-right:24px; flex-shrink:0; position:relative;
+      padding-bottom:20px;
+    }
+    .tl-dot {
+      width:40px; height:40px;
+      border-radius:50%; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1rem; z-index:1;
+    }
+    .tl-dot-green  { background:rgba(22,163,74,0.3);  border:2px solid rgba(22,163,74,0.5); }
+    .tl-dot-blue   { background:rgba(59,95,196,0.3);  border:2px solid rgba(59,95,196,0.5); }
+    .tl-dot-purple { background:rgba(124,58,237,0.3); border:2px solid rgba(124,58,237,0.5); }
+    .tl-dot-amber  { background:rgba(180,83,9,0.3);   border:2px solid rgba(180,83,9,0.5); }
+
+    .tl-content {
+      flex:1; padding-bottom:28px;
+    }
+    .tl-content__title {
+      font-size:0.95rem; font-weight:700; color:var(--white); margin-bottom:4px;
+    }
+    .tl-content__date {
+      font-size:0.75rem; color:rgba(255,255,255,0.45); font-weight:500; margin-bottom:8px;
+    }
+    .tl-content__text {
+      font-size:0.85rem; color:rgba(255,255,255,0.65); line-height:1.65;
+    }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .final-cta {
+      padding: var(--section-pad);
+      background: var(--white);
+    }
+    .final-cta__card {
+      background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-900) 50%, #163b25 100%);
+      border-radius: var(--radius-xl);
+      padding: 80px 60px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .final-cta__card::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size:32px 32px;
+    }
+    .final-cta__card::after {
+      content:''; position:absolute;
+      top:-80px; right:-80px;
+      width:320px; height:320px;
+      background:radial-gradient(circle, rgba(22,163,74,0.3) 0%, transparent 65%);
+    }
+    .final-cta__inner { position:relative; z-index:1; }
+    .final-cta__title {
+      font-family:var(--font-head);
+      font-size:clamp(2rem,5vw,3rem);
+      font-weight:700; color:var(--white);
+      line-height:1.25; margin-bottom:18px;
+    }
+    .final-cta__sub {
+      font-size:1.05rem; color:rgba(255,255,255,0.72);
+      max-width:520px; margin:0 auto 40px; line-height:1.75;
+    }
+    .final-cta__actions { display:flex; justify-content:center; flex-wrap:wrap; gap:14px; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer { background:var(--gray-900); color:rgba(255,255,255,0.75); padding:80px 0 0; }
+    .footer__grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:60px; padding-bottom:60px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .footer__brand .navbar__logo { margin-bottom:20px; }
+    .footer__brand .navbar__logo .logo-text strong { color:var(--white); }
+    .footer__brand .navbar__logo .logo-text span   { color:rgba(255,255,255,0.4); }
+    .footer__tagline { font-size:0.88rem; line-height:1.7; color:rgba(255,255,255,0.55); margin-bottom:28px; }
+    .footer__social  { display:flex; gap:10px; }
+    .social-btn { width:38px; height:38px; border-radius:var(--radius-sm); background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.65); transition:var(--transition); }
+    .social-btn:hover { background:var(--blue-800); color:var(--white); transform:translateY(-2px); }
+    .footer__col-title { font-size:0.85rem; font-weight:700; color:var(--white); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:22px; }
+    .footer__links { display:flex; flex-direction:column; gap:10px; }
+    .footer__links a { font-size:0.875rem; color:rgba(255,255,255,0.55); transition:color var(--transition); }
+    .footer__links a:hover { color:var(--white); }
+    .footer__contact { display:flex; flex-direction:column; gap:14px; }
+    .footer-contact-item { display:flex; align-items:flex-start; gap:12px; font-size:0.875rem; color:rgba(255,255,255,0.55); }
+    .footer-contact-item svg { width:16px; height:16px; color:var(--green-500); flex-shrink:0; margin-top:2px; }
+    .footer__bottom { padding:24px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .footer__copy { font-size:0.82rem; color:rgba(255,255,255,0.35); }
+    .footer__bottom-links { display:flex; gap:20px; }
+    .footer__bottom-links a { font-size:0.82rem; color:rgba(255,255,255,0.35); transition:color var(--transition); }
+    .footer__bottom-links a:hover { color:rgba(255,255,255,0.7); }
+
+    /* =============================================
+       SCROLL REVEAL
+    ============================================= */
+    .js-animations .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity 0.65s ease, transform 0.65s ease;
+    }
+    .js-animations .reveal.visible      { opacity:1; transform:translateY(0); }
+    .js-animations .reveal-delay-1 { transition-delay:0.1s; }
+    .js-animations .reveal-delay-2 { transition-delay:0.2s; }
+    .js-animations .reveal-delay-3 { transition-delay:0.3s; }
+    .js-animations .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* =============================================
+       RESPONSIVE – TABLET (≤ 1024px)
+    ============================================= */
+    @media (max-width: 1024px) {
+      .events-intro__grid  { grid-template-columns:1fr; gap:44px; }
+      .events-intro__visual { display:none; }
+      .event-featured      { grid-template-columns:1fr; }
+      .event-featured__visual { display:none; }
+      .upcoming-grid       { grid-template-columns:repeat(2,1fr); }
+      .past-grid           { grid-template-columns:repeat(2,1fr); }
+      .highlights-row      { grid-template-columns:repeat(2,1fr); }
+      .footer__grid        { grid-template-columns:1fr 1fr; gap:40px; }
+      .page-hero__strip    { gap:24px; }
+    }
+
+    /* =============================================
+       RESPONSIVE – MOBILE (≤ 768px)
+    ============================================= */
+    @media (max-width: 768px) {
+      :root { --section-pad:72px 0; }
+      .navbar__links, .navbar__cta { display:none; }
+      .navbar__hamburger { display:flex; }
+      .page-hero { padding:80px 0 70px; }
+      .page-hero__ring { display:none; }
+      .page-hero__strip { gap:20px; }
+      .hero-strip-divider { display:none; }
+      .event-featured__body { padding:36px 28px; }
+      .upcoming-grid  { grid-template-columns:1fr; }
+      .past-grid      { grid-template-columns:1fr; }
+      .highlights-row { grid-template-columns:repeat(2,1fr); gap:16px; }
+      .footer__grid   { grid-template-columns:1fr; gap:36px; }
+      .footer__bottom { flex-direction:column; text-align:center; }
+      .final-cta__card { padding:52px 28px; border-radius:var(--radius-lg); }
+      .final-cta__actions { flex-direction:column; align-items:center; }
+      .final-cta__actions .btn { width:100%; justify-content:center; max-width:320px; }
+      .upcoming-events__head { flex-direction:column; align-items:flex-start; }
+      .past-events__head     { flex-direction:column; align-items:flex-start; }
+    }
+    @media (max-width: 480px) {
+      .highlights-row { grid-template-columns:1fr 1fr; }
+      .filter-tabs { gap:6px; }
+      .filter-tab  { padding:7px 14px; font-size:0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVBAR
+  ========================================== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container">
+      <nav class="navbar__inner" aria-label="Primary navigation">
+        <a href="index.html" class="navbar__logo" aria-label="4U Home">
+          <div class="logo-mark" aria-hidden="true">4U</div>
+          <div class="logo-text">
+            <strong>4U</strong>
+            <span>Use Unity to Uplift Universe</span>
+          </div>
+        </a>
+        <ul class="navbar__links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="initiatives.html">Initiatives</a></li>
+          <li><a href="events.html" class="active">Events</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="navbar__cta">
+          <a href="#final-cta" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <div class="navbar__mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="initiatives.html">Initiatives</a>
+      <a href="events.html">Events</a>
+      <a href="#">Gallery</a>
+      <a href="#">Contact</a>
+      <a href="#final-cta" class="btn btn-primary">Join Us</a>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE HERO
+  ========================================== -->
+  <section class="page-hero" aria-label="Page header">
+    <div class="page-hero__bg"   aria-hidden="true"></div>
+    <div class="page-hero__dots" aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--1" aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--2" aria-hidden="true"></div>
+    <div class="page-hero__ring page-hero__ring--3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="page-hero__content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Events</span>
+        </nav>
+        <h1 class="page-hero__title">
+          Events &amp;<br><em>Activities</em>
+        </h1>
+        <p class="page-hero__sub">
+          Be a part of the change. Every event is an opportunity to show up,
+          connect with like-minded people, and leave a real mark on someone's life.
+        </p>
+        <div class="page-hero__strip" role="list" aria-label="Event statistics">
+          <div class="hero-strip-stat" role="listitem">
+            <span class="hero-strip-stat__num">120<span>+</span></span>
+            <span class="hero-strip-stat__label">Events Conducted</span>
+          </div>
+          <div class="hero-strip-divider" aria-hidden="true"></div>
+          <div class="hero-strip-stat" role="listitem">
+            <span class="hero-strip-stat__num">4<span></span></span>
+            <span class="hero-strip-stat__label">Upcoming This Month</span>
+          </div>
+          <div class="hero-strip-divider" aria-hidden="true"></div>
+          <div class="hero-strip-stat" role="listitem">
+            <span class="hero-strip-stat__num">500<span>+</span></span>
+            <span class="hero-strip-stat__label">Volunteers Joined</span>
+          </div>
+          <div class="hero-strip-divider" aria-hidden="true"></div>
+          <div class="hero-strip-stat" role="listitem">
+            <span class="hero-strip-stat__num">8K<span>+</span></span>
+            <span class="hero-strip-stat__label">Lives Impacted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-hero__wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 64 L0 32 Q360 0 720 32 Q1080 64 1440 32 L1440 64 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       INTRO + FILTER
+  ========================================== -->
+  <section class="events-intro" id="events-intro">
+    <div class="container">
+      <div class="events-intro__grid">
+        <!-- Content -->
+        <div class="reveal">
+          <span class="section-label">Why Events Matter</span>
+          <h2 class="section-title">
+            Where <span>Change Happens</span><br>In Real Time
+          </h2>
+          <p class="section-subtitle">
+            Events are the beating heart of 4U. Each drive, visit, and
+            distribution is where intention becomes action — where volunteers
+            meet the people they serve, and where impact is created face to face.
+          </p>
+          <p class="section-subtitle" style="margin-top:14px;">
+            From weekend clean-up drives to festival celebrations at orphanages,
+            every event is designed to be meaningful, measurable, and memorable.
+            Join any event below — no experience required, just the desire to help.
+          </p>
+        </div>
+        <!-- Calendar visual -->
+        <div class="events-intro__visual reveal reveal-delay-2" aria-hidden="true">
+          <div class="cal-preview">
+            <div class="cal-preview__header">
+              <span class="cal-preview__month">April 2026</span>
+              <span class="cal-preview__year">Upcoming Events</span>
+            </div>
+            <div class="cal-preview__body">
+              <div class="cal-days-head">
+                <span>Su</span><span>Mo</span><span>Tu</span>
+                <span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+              </div>
+              <div class="cal-days">
+                <!-- Week 1: Apr starts Wednesday -->
+                <div class="cal-day cal-day--empty"></div>
+                <div class="cal-day cal-day--empty"></div>
+                <div class="cal-day cal-day--empty"></div>
+                <div class="cal-day">1</div>
+                <div class="cal-day">2</div>
+                <div class="cal-day">3</div>
+                <div class="cal-day">4</div>
+                <!-- Week 2 -->
+                <div class="cal-day">5</div>
+                <div class="cal-day">6</div>
+                <div class="cal-day">7</div>
+                <div class="cal-day">8</div>
+                <div class="cal-day">9</div>
+                <div class="cal-day">10</div>
+                <div class="cal-day">11</div>
+                <!-- Week 3 -->
+                <div class="cal-day cal-day--event" title="City Park Clean-Up">12</div>
+                <div class="cal-day">13</div>
+                <div class="cal-day">14</div>
+                <div class="cal-day">15</div>
+                <div class="cal-day">16</div>
+                <div class="cal-day">17</div>
+                <div class="cal-day">18</div>
+                <!-- Week 4 -->
+                <div class="cal-day">19</div>
+                <div class="cal-day cal-day--event" title="Festival of Joy">20</div>
+                <div class="cal-day">21</div>
+                <div class="cal-day">22</div>
+                <div class="cal-day">23</div>
+                <div class="cal-day">24</div>
+                <div class="cal-day">25</div>
+                <!-- Week 5 -->
+                <div class="cal-day">26</div>
+                <div class="cal-day cal-day--event" title="Elder Care Visit">27</div>
+                <div class="cal-day">28</div>
+                <div class="cal-day">29</div>
+                <div class="cal-day">30</div>
+                <div class="cal-day cal-day--empty"></div>
+                <div class="cal-day cal-day--empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Row -->
+      <div class="filter-row reveal">
+        <div class="filter-tabs" id="filterTabs" role="tablist" aria-label="Filter events">
+          <button class="filter-tab active" data-filter="all"      role="tab" aria-selected="true" >All Events</button>
+          <button class="filter-tab"        data-filter="upcoming" role="tab" aria-selected="false">Upcoming</button>
+          <button class="filter-tab"        data-filter="past"     role="tab" aria-selected="false">Past</button>
+          <button class="filter-tab"        data-filter="clean"    role="tab" aria-selected="false">Cleanliness</button>
+          <button class="filter-tab"        data-filter="orph"     role="tab" aria-selected="false">Orphanage</button>
+          <button class="filter-tab"        data-filter="elder"    role="tab" aria-selected="false">Elder Care</button>
+          <button class="filter-tab"        data-filter="food"     role="tab" aria-selected="false">Food Drive</button>
+        </div>
+        <span class="events-count" id="eventsCount" aria-live="polite">
+          Showing <strong>7</strong> events
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       UPCOMING EVENTS
+  ========================================== -->
+  <section class="upcoming-events" id="upcoming" aria-labelledby="upcoming-title">
+    <div class="container">
+      <div class="upcoming-events__head">
+        <div>
+          <span class="section-label">Don't Miss Out</span>
+          <h2 class="section-title" id="upcoming-title">Upcoming <span>Events</span></h2>
+        </div>
+        <a href="#final-cta" class="btn btn-outline-blue btn-sm">
+          Register for an Event
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Featured Event -->
+      <article class="event-featured reveal" data-category="upcoming clean" aria-labelledby="feat-title">
+        <div class="event-featured__glow" aria-hidden="true"></div>
+        <div class="event-featured__body">
+          <div class="featured-badge">
+            <span class="featured-badge__dot" aria-hidden="true"></span>
+            Featured · Next Event
+          </div>
+          <h2 class="event-featured__title" id="feat-title">
+            City Park Clean-Up<br>Campaign — April Edition
+          </h2>
+          <p class="event-featured__desc">
+            Join us for our biggest monthly cleanliness drive as we reclaim
+            and restore Central City Park. Gloves, bags, and refreshments
+            provided. Come alone or bring your whole crew — all are welcome.
+          </p>
+          <div class="event-featured__meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Saturday, 12 April 2026
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              8:00 AM – 12:00 PM
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Central City Park, Jamshedpur
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+              Open to All · 50 Spots Left
+            </div>
+          </div>
+          <div class="event-featured__actions">
+            <a href="#final-cta" class="btn btn-green">
+              Register Now
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="initiatives.html#cleanliness" class="btn btn-outline-white">Learn About This Initiative</a>
+          </div>
+        </div>
+        <div class="event-featured__visual" aria-hidden="true">
+          <div class="event-featured__visual-pattern"></div>
+          <div class="event-featured__icon">🧹</div>
+        </div>
+      </article>
+
+      <!-- 3 regular upcoming cards -->
+      <div class="upcoming-grid">
+
+        <!-- Upcoming 2 -->
+        <article class="event-card reveal reveal-delay-1" data-category="upcoming orph" aria-labelledby="ev2-title">
+          <div class="event-card__top top-green"></div>
+          <div class="event-card__header">
+            <div class="event-date-box edb-green" aria-label="April 20">
+              <span class="event-date-box__day">20</span>
+              <span class="event-date-box__month">Apr</span>
+            </div>
+            <div class="event-card__head-info">
+              <span class="event-tag tag-green">Orphanage Visit</span>
+              <h3 class="event-card__title" id="ev2-title">Festival of Joy — Sunshine Children's Home</h3>
+            </div>
+          </div>
+          <div class="event-card__body">
+            <p class="event-card__desc">
+              A full day of games, music, gifting, and shared meals with the
+              children at Sunshine Children's Home. Volunteers are encouraged
+              to bring handmade cards, small gifts, or just their energy.
+            </p>
+            <div class="event-card__metas">
+              <div class="event-card__meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Sunday, 20 April · 10:00 AM – 4:00 PM
+              </div>
+              <div class="event-card__meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Sunshine Children's Home, Ranchi
+              </div>
+            </div>
+            <div class="event-card__footer">
+              <span class="spots-left">
+                <span class="spots-left__dot" aria-hidden="true"></span>
+                30 spots remaining
+              </span>
+              <a href="#final-cta" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Upcoming 3 -->
+        <article class="event-card reveal reveal-delay-2" data-category="upcoming elder" aria-labelledby="ev3-title">
+          <div class="event-card__top top-purple"></div>
+          <div class="event-card__header">
+            <div class="event-date-box edb-purple" aria-label="April 27">
+              <span class="event-date-box__day">27</span>
+              <span class="event-date-box__month">Apr</span>
+            </div>
+            <div class="event-card__head-info">
+              <span class="event-tag tag-purple">Elder Care</span>
+              <h3 class="event-card__title" id="ev3-title">Monthly Elder Care & Companion Visit</h3>
+            </div>
+          </div>
+          <div class="event-card__body">
+            <p class="event-card__desc">
+              Our bi-monthly visit to Sewa Old Age Home — bringing essentials,
+              sharing conversations, hosting a small cultural program, and
+              spending quality time with the residents.
+            </p>
+            <div class="event-card__metas">
+              <div class="event-card__meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Sunday, 27 April · 11:00 AM – 3:00 PM
+              </div>
+              <div class="event-card__meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Sewa Old Age Home, Jamshedpur
+              </div>
+            </div>
+            <div class="event-card__footer">
+              <span class="spots-left">
+                <span class="spots-left__dot" aria-hidden="true"></span>
+                20 spots remaining
+              </span>
+              <a href="#final-cta" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Upcoming 4 -->
+        <article class="event-card reveal reveal-delay-3" data-category="upcoming food" aria-labelledby="ev4-title">
+          <div class="event-card__top top-amber"></div>
+          <div class="event-card__header">
+            <div class="event-date-box edb-amber" aria-label="May 1">
+              <span class="event-date-box__day">01</span>
+              <span class="event-date-box__month">May</span>
+            </div>
+            <div class="event-card__head-info">
+              <span class="event-tag tag-amber">Food Drive</span>
+              <h3 class="event-card__title" id="ev4-title">Labour Day Meal Distribution Drive</h3>
+            </div>
+          </div>
+          <div class="event-card__body">
+            <p class="event-card__desc">
+              On International Labour Day we honour the hands that built our
+              world. Join us to distribute hot meals and care kits to
+              daily-wage workers across Jamshedpur's industrial zone.
+            </p>
+            <div class="event-card__metas">
+              <div class="event-card__meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Friday, 1 May · 7:00 AM – 11:00 AM
+              </div>
+              <div class="event-card__meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Industrial Zone, Jamshedpur
+              </div>
+            </div>
+            <div class="event-card__footer">
+              <span class="spots-left">
+                <span class="spots-left__dot" aria-hidden="true"></span>
+                45 spots remaining
+              </span>
+              <a href="#final-cta" class="btn btn-primary btn-sm">Register</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       PAST EVENTS
+  ========================================== -->
+  <section class="past-events" id="past" aria-labelledby="past-title">
+    <div class="container">
+      <div class="past-events__head">
+        <div>
+          <span class="section-label">Our Track Record</span>
+          <h2 class="section-title" id="past-title">Past <span>Events</span></h2>
+        </div>
+        <p class="section-subtitle" style="max-width:380px;">
+          A look at the drives, visits, and distributions that have made 4U
+          what it is today.
+        </p>
+      </div>
+
+      <div class="past-grid">
+
+        <!-- Past 1 -->
+        <article class="past-card reveal reveal-delay-1" data-category="past clean">
+          <div class="past-card__banner pb-clean" aria-hidden="true">
+            <div class="past-card__banner-pattern"></div>
+            <div class="past-card__banner-overlay"></div>
+            <span>🧹</span>
+            <span class="past-card__banner-date">15 March 2026</span>
+          </div>
+          <div class="past-card__body">
+            <div class="past-card__tag"><span class="event-tag tag-teal">Cleanliness Drive</span></div>
+            <h3 class="past-card__title">March Riverside Clean-Up Drive</h3>
+            <p class="past-card__desc">Cleared plastic and debris from 800m of Subarnarekha riverbank with 60+ volunteers. One of our most impactful single-day drives.</p>
+            <div class="past-card__stats">
+              <span class="past-stat"><span class="past-stat__icon">👥</span> 62 Volunteers</span>
+              <span class="past-stat"><span class="past-stat__icon">🗑️</span> 400 kg Cleared</span>
+              <span class="past-stat"><span class="past-stat__icon">⏱️</span> 4 Hours</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Past 2 -->
+        <article class="past-card reveal reveal-delay-2" data-category="past orph">
+          <div class="past-card__banner pb-orph" aria-hidden="true">
+            <div class="past-card__banner-pattern"></div>
+            <div class="past-card__banner-overlay"></div>
+            <span>🏠</span>
+            <span class="past-card__banner-date">23 February 2026</span>
+          </div>
+          <div class="past-card__body">
+            <div class="past-card__tag"><span class="event-tag tag-green">Orphanage Visit</span></div>
+            <h3 class="past-card__title">Holi Celebration — Hope Children's Home</h3>
+            <p class="past-card__desc">We brought colours, sweets, and laughter to 80+ children at Hope Children's Home for an unforgettable Holi celebration.</p>
+            <div class="past-card__stats">
+              <span class="past-stat"><span class="past-stat__icon">👥</span> 35 Volunteers</span>
+              <span class="past-stat"><span class="past-stat__icon">🧒</span> 80+ Children</span>
+              <span class="past-stat"><span class="past-stat__icon">🎨</span> Full Day</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Past 3 -->
+        <article class="past-card reveal reveal-delay-3" data-category="past food">
+          <div class="past-card__banner pb-food" aria-hidden="true">
+            <div class="past-card__banner-pattern"></div>
+            <div class="past-card__banner-overlay"></div>
+            <span>🍱</span>
+            <span class="past-card__banner-date">26 January 2026</span>
+          </div>
+          <div class="past-card__body">
+            <div class="past-card__tag"><span class="event-tag tag-amber">Food Drive</span></div>
+            <h3 class="past-card__title">Republic Day Meal Drive — Industrial Zone</h3>
+            <p class="past-card__desc">Distributed 500+ hot meal packets and dry ration kits to workers and homeless individuals across 5 locations on Republic Day.</p>
+            <div class="past-card__stats">
+              <span class="past-stat"><span class="past-stat__icon">👥</span> 28 Volunteers</span>
+              <span class="past-stat"><span class="past-stat__icon">🍛</span> 500+ Meals</span>
+              <span class="past-stat"><span class="past-stat__icon">📍</span> 5 Locations</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Past 4 -->
+        <article class="past-card reveal reveal-delay-1" data-category="past elder">
+          <div class="past-card__banner pb-elder" aria-hidden="true">
+            <div class="past-card__banner-pattern"></div>
+            <div class="past-card__banner-overlay"></div>
+            <span>🧓</span>
+            <span class="past-card__banner-date">15 January 2026</span>
+          </div>
+          <div class="past-card__body">
+            <div class="past-card__tag"><span class="event-tag tag-purple">Elder Care</span></div>
+            <h3 class="past-card__title">Makar Sankranti — Elder Care Celebration</h3>
+            <p class="past-card__desc">Hosted a Makar Sankranti cultural program at two old-age homes with folk music, games, sweets, and blanket distribution for winter.</p>
+            <div class="past-card__stats">
+              <span class="past-stat"><span class="past-stat__icon">👥</span> 22 Volunteers</span>
+              <span class="past-stat"><span class="past-stat__icon">🧓</span> 120 Elders</span>
+              <span class="past-stat"><span class="past-stat__icon">🏠</span> 2 Homes</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Past 5 -->
+        <article class="past-card reveal reveal-delay-2" data-category="past clean">
+          <div class="past-card__banner pb-clean" aria-hidden="true">
+            <div class="past-card__banner-pattern"></div>
+            <div class="past-card__banner-overlay"></div>
+            <span>🧹</span>
+            <span class="past-card__banner-date">28 December 2025</span>
+          </div>
+          <div class="past-card__body">
+            <div class="past-card__tag"><span class="event-tag tag-teal">Cleanliness Drive</span></div>
+            <h3 class="past-card__title">Year-End Community Clean-Up — Adityapur</h3>
+            <p class="past-card__desc">Closed out 2025 with a landmark drive covering 3 wards of Adityapur — our largest single-area cleanliness event to date.</p>
+            <div class="past-card__stats">
+              <span class="past-stat"><span class="past-stat__icon">👥</span> 90 Volunteers</span>
+              <span class="past-stat"><span class="past-stat__icon">🌍</span> 3 Wards</span>
+              <span class="past-stat"><span class="past-stat__icon">⏱️</span> 5 Hours</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Past 6 -->
+        <article class="past-card reveal reveal-delay-3" data-category="past multi">
+          <div class="past-card__banner pb-multi" aria-hidden="true">
+            <div class="past-card__banner-pattern"></div>
+            <div class="past-card__banner-overlay"></div>
+            <span>🎉</span>
+            <span class="past-card__banner-date">14 November 2025</span>
+          </div>
+          <div class="past-card__body">
+            <div class="past-card__tag"><span class="event-tag tag-blue">Multi-Initiative</span></div>
+            <h3 class="past-card__title">Children's Day Mega Event 2025</h3>
+            <p class="past-card__desc">Our biggest event of 2025 — combining orphanage visits, food distribution, and a cleanliness drive across 3 venues in a single day.</p>
+            <div class="past-card__stats">
+              <span class="past-stat"><span class="past-stat__icon">👥</span> 120 Volunteers</span>
+              <span class="past-stat"><span class="past-stat__icon">❤️</span> 300+ Impacted</span>
+              <span class="past-stat"><span class="past-stat__icon">📍</span> 3 Venues</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       EVENT HIGHLIGHTS
+  ========================================== -->
+  <section class="event-highlights" id="highlights" aria-labelledby="hl-title">
+    <div class="event-highlights__inner">
+      <div class="container">
+        <div class="event-highlights__head reveal">
+          <span class="section-label section-label--center section-label--light">Event Impact</span>
+          <h2 class="section-title" id="hl-title" style="color:var(--white);">
+            What Our Events<br>Have Achieved
+          </h2>
+          <p class="section-subtitle" style="color:rgba(255,255,255,0.7);margin:0 auto;">
+            Every number below is the result of ordinary people showing up
+            and doing extraordinary things together.
+          </p>
+        </div>
+
+        <div class="highlights-row">
+          <div class="hl-card reveal reveal-delay-1">
+            <span class="hl-card__icon" aria-hidden="true">📅</span>
+            <div class="hl-card__num"><span class="counter" data-target="120">120</span><span class="plus">+</span></div>
+            <div class="hl-card__label">Events Conducted</div>
+          </div>
+          <div class="hl-card reveal reveal-delay-2">
+            <span class="hl-card__icon" aria-hidden="true">🙋</span>
+            <div class="hl-card__num"><span class="counter" data-target="500">500</span><span class="plus">+</span></div>
+            <div class="hl-card__label">Total Participants</div>
+          </div>
+          <div class="hl-card reveal reveal-delay-3">
+            <span class="hl-card__icon" aria-hidden="true">❤️</span>
+            <div class="hl-card__num"><span class="counter" data-target="8000">8K</span><span class="plus">+</span></div>
+            <div class="hl-card__label">Lives Directly Impacted</div>
+          </div>
+          <div class="hl-card reveal reveal-delay-4">
+            <span class="hl-card__icon" aria-hidden="true">📍</span>
+            <div class="hl-card__num"><span class="counter" data-target="25">25</span><span class="plus">+</span></div>
+            <div class="hl-card__label">Areas Covered</div>
+          </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="timeline reveal">
+          <h3 class="timeline__title">Recent Event Highlights</h3>
+          <div class="timeline-list">
+
+            <div class="timeline-item">
+              <div class="tl-line">
+                <div class="tl-dot tl-dot-green" aria-hidden="true">🧹</div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-content__title">March Riverside Clean-Up Drive</div>
+                <div class="tl-content__date">15 March 2026 · Jamshedpur</div>
+                <div class="tl-content__text">62 volunteers cleared 400 kg of waste from 800m of riverbank — our most impactful water body restoration to date.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="tl-line">
+                <div class="tl-dot tl-dot-blue" aria-hidden="true">🏠</div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-content__title">Holi Celebration at Hope Children's Home</div>
+                <div class="tl-content__date">23 February 2026 · Ranchi</div>
+                <div class="tl-content__text">35 volunteers brought colour and joy to 80+ children, creating memories that lasted far beyond a single festival day.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="tl-line">
+                <div class="tl-dot tl-dot-amber" aria-hidden="true">🍱</div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-content__title">Republic Day Meal Drive</div>
+                <div class="tl-content__date">26 January 2026 · 5 Locations</div>
+                <div class="tl-content__text">500+ hot meals and ration kits distributed across the industrial zone, honouring workers on Republic Day.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="tl-line">
+                <div class="tl-dot tl-dot-purple" aria-hidden="true">🎉</div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-content__title">Children's Day Mega Event 2025</div>
+                <div class="tl-content__date">14 November 2025 · 3 Venues</div>
+                <div class="tl-content__text">Our largest single-day event — 120 volunteers, 3 initiatives, 300+ people impacted across Jamshedpur in one day.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FINAL CTA
+  ========================================== -->
+  <section class="final-cta" id="final-cta" aria-labelledby="fcta-title">
+    <div class="container">
+      <div class="final-cta__card reveal">
+        <div class="final-cta__inner">
+          <h2 class="final-cta__title" id="fcta-title">
+            Ready to Join<br>Our Next Event?
+          </h2>
+          <p class="final-cta__sub">
+            Every event needs more caring hands. Whether it's your first time
+            or you're a regular, there's always a place for you at 4U. Pick an
+            event above and register — or reach out and we'll match you to one
+            that fits your schedule.
+          </p>
+          <div class="final-cta__actions">
+            <a href="#upcoming" class="btn btn-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Join Our Next Event
+            </a>
+            <a href="#" class="btn btn-outline-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+  ========================================== -->
+  <footer class="footer" id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo" aria-label="4U Home">
+            <div class="logo-mark" aria-hidden="true">4U</div>
+            <div class="logo-text"><strong>4U</strong><span>Use Unity to Uplift Universe</span></div>
+          </a>
+          <p class="footer__tagline">A grassroots movement creating meaningful change through unity, compassion, and consistent action. Join us — the universe needs you.</p>
+          <div class="footer__social" aria-label="Social media links">
+            <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
+          </div>
+        </div>
+        <nav aria-label="Footer quick links">
+          <h3 class="footer__col-title">Quick Links</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="initiatives.html">Initiatives</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Upcoming events links">
+          <h3 class="footer__col-title">Upcoming Events</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#upcoming">City Park Clean-Up · Apr 12</a></li>
+            <li><a href="#upcoming">Festival of Joy · Apr 20</a></li>
+            <li><a href="#upcoming">Elder Care Visit · Apr 27</a></li>
+            <li><a href="#upcoming">Labour Day Meal Drive · May 1</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3 class="footer__col-title">Contact Us</h3>
+          <address class="footer__contact" style="font-style:normal;">
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Jamshedpur, Jharkhand, India
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              connect@4u-initiative.org
+            </div>
+            <div class="footer-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.32 2 2 0 0 1 3.62 1.14h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.98 5.98l.83-.83a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +91 98765 43210
+            </div>
+          </address>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 4U – Use Unity to Uplift Universe. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+  ========================================== -->
+  <script>
+    'use strict';
+
+    /* Prevent blank sections */
+    document.body.classList.add('js-animations');
+
+    /* ---- Navbar scroll ---- */
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ---- Hamburger ---- */
+    var hamburger  = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ---- Scroll reveal ---- */
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+
+    /* ---- Counter animation ---- */
+    function animateCounter(el, target) {
+      var start   = performance.now();
+      var dur     = 1800;
+      var isLarge = target >= 1000;
+      var fmt     = isLarge
+        ? function(n) { return n >= 1000 ? (n/1000).toFixed(1).replace('.0','')+'K' : String(n); }
+        : function(n) { return String(Math.round(n)); };
+      function step(now) {
+        var p    = Math.min((now - start) / dur, 1);
+        var ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt(Math.round(ease * target));
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = fmt(target);
+      }
+      requestAnimationFrame(step);
+    }
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target, parseInt(entry.target.dataset.target, 10));
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.counter').forEach(function(el) {
+      counterObserver.observe(el);
+    });
+
+    /* ---- Filter tabs ---- */
+    var filterTabs   = document.querySelectorAll('#filterTabs .filter-tab');
+    var eventsCount  = document.getElementById('eventsCount');
+
+    /* Collect all filterable cards */
+    var allCards = Array.from(document.querySelectorAll(
+      '.event-featured, .event-card, .past-card'
+    ));
+
+    function countVisible() {
+      return allCards.filter(function(c) { return c.style.display !== 'none'; }).length;
+    }
+
+    function updateCount() {
+      var n = countVisible();
+      eventsCount.innerHTML = 'Showing <strong>' + n + '</strong> event' + (n !== 1 ? 's' : '');
+    }
+
+    filterTabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var filter = tab.dataset.filter;
+
+        filterTabs.forEach(function(t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        allCards.forEach(function(card) {
+          var cats = (card.dataset.category || '').split(' ');
+          var match = filter === 'all' || cats.indexOf(filter) !== -1;
+
+          if (match) {
+            card.style.display = '';
+            requestAnimationFrame(function() {
+              card.style.opacity = '1';
+              card.style.transform = '';
+            });
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.96)';
+            setTimeout(function() {
+              if (!((card.dataset.category || '').split(' ').indexOf(filter) !== -1) && filter !== 'all') {
+                card.style.display = 'none';
+              }
+            }, 280);
+          }
+        });
+
+        setTimeout(updateCount, 300);
+      });
+    });
+
+    updateCount();
+  </script>
+
+</body>
+</html>

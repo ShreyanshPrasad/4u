@@ -490,8 +490,8 @@
       gap: 72px;
       align-items: center;
     }
-    .detail-grid--reverse { direction: rtl; }
-    .detail-grid--reverse > * { direction: ltr; }
+    /*.detail-grid--reverse { direction: rtl; }
+    .detail-grid--reverse > * { direction: ltr; }*/
 
     /* Visual side */
     .detail-visual { position: relative; }
@@ -791,8 +791,11 @@
       .intro__grid       { grid-template-columns:1fr; gap:48px; }
       .intro__visual     { display:none; }
       .init-grid         { grid-template-columns:1fr; }
-      .detail-grid       { grid-template-columns:1fr; gap:44px; }
-      .detail-grid--reverse { direction:ltr; }
+
+      .detail-grid       { display: flex; flex-direction: column; gap:44px; }
+      .detail-visual     { order: 1; width: 100%; } /* Forces the image to always be on top */
+      .detail-content    { order: 2; width: 100%; } /* Forces the text to always be below */
+
       .highlights-grid   { grid-template-columns:repeat(2,1fr); }
       .contribute-grid   { grid-template-columns:repeat(2,1fr); }
       .footer__grid      { grid-template-columns:1fr 1fr; gap:40px; }
@@ -804,6 +807,15 @@
     ============================================= */
     @media (max-width: 768px) {
       :root { --section-pad:72px 0; }
+      .detail-img-main { 
+        height: 220px; /* Shrinks the massive colored box */
+      }
+      .detail-img-main__icon { 
+        font-size: 5rem; /* Scales down the emoji/icon to fit */
+      }
+      .detail-grid { 
+        gap: 24px; /* Reduces the awkward empty space between the image and the text */
+      }
       .navbar__links, .navbar__cta { display:none; }
       .navbar__hamburger { display:flex; }
       .page-hero { padding:80px 0 70px; }
@@ -845,9 +857,9 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="initiatives.html" class="active">Initiatives</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Gallery</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
         <div class="navbar__cta">
           <a href="#final-cta" class="btn btn-primary btn-sm">Join Us</a>
@@ -861,9 +873,9 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="initiatives.html">Initiatives</a>
-      <a href="#">Events</a>
-      <a href="#">Gallery</a>
-      <a href="#">Contact</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
       <a href="#final-cta" class="btn btn-primary">Join Us</a>
     </div>
   </header>
@@ -1594,9 +1606,9 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="initiatives.html">Initiatives</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </nav>
         <nav aria-label="Initiatives links">
