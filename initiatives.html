@@ -172,8 +172,13 @@
       padding:16px 24px 20px; border-top:1px solid var(--gray-100); background:var(--white);
     }
     .navbar__mobile.open { display:flex; }
-    .navbar__mobile a { font-size:0.95rem; font-weight:500; color:var(--gray-700); padding:12px 16px; border-radius:var(--radius-sm); transition:var(--transition); }
-    .navbar__mobile a:hover { background:var(--blue-50); color:var(--blue-800); }
+    .navbar__mobile a:not(.btn) {
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--gray-700);
+      padding: 12px 16px; border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+    .navbar__mobile a:not(.btn):hover { background: var(--blue-50); color: var(--blue-800); }
     .navbar__mobile .btn { margin-top:8px; width:100%; justify-content:center; }
 
     /* =============================================
@@ -862,7 +867,7 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <div class="navbar__cta">
-          <a href="#final-cta" class="btn btn-primary btn-sm">Join Us</a>
+          <a href="volunteer.html" class="btn btn-primary btn-sm">Join Us</a>
         </div>
         <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -876,7 +881,7 @@
       <a href="events.html">Events</a>
       <a href="gallery.html">Gallery</a>
       <a href="contact.html">Contact</a>
-      <a href="#final-cta" class="btn btn-primary">Join Us</a>
+      <a href="volunteer.html" class="btn btn-primary">Join Us</a>
     </div>
   </header>
 
@@ -1502,7 +1507,7 @@
             elder care programs, or food distribution. No special skills needed
             — just willingness to show up and make a difference.
           </p>
-          <a href="#final-cta" class="contribute-card__link">
+          <a href="volunteer.html" class="contribute-card__link">
             Register as Volunteer
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -1567,11 +1572,11 @@
           role. Show up. That's all it takes to be part of 4U.
         </p>
         <div class="final-cta__actions">
-          <a href="#" class="btn btn-green">
+          <a href="volunteer.html" class="btn btn-green">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             Join Us
           </a>
-          <a href="#" class="btn btn-outline-white">
+          <a href="contact.html" class="btn btn-outline-white">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Contact Us
           </a>
